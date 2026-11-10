@@ -1,0 +1,60 @@
+{% load static i18n %}<!doctype html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ hotel.name }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{% translate 'Pushka Hotel: seven cosy suites. Book online.' %}{% endblock %}">
+  <link rel="icon" href="{% static 'hotel/img/house.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+  {% get_available_languages as LANGUAGES %}
+  {% for code, name in LANGUAGES %}
+    {% language code %}<link rel="alternate" hreflang="{{ code }}" href="{{ request.scheme }}://{{ request.get_host }}{% block alt_url %}{% url 'hotel:home' %}{% endblock %}">{% endlanguage %}
+  {% endfor %}
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="{% url 'hotel:home' %}" aria-label="{{ hotel.name }}">
+        <img src="{% static 'hotel/img/logo.svg' %}" alt="Pushka Hotel" width="176" height="45">
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="{% translate 'Menu' %}"><span></span></label>
+      <nav class="main-nav" aria-label="{% translate 'Main menu' %}">
+        {% url 'hotel:home' as home_url %}{% url 'hotel:suite_list' as suites_url %}{% url 'hotel:about' as about_url %}{% url 'hotel:contacts' as contacts_url %}
+        <a href="{{ home_url }}" {% if request.path == home_url %}aria-current="page"{% endif %}>{% translate "Home" %}</a>
+        <a href="{{ suites_url }}" {% if suites_url in request.path %}aria-current="page"{% endif %}>{% translate "Suites" %}</a>
+        <a href="{{ about_url }}" {% if request.path == about_url %}aria-current="page"{% endif %}>{% translate "About" %}</a>
+        <a href="{{ contacts_url }}" {% if request.path == contacts_url %}aria-current="page"{% endif %}>{% translate "Contacts" %}</a>
+        <form class="lang-switch" action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          {% for code, name in LANGUAGES %}
+            <button type="submit" name="language" value="{{ code }}" {% if code == LANGUAGE_CODE %}aria-pressed="true"{% endif %} title="{{ name }}">{{ code|upper }}</button>
+          {% endfor %}
+        </form>
+      </nav>
+    </div>
+  </header>
+
+  <main>{% block content %}{% endblock %}</main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <img src="{% static 'hotel/img/logo.svg' %}" alt="Pushka Hotel" width="150" height="38" class="footer-logo">
+        <p>{{ hotel.address }}</p>
+      </div>
+      <div>
+        {% if hotel.phone %}<p><a href="tel:{{ hotel.phone|cut:' '|cut:'('|cut:')'|cut:'-' }}">{{ hotel.phone }}</a></p>{% endif %}
+        {% if hotel.email %}<p><a href="mailto:{{ hotel.email }}">{{ hotel.email }}</a></p>{% endif %}
+      </div>
+      <div>
+        <p>{% translate "Check-in" %}: {{ hotel.check_in_time|time:"H:i" }}<br>{% translate "Check-out" %}: {{ hotel.check_out_time|time:"H:i" }}</p>
+      </div>
+    </div>
+    <div class="container copyright">© {% now "Y" %} {{ hotel.name }}</div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% extends "hotel/base.html" %}
+{% load i18n %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <h1>{{ hotel.name }}</h1>
+    <p class="lead">{% translate "A small, quiet hotel with seven cosy suites, where every guest is welcomed like family." %}</p>
+    <div class="hero-actions">
+      <a class="btn btn-light" href="{% url 'hotel:suite_list' %}">{% translate "Choose a suite" %}</a>
+      <a class="btn btn-ghost" href="{% url 'hotel:contacts' %}">{% translate "Contact us" %}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container features">
+    <div class="feature">
+      <h3>{% translate "Seven suites" %}</h3>
+      <p>{% translate "Suites for two, a suite for three and a family suite for up to four guests." %}</p>
+    </div>
+    <div class="feature">
+      <h3>{% translate "Personal service" %}</h3>
+      <p>{% translate "We are a small hotel, so we know every guest and are always happy to help." %}</p>
+    </div>
+    <div class="feature">
+      <h3>{% translate "Easy booking" %}</h3>
+      <p>{% translate "Choose your dates and suite online. We will confirm your booking quickly." %}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <h2>{% translate "Our suites" %}</h2>
+      <a href="{% url 'hotel:suite_list' %}">{% translate "All suites" %} →</a>
+    </div>
+    <div class="suite-grid">
+      {% for suite in suites %}{% include "hotel/_suite_card.html" %}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% load i18n static %}
+<article class="suite-card">
+  <a href="{{ suite.get_absolute_url }}" class="suite-card-media">
+    {% if suite.cover %}
+      <img src="{{ suite.cover.image.url }}" alt="{{ suite.cover.alt }}" loading="lazy">
+    {% else %}
+      <div class="photo-placeholder"><img src="{% static 'hotel/img/house.svg' %}" alt=""><span>{% translate "Photo coming soon" %}</span></div>
+    {% endif %}
+  </a>
+  <div class="suite-card-body">
+    <h3><a href="{{ suite.get_absolute_url }}">{{ suite.name }}</a></h3>
+    <p class="suite-meta">{% blocktranslate count guests=suite.capacity %}Up to {{ guests }} guest{% plural %}Up to {{ guests }} guests{% endblocktranslate %}</p>
+    <p>{{ suite.summary }}</p>
+    <p class="price">{% blocktranslate with price=suite.price_per_night|floatformat:"0g" %}from {{ price }} ₽ per night{% endblocktranslate %}</p>
+    <a class="btn btn-outline" href="{{ suite.get_absolute_url }}">{% translate "View suite" %}</a>
+  </div>
+</article>

@@ -6,7 +6,6 @@ venv/
 db.sqlite3
 /media/
 /staticfiles/
-*.mo
 .DS_Store
 .idea/
 .vscode/

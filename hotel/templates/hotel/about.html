@@ -1,0 +1,21 @@
+{% extends "hotel/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "About" %} · {{ hotel.name }}{% endblock %}
+{% block alt_url %}{% url 'hotel:about' %}{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div class="container"><h1>{% translate "About the hotel" %}</h1></div>
+</section>
+<section class="section">
+  <div class="container prose">
+    <p>{% translate "Pushka Hotel is a small hotel with just seven suites. We chose to stay small so that we can give every guest our full attention: from the first message to the moment you check out." %}</p>
+    <p>{% translate "Each suite has its own bathroom and everything you need for a comfortable stay. Whether you are travelling as a couple, with a friend or with your whole family, we will find the right suite for you." %}</p>
+    <h2>{% translate "Good to know" %}</h2>
+    <ul>
+      <li>{% blocktranslate with checkin=hotel.check_in_time|time:"H:i" checkout=hotel.check_out_time|time:"H:i" %}Check-in from {{ checkin }}, check-out until {{ checkout }}.{% endblocktranslate %}</li>
+      <li>{% translate "Free Wi-Fi throughout the hotel." %}</li>
+      <li>{% translate "Suites for two, three and four guests." %}</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

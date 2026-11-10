@@ -1,0 +1,41 @@
+{% extends "hotel/base.html" %}
+{% load i18n static %}
+{% block title %}{{ suite.name }} · {{ hotel.name }}{% endblock %}
+{% block description %}{{ suite.summary }}{% endblock %}
+{% block alt_url %}{{ suite.get_absolute_url }}{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <p class="breadcrumbs"><a href="{% url 'hotel:suite_list' %}">{% translate "Suites" %}</a> / {{ suite.name }}</p>
+    <h1>{{ suite.name }}</h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container suite-detail">
+    <div class="gallery">
+      {% for photo in suite.photos.all %}
+        <img src="{{ photo.image.url }}" alt="{{ photo.alt }}" {% if not forloop.first %}loading="lazy"{% endif %}>
+      {% empty %}
+        <div class="photo-placeholder large"><img src="{% static 'hotel/img/house.svg' %}" alt=""><span>{% translate "Photo coming soon" %}</span></div>
+      {% endfor %}
+    </div>
+    <aside class="booking-box">
+      <p class="price">{% blocktranslate with price=suite.price_per_night|floatformat:"0g" %}from {{ price }} ₽ per night{% endblocktranslate %}</p>
+      <ul class="facts">
+        <li>{% blocktranslate count guests=suite.capacity %}Up to {{ guests }} guest{% plural %}Up to {{ guests }} guests{% endblocktranslate %}</li>
+        {% if suite.area_m2 %}<li>{{ suite.area_m2 }} m²</li>{% endif %}
+        <li>{% translate "Check-in" %} {{ hotel.check_in_time|time:"H:i" }} · {% translate "Check-out" %} {{ hotel.check_out_time|time:"H:i" }}</li>
+      </ul>
+      <p class="note">{% translate "Online booking is coming soon. Until then, please call or email us to book this suite." %}</p>
+      <a class="btn" href="{% url 'hotel:contacts' %}">{% translate "Book this suite" %}</a>
+    </aside>
+    <div class="suite-text">
+      <p>{{ suite.description|linebreaksbr }}</p>
+      {% if suite.amenities %}
+        <h2>{% translate "In the suite" %}</h2>
+        <ul class="amenities">{% for item in suite.amenities %}<li>{{ item }}</li>{% endfor %}</ul>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

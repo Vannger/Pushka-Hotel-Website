@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" role="img" aria-labelledby="t">
+  <title id="t">Pushka Hotel</title>
+  <g fill="none" stroke="#2a2622" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M6 26 L26 8 L46 26"/>
+    <path d="M11 22 V48 H41 V22"/>
+    <path d="M22 48 V35 H30 V48"/>
+    <path d="M35 14 V7 H40 V18.5"/>
+  </g>
+  <text x="58" y="27" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" fill="#2a2622">Pushka</text>
+  <text x="59" y="46" font-family="Georgia, 'Times New Roman', serif" font-size="13" letter-spacing="4.5" fill="#2a2622">HOTEL</text>
+</svg>
