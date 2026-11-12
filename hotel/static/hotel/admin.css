@@ -1,0 +1,15 @@
+/* Keep all seven weekday prices visible in the suite list without scrolling. */
+#result_list input.vIntegerField { width: 4.2em; }
+#result_list td, #result_list th { padding-left: 5px; padding-right: 5px; }
+
+/* Put the seven price fields of a suite on one line. */
+fieldset.price-days .form-row > div { flex-wrap: wrap; gap: 8px 18px; }
+fieldset.price-days .fieldBox { margin-right: 0; }
+fieldset.price-days .fieldBox label { width: auto; min-width: 0; padding-right: 6px; }
+fieldset.price-days input.vIntegerField { width: 5em; }
+
+/* Photo rows under a suite: keep the table inside the page. */
+.inline-group .tabular td input.vTextField { width: 12em; }
+.inline-group .tabular td.field-order input { width: 4em; }
+.inline-group .tabular td.field-image input[type="file"] { max-width: 14em; }
+.inline-group .tabular td.field-image a { word-break: break-all; }

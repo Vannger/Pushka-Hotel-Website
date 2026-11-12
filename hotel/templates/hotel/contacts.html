@@ -1,0 +1,24 @@
+{% extends "hotel/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Contacts" %} · {{ hotel.name }}{% endblock %}
+{% block alt_url %}{% url 'hotel:contacts' %}{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div class="container"><h1>{% translate "Contacts" %}</h1></div>
+</section>
+<section class="section">
+  <div class="container contacts">
+    <dl>
+      <dt>{% translate "Address" %}</dt><dd>{{ hotel.address }}</dd>
+      {% if hotel.phone %}<dt>{% translate "Phone" %}</dt><dd><a href="tel:{{ hotel.phone|cut:' '|cut:'('|cut:')'|cut:'-' }}">{{ hotel.phone }}</a></dd>{% endif %}
+      {% if hotel.email %}<dt>{% translate "Email" %}</dt><dd><a href="mailto:{{ hotel.email }}">{{ hotel.email }}</a></dd>{% endif %}
+      <dt>{% translate "Check-in / check-out" %}</dt><dd>{{ hotel.check_in_time|time:"H:i" }} / {{ hotel.check_out_time|time:"H:i" }}</dd>
+    </dl>
+    {% if hotel.map_embed_url %}
+      <iframe class="map" src="{{ hotel.map_embed_url }}" title="{% translate 'Map' %}" loading="lazy"></iframe>
+    {% else %}
+      <div class="map map-placeholder">{% translate "The map will appear here once the address is added." %}</div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

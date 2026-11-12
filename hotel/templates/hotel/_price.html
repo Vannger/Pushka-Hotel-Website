@@ -1,0 +1,1 @@
+{% load i18n %}{% if suite.has_single_price %}{% blocktranslate with price=suite.min_price|floatformat:"0g" %}{{ price }} ₽ per night{% endblocktranslate %}{% else %}{% blocktranslate with price=suite.min_price|floatformat:"0g" %}from {{ price }} ₽ per night{% endblocktranslate %}{% endif %}

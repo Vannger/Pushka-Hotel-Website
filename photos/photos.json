@@ -1,0 +1,260 @@
+{
+  "hotel": [
+    {
+      "file": "01.jpg",
+      "alt_ru": "Коридор",
+      "alt_en": "Corridor",
+      "source": "Hall 2.jpg"
+    },
+    {
+      "file": "02.jpg",
+      "alt_ru": "Коридор и шкаф с посудой",
+      "alt_en": "Corridor and dish cabinet",
+      "source": "Hall 3.jpg"
+    },
+    {
+      "file": "03.jpg",
+      "alt_ru": "Кухонный уголок с микроволновой печью",
+      "alt_en": "Kitchenette with a microwave",
+      "source": "Hall.jpg"
+    }
+  ],
+  "suite-2": [
+    {
+      "file": "01.jpg",
+      "alt_ru": "Кровать и туалетный столик",
+      "alt_en": "Bed and dressing table",
+      "source": "Room2 5.jpg"
+    },
+    {
+      "file": "02.jpg",
+      "alt_ru": "Номер с латунной кроватью и высоким окном",
+      "alt_en": "Suite with a brass bed and a tall window",
+      "source": "Room2 3.jpg"
+    },
+    {
+      "file": "03.jpg",
+      "alt_ru": "Изголовье кровати и обои с птицами",
+      "alt_en": "Headboard and bird-pattern wallpaper",
+      "source": "Room2.jpg"
+    },
+    {
+      "file": "04.jpg",
+      "alt_ru": "Туалетный столик и прихожая",
+      "alt_en": "Dressing table and entrance",
+      "source": "Room2 4.jpg"
+    },
+    {
+      "file": "05.jpg",
+      "alt_ru": "Вид на номер и душевую",
+      "alt_en": "View of the room and the shower room",
+      "source": "Room2 2.jpg"
+    }
+  ],
+  "suite-3": [
+    {
+      "file": "01.jpg",
+      "alt_ru": "Двуспальная кровать и диван у окна",
+      "alt_en": "Double bed and sofa by the window",
+      "source": "Room3.jpg"
+    },
+    {
+      "file": "02.jpg",
+      "alt_ru": "Кровать, диван и окно",
+      "alt_en": "Bed, sofa and window",
+      "source": "Room3 2.jpg"
+    },
+    {
+      "file": "03.jpg",
+      "alt_ru": "Диван и рабочий стол",
+      "alt_en": "Sofa and desk",
+      "source": "Room3 3.jpg"
+    },
+    {
+      "file": "04.jpg",
+      "alt_ru": "Рабочий стол, шкаф и зеркало",
+      "alt_en": "Desk, wardrobe and mirror",
+      "source": "Room3 (4).jpg"
+    },
+    {
+      "file": "05.jpg",
+      "alt_ru": "Ванная комната с ванной",
+      "alt_en": "Bathroom with a bathtub",
+      "source": "Room3 (5).jpg"
+    }
+  ],
+  "suite-4": [
+    {
+      "file": "01.jpg",
+      "alt_ru": "Кровать с бархатным изголовьем и большое окно",
+      "alt_en": "Bed with a velvet headboard and a large window",
+      "source": "Room4 5.jpg"
+    },
+    {
+      "file": "02.jpg",
+      "alt_ru": "Кровать и зеркальный шкаф",
+      "alt_en": "Bed and mirrored wardrobe",
+      "source": "Room4 2.jpg"
+    },
+    {
+      "file": "03.jpg",
+      "alt_ru": "Шкаф, телевизор и рабочий стол",
+      "alt_en": "Wardrobe, TV and desk",
+      "source": "Room4 4.jpg"
+    },
+    {
+      "file": "04.jpg",
+      "alt_ru": "Рабочий стол у окна",
+      "alt_en": "Desk by the window",
+      "source": "Room4 3.jpg"
+    },
+    {
+      "file": "05.jpg",
+      "alt_ru": "Ванная комната с ванной",
+      "alt_en": "Bathroom with a bathtub",
+      "source": "Room4.jpg"
+    }
+  ],
+  "suite-5": [
+    {
+      "file": "01.jpg",
+      "alt_ru": "Кровать и окно",
+      "alt_en": "Bed and window",
+      "source": "Room5 (3).jpg"
+    },
+    {
+      "file": "02.jpg",
+      "alt_ru": "Кровать и рабочий стол",
+      "alt_en": "Bed and desk",
+      "source": "Room5 (5).jpg"
+    },
+    {
+      "file": "03.jpg",
+      "alt_ru": "Номер при дневном свете",
+      "alt_en": "The suite in daylight",
+      "source": "Room5 (9).jpg"
+    },
+    {
+      "file": "04.jpg",
+      "alt_ru": "Общий вид номера",
+      "alt_en": "View of the suite",
+      "source": "Room5 (7).jpg"
+    },
+    {
+      "file": "05.jpg",
+      "alt_ru": "Окно с плотными шторами",
+      "alt_en": "Window with heavy curtains",
+      "source": "Room5 (8).jpg"
+    },
+    {
+      "file": "06.jpg",
+      "alt_ru": "Изголовье кровати и бра",
+      "alt_en": "Headboard and wall lamp",
+      "source": "Room5 (6).jpg"
+    },
+    {
+      "file": "07.jpg",
+      "alt_ru": "Рабочий стол",
+      "alt_en": "Desk",
+      "source": "Room5 (10).jpg"
+    },
+    {
+      "file": "08.jpg",
+      "alt_ru": "Шкаф с зеркалом",
+      "alt_en": "Wardrobe with a mirror",
+      "source": "Room5 (4).jpg"
+    },
+    {
+      "file": "09.jpg",
+      "alt_ru": "Прихожая",
+      "alt_en": "Entrance",
+      "source": "Room5 (2).jpg"
+    },
+    {
+      "file": "10.jpg",
+      "alt_ru": "Ванная комната",
+      "alt_en": "Bathroom",
+      "source": "Room5.jpg"
+    },
+    {
+      "file": "11.jpg",
+      "alt_ru": "Душевая кабина",
+      "alt_en": "Shower cabin",
+      "source": "Room5 (11).jpg"
+    }
+  ],
+  "suite-6": [
+    {
+      "file": "01.jpg",
+      "alt_ru": "Кровать и шкаф с зеркалом",
+      "alt_en": "Bed and mirrored wardrobe",
+      "source": "Room6 (6).jpg"
+    },
+    {
+      "file": "02.jpg",
+      "alt_ru": "Кровать, кресла и окно",
+      "alt_en": "Bed, armchairs and window",
+      "source": "Room6 (5).jpg"
+    },
+    {
+      "file": "03.jpg",
+      "alt_ru": "Кровать у окна",
+      "alt_en": "Bed by the window",
+      "source": "Room6 (4).jpg"
+    },
+    {
+      "file": "04.jpg",
+      "alt_ru": "Окно и кровать",
+      "alt_en": "Window and bed",
+      "source": "Room6.jpg"
+    },
+    {
+      "file": "05.jpg",
+      "alt_ru": "Кровать и шкаф",
+      "alt_en": "Bed and wardrobe",
+      "source": "Room6 (2).jpg"
+    },
+    {
+      "file": "06.jpg",
+      "alt_ru": "Кровать и прикроватная тумбочка",
+      "alt_en": "Bed and bedside table",
+      "source": "Room6 (3).jpg"
+    },
+    {
+      "file": "07.jpg",
+      "alt_ru": "Кресла и телевизор",
+      "alt_en": "Armchairs and TV",
+      "source": "Room6 (7).jpg"
+    },
+    {
+      "file": "08.jpg",
+      "alt_ru": "Зона отдыха и прихожая",
+      "alt_en": "Seating area and entrance",
+      "source": "Room6 (8).jpg"
+    },
+    {
+      "file": "09.jpg",
+      "alt_ru": "Номер вечером",
+      "alt_en": "The suite in the evening",
+      "source": "Room6 (9).jpg"
+    },
+    {
+      "file": "10.jpg",
+      "alt_ru": "Душевая",
+      "alt_en": "Shower room",
+      "source": "Room6 (10).jpg"
+    },
+    {
+      "file": "11.jpg",
+      "alt_ru": "Душевая кабина",
+      "alt_en": "Shower cabin",
+      "source": "Room6 (11).jpg"
+    },
+    {
+      "file": "12.jpg",
+      "alt_ru": "Раковина и зеркало",
+      "alt_en": "Sink and mirror",
+      "source": "Room6 (12).jpg"
+    }
+  ]
+}

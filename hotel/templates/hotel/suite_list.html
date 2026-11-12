@@ -1,0 +1,17 @@
+{% extends "hotel/base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Suites" %} · {{ hotel.name }}{% endblock %}
+{% block alt_url %}{% url 'hotel:suite_list' %}{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <h1>{% translate "Suites" %}</h1>
+    <p class="lead">{% translate "Seven suites for every kind of stay. All prices are per suite per night." %}</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container suite-grid">
+    {% for suite in suites %}{% include "hotel/_suite_card.html" %}{% empty %}<p>{% translate "No suites are available right now." %}</p>{% endfor %}
+  </div>
+</section>
+{% endblock %}
