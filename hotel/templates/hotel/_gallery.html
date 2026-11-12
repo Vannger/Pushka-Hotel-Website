@@ -1,0 +1,26 @@
+{% load i18n static %}
+{% if photos %}
+<div class="gallery" data-gallery>
+  <figure class="gallery-main">
+    <img src="{{ photos.0.image.url }}" alt="{{ photos.0.alt }}" data-gallery-main>
+    {% if photos|length > 1 %}
+      <button type="button" class="gallery-nav gallery-prev" data-gallery-prev aria-label="{% translate 'Previous photo' %}">‹</button>
+      <button type="button" class="gallery-nav gallery-next" data-gallery-next aria-label="{% translate 'Next photo' %}">›</button>
+      <span class="gallery-count" data-gallery-count>1 / {{ photos|length }}</span>
+    {% endif %}
+  </figure>
+  {% if photos|length > 1 %}
+    <ul class="gallery-thumbs">
+      {% for photo in photos %}
+        <li>
+          <a href="{{ photo.image.url }}" data-gallery-thumb data-alt="{{ photo.alt }}" {% if forloop.first %}aria-current="true"{% endif %}>
+            <img src="{{ photo.thumb_url }}" alt="{{ photo.alt }}" loading="lazy">
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% else %}
+<div class="photo-placeholder large"><img src="{% static 'hotel/img/house.svg' %}" alt=""><span>{% translate "Photo coming soon" %}</span></div>
+{% endif %}

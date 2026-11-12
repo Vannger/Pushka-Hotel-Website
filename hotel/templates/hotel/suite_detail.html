@@ -12,20 +12,24 @@
 </section>
 <section class="section">
   <div class="container suite-detail">
-    <div class="gallery">
-      {% for photo in suite.photos.all %}
-        <img src="{{ photo.image.url }}" alt="{{ photo.alt }}" {% if not forloop.first %}loading="lazy"{% endif %}>
-      {% empty %}
-        <div class="photo-placeholder large"><img src="{% static 'hotel/img/house.svg' %}" alt=""><span>{% translate "Photo coming soon" %}</span></div>
-      {% endfor %}
-    </div>
+    {% include "hotel/_gallery.html" with photos=suite.photos.all %}
     <aside class="booking-box">
-      <p class="price">{% blocktranslate with price=suite.price_per_night|floatformat:"0g" %}from {{ price }} ₽ per night{% endblocktranslate %}</p>
+      <p class="price">{% include "hotel/_price.html" %}</p>
       <ul class="facts">
         <li>{% blocktranslate count guests=suite.capacity %}Up to {{ guests }} guest{% plural %}Up to {{ guests }} guests{% endblocktranslate %}</li>
         {% if suite.area_m2 %}<li>{{ suite.area_m2 }} m²</li>{% endif %}
         <li>{% translate "Check-in" %} {{ hotel.check_in_time|time:"H:i" }} · {% translate "Check-out" %} {{ hotel.check_out_time|time:"H:i" }}</li>
       </ul>
+      {% if not suite.has_single_price %}
+        <table class="price-table">
+          <caption>{% translate "Price per night" %}</caption>
+          <tbody>
+            {% for day, price in suite.weekday_prices %}
+              <tr{% if price == suite.min_price %} class="is-lowest"{% endif %}><th scope="row">{{ day|capfirst }}</th><td>{{ price|floatformat:"0g" }} ₽</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
       <p class="note">{% translate "Online booking is coming soon. Until then, please call or email us to book this suite." %}</p>
       <a class="btn" href="{% url 'hotel:contacts' %}">{% translate "Book this suite" %}</a>
     </aside>

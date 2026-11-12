@@ -1,7 +1,31 @@
+from datetime import timedelta
+
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
+
+from . import images
+
+# One price field per day of the week, in date.weekday() order (Monday = 0).
+WEEKDAY_PRICE_FIELDS = (
+    "price_mon",
+    "price_tue",
+    "price_wed",
+    "price_thu",
+    "price_fri",
+    "price_sat",
+    "price_sun",
+)
+WEEKDAY_NAMES = (
+    _("Monday"),
+    _("Tuesday"),
+    _("Wednesday"),
+    _("Thursday"),
+    _("Friday"),
+    _("Saturday"),
+    _("Sunday"),
+)
 
 
 class TranslatedFieldsMixin:
@@ -52,6 +76,10 @@ class HotelInfo(TranslatedFieldsMixin, models.Model):
         return self.tr("address")
 
 
+def _price_field(label):
+    return models.PositiveIntegerField(label)
+
+
 class Suite(TranslatedFieldsMixin, models.Model):
     number = models.PositiveSmallIntegerField(_("suite number"), unique=True)
     slug = models.SlugField(_("URL name"), unique=True)
@@ -69,12 +97,16 @@ class Suite(TranslatedFieldsMixin, models.Model):
     )
     capacity = models.PositiveSmallIntegerField(_("maximum guests"))
     area_m2 = models.PositiveSmallIntegerField(_("area, m²"), null=True, blank=True)
-    price_per_night = models.DecimalField(
-        _("price per night, ₽"), max_digits=9, decimal_places=2
-    )
-    is_active = models.BooleanField(
-        _("shown on the site"), default=True
-    )
+    # The price of a night belongs to the day the night starts on:
+    # price_fri is the night from Friday to Saturday.
+    price_mon = _price_field(_("Mon"))
+    price_tue = _price_field(_("Tue"))
+    price_wed = _price_field(_("Wed"))
+    price_thu = _price_field(_("Thu"))
+    price_fri = _price_field(_("Fri"))
+    price_sat = _price_field(_("Sat"))
+    price_sun = _price_field(_("Sun"))
+    is_active = models.BooleanField(_("shown on the site"), default=True)
 
     class Meta:
         ordering = ["number"]
@@ -105,20 +137,90 @@ class Suite(TranslatedFieldsMixin, models.Model):
 
     @property
     def cover(self):
-        return self.photos.first()
+        photos = self.photos.all()
+        return photos[0] if photos else None
+
+    # Prices -----------------------------------------------------------
+
+    @property
+    def weekday_prices(self):
+        """[(day name, price), ...] from Monday to Sunday."""
+        return [
+            (name, getattr(self, field))
+            for name, field in zip(WEEKDAY_NAMES, WEEKDAY_PRICE_FIELDS)
+        ]
+
+    @property
+    def min_price(self):
+        return min(getattr(self, field) for field in WEEKDAY_PRICE_FIELDS)
+
+    @property
+    def has_single_price(self):
+        return len({getattr(self, field) for field in WEEKDAY_PRICE_FIELDS}) == 1
+
+    def price_for_night(self, day):
+        """Price of the night that starts on `day` (a date)."""
+        return getattr(self, WEEKDAY_PRICE_FIELDS[day.weekday()])
+
+    def price_for_stay(self, check_in, check_out):
+        """Total for all nights from check-in up to (not including) check-out."""
+        nights = (check_out - check_in).days
+        return sum(self.price_for_night(check_in + timedelta(days=i)) for i in range(nights))
 
 
-class SuitePhoto(TranslatedFieldsMixin, models.Model):
-    suite = models.ForeignKey(
-        Suite, on_delete=models.CASCADE, related_name="photos", verbose_name=_("suite")
+def photo_upload_to(instance, filename):
+    return f"{instance.upload_folder}/{filename}"
+
+
+def thumbnail_upload_to(instance, filename):
+    return f"{instance.upload_folder}/thumbs/{filename}"
+
+
+class Photo(TranslatedFieldsMixin, models.Model):
+    """A web-ready photo with a smaller copy for cards and thumbnails."""
+
+    upload_folder = "photos"
+
+    image = models.ImageField(_("photo"), upload_to=photo_upload_to)
+    thumbnail = models.ImageField(
+        _("thumbnail"), upload_to=thumbnail_upload_to, editable=False, blank=True
     )
-    image = models.ImageField(_("photo"), upload_to="suites/")
     alt_ru = models.CharField(_("caption (Russian)"), max_length=150, blank=True)
     alt_en = models.CharField(_("caption (English)"), max_length=150, blank=True)
     order = models.PositiveSmallIntegerField(_("order"), default=0)
 
     class Meta:
+        abstract = True
         ordering = ["order", "id"]
+
+    def save(self, *args, **kwargs):
+        if self.image and not self.image._committed:
+            # A new file was uploaded: resize it and make the thumbnail.
+            self.image.seek(0)
+            main, thumb = images.prepare(self.image.read())
+            self.image.seek(0)
+            if main is not None:
+                self.image.save(images.jpeg_name(self.image.name), main, save=False)
+            self.thumbnail.save(images.jpeg_name(self.image.name, "-thumb"), thumb, save=False)
+        elif self.image and not self.thumbnail:
+            with self.image.open("rb") as fh:
+                _main, thumb = images.prepare(fh.read())
+            self.thumbnail.save(images.jpeg_name(self.image.name, "-thumb"), thumb, save=False)
+        super().save(*args, **kwargs)
+
+    @property
+    def thumb_url(self):
+        return (self.thumbnail or self.image).url
+
+
+class SuitePhoto(Photo):
+    upload_folder = "suites"
+
+    suite = models.ForeignKey(
+        Suite, on_delete=models.CASCADE, related_name="photos", verbose_name=_("suite")
+    )
+
+    class Meta(Photo.Meta):
         verbose_name = _("photo")
         verbose_name_plural = _("photos")
 
@@ -128,3 +230,20 @@ class SuitePhoto(TranslatedFieldsMixin, models.Model):
     @property
     def alt(self):
         return self.tr("alt") or self.suite.name
+
+
+class HotelPhoto(Photo):
+    """Photos of the hotel itself (corridors, kitchenette) for the About page."""
+
+    upload_folder = "hotel"
+
+    class Meta(Photo.Meta):
+        verbose_name = _("hotel photo")
+        verbose_name_plural = _("hotel photos")
+
+    def __str__(self):
+        return self.alt_ru or f"#{self.pk}"
+
+    @property
+    def alt(self):
+        return self.tr("alt")

@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 
-from .models import Suite
+from .models import HotelPhoto, Suite
 
 
 def _active_suites():
@@ -8,7 +8,9 @@ def _active_suites():
 
 
 def home(request):
-    return render(request, "hotel/home.html", {"suites": _active_suites()[:3]})
+    # Feature suites that already have photos; keep the suite order otherwise.
+    suites = sorted(_active_suites(), key=lambda suite: suite.cover is None)[:3]
+    return render(request, "hotel/home.html", {"suites": suites})
 
 
 def suite_list(request):
@@ -21,7 +23,7 @@ def suite_detail(request, slug):
 
 
 def about(request):
-    return render(request, "hotel/about.html")
+    return render(request, "hotel/about.html", {"photos": HotelPhoto.objects.all()})
 
 
 def contacts(request):

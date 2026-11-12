@@ -8,6 +8,7 @@
   <meta name="description" content="{% block description %}{% translate 'Pushka Hotel: seven cosy suites. Book online.' %}{% endblock %}">
   <link rel="icon" href="{% static 'hotel/img/house.svg' %}" type="image/svg+xml">
   <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+  <script src="{% static 'hotel/js/gallery.js' %}" defer></script>
   {% get_available_languages as LANGUAGES %}
   {% for code, name in LANGUAGES %}
     {% language code %}<link rel="alternate" hreflang="{{ code }}" href="{{ request.scheme }}://{{ request.get_host }}{% block alt_url %}{% url 'hotel:home' %}{% endblock %}">{% endlanguage %}

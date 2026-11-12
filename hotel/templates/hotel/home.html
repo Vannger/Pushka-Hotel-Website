@@ -1,7 +1,7 @@
 {% extends "hotel/base.html" %}
-{% load i18n %}
+{% load i18n static %}
 {% block content %}
-<section class="hero">
+<section class="hero" style="--hero-image: url('{% static 'hotel/img/hero.jpg' %}')">
   <div class="container hero-inner">
     <h1>{{ hotel.name }}</h1>
     <p class="lead">{% translate "A small, quiet hotel with seven cosy suites, where every guest is welcomed like family." %}</p>

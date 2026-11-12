@@ -19,6 +19,7 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env               # then edit the values
 python manage.py migrate           # also creates the seven suites
+python manage.py load_photos       # adds the suite and hotel photos from photos/
 python manage.py createsuperuser
 python manage.py runserver
 ```
@@ -39,6 +40,8 @@ If `POSTGRES_DB` is empty in `.env`, a local SQLite file is used instead.
 | What | Where |
 |---|---|
 | Suites, photos, prices, hotel contacts | Admin panel (stored in the database) |
+| Prices for each day of the week | Admin panel → Suites: the list is an editable price table (Mon–Sun) |
+| Original photos for the first load | `photos/` (one folder per suite, captions in `photos/photos.json`) |
 | Suite texts in both languages | `*_ru` / `*_en` fields on each suite |
 | Interface texts (menus, buttons, page copy) | Templates in `hotel/templates/hotel/`, Russian translation in `locale/ru/LC_MESSAGES/django.po` |
 | Styles and logo | `hotel/static/hotel/` |
@@ -52,11 +55,29 @@ python manage.py makemessages -l ru -l en   # updates the .po files (needs GNU g
 python manage.py compilemessages
 ```
 
+## Prices
+
+Each suite has a price per night for every day of the week. The price of a night
+belongs to the day it starts on: the Friday price is the night from Friday to
+Saturday. `Suite.price_for_stay(check_in, check_out)` adds up the nights of a stay.
+
+## Photos
+
+`python manage.py load_photos` loads `photos/` into the database and media folder.
+It skips suites that already have photos; `--replace` reloads them.
+
+Every photo uploaded in the admin panel is resized to at most 1920 px, turned the
+right way up, stripped of camera metadata and given a thumbnail automatically.
+
+The photos of suites 5 and 6 were taken on a phone, so they were enhanced with
+Real-ESRGAN (`realesr-general-x4v3`, denoise strength 0.35) before being added.
+The photos of suites 2–4 and the hall are professional shots, only resized.
+
 ## Placeholders to replace
 
-- Suite prices (8 000 / 6 500 / 5 000 ₽): edit in the admin panel.
+- Suite prices (8 000 / 6 500 / 5 000 ₽ on every day): edit in the admin panel.
 - Address, phone, email and map link: admin panel → Hotel information.
-- Suite photos: admin panel → Suites → open a suite → Photos.
+- Photos for suites 1 and 7.
 - Suite descriptions and amenities are drafts and need checking against the real rooms.
 
 ## Tests

@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-10 18:21+0300\n"
+"POT-Creation-Date: 2026-11-12 16:17+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,160 +15,260 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: config/settings.py:111 hotel/admin.py:23
+#: config/settings.py:111 hotel/admin.py:47
 msgid "Russian"
 msgstr "Русский"
 
-#: config/settings.py:112 hotel/admin.py:24
+#: config/settings.py:112 hotel/admin.py:48
 msgid "English"
 msgstr "English"
 
-#: hotel/admin.py:6
+#: hotel/admin.py:7
 msgid "Pushka Hotel administration"
 msgstr "Управление отелем «Пушка»"
 
-#: hotel/admin.py:7
+#: hotel/admin.py:8
 msgid "Pushka Hotel"
 msgstr "Отель «Пушка»"
+
+#: hotel/admin.py:11
+msgid "preview"
+msgstr "превью"
+
+#: hotel/admin.py:37
+msgid "Price per night by day of the week, ₽"
+msgstr "Цена за ночь по дням недели, ₽"
+
+#: hotel/admin.py:42
+msgid ""
+"Each price is for the night that starts on that day. For example, Friday is "
+"the night from Friday to Saturday."
+msgstr ""
+"Цена указана за ночь, которая начинается в этот день. Например, пятница — "
+"это ночь с пятницы на субботу."
 
 #: hotel/apps.py:8
 msgid "Hotel"
 msgstr "Отель"
 
-#: hotel/models.py:20 hotel/models.py:58
+#: hotel/models.py:21
+msgid "Monday"
+msgstr "понедельник"
+
+#: hotel/models.py:22
+msgid "Tuesday"
+msgstr "вторник"
+
+#: hotel/models.py:23
+msgid "Wednesday"
+msgstr "среда"
+
+#: hotel/models.py:24
+msgid "Thursday"
+msgstr "четверг"
+
+#: hotel/models.py:25
+msgid "Friday"
+msgstr "пятница"
+
+#: hotel/models.py:26
+msgid "Saturday"
+msgstr "суббота"
+
+#: hotel/models.py:27
+msgid "Sunday"
+msgstr "воскресенье"
+
+#: hotel/models.py:44 hotel/models.py:86
 msgid "name (Russian)"
 msgstr "название (рус.)"
 
-#: hotel/models.py:21 hotel/models.py:59
+#: hotel/models.py:45 hotel/models.py:87
 msgid "name (English)"
 msgstr "название (англ.)"
 
-#: hotel/models.py:22
+#: hotel/models.py:46
 msgid "address (Russian)"
 msgstr "адрес (рус.)"
 
-#: hotel/models.py:23
+#: hotel/models.py:47
 msgid "address (English)"
 msgstr "адрес (англ.)"
 
-#: hotel/models.py:24
+#: hotel/models.py:48
 msgid "phone"
 msgstr "телефон"
 
-#: hotel/models.py:25
+#: hotel/models.py:49
 msgid "email"
 msgstr "эл. почта"
 
-#: hotel/models.py:26
+#: hotel/models.py:50
 msgid "check-in time"
 msgstr "время заезда"
 
-#: hotel/models.py:27
+#: hotel/models.py:51
 msgid "check-out time"
 msgstr "время выезда"
 
-#: hotel/models.py:29
+#: hotel/models.py:53
 msgid "map embed URL"
 msgstr "ссылка на карту"
 
-#: hotel/models.py:31
+#: hotel/models.py:55
 msgid "Yandex Maps constructor link for the contacts page (optional)."
 msgstr ""
 "Ссылка из конструктора Яндекс Карт для страницы контактов (необязательно)."
 
-#: hotel/models.py:35 hotel/models.py:36
+#: hotel/models.py:59 hotel/models.py:60
 msgid "hotel information"
 msgstr "информация об отеле"
 
-#: hotel/models.py:56
+#: hotel/models.py:84
 msgid "suite number"
 msgstr "номер люкса"
 
-#: hotel/models.py:57
+#: hotel/models.py:85
 msgid "URL name"
 msgstr "имя в адресе страницы"
 
-#: hotel/models.py:60
+#: hotel/models.py:88
 msgid "short description (Russian)"
 msgstr "краткое описание (рус.)"
 
-#: hotel/models.py:61
+#: hotel/models.py:89
 msgid "short description (English)"
 msgstr "краткое описание (англ.)"
 
-#: hotel/models.py:62
+#: hotel/models.py:90
 msgid "description (Russian)"
 msgstr "описание (рус.)"
 
-#: hotel/models.py:63
+#: hotel/models.py:91
 msgid "description (English)"
 msgstr "описание (англ.)"
 
-#: hotel/models.py:65
+#: hotel/models.py:93
 msgid "amenities (Russian)"
 msgstr "удобства (рус.)"
 
-#: hotel/models.py:65 hotel/models.py:68
+#: hotel/models.py:93 hotel/models.py:96
 msgid "One item per line."
 msgstr "По одному пункту в строке."
 
-#: hotel/models.py:68
+#: hotel/models.py:96
 msgid "amenities (English)"
 msgstr "удобства (англ.)"
 
-#: hotel/models.py:70
+#: hotel/models.py:98
 msgid "maximum guests"
 msgstr "максимум гостей"
 
-#: hotel/models.py:71
+#: hotel/models.py:99
 msgid "area, m²"
 msgstr "площадь, м²"
 
-#: hotel/models.py:73
-msgid "price per night, ₽"
-msgstr "цена за ночь, ₽"
+#: hotel/models.py:102
+msgid "Mon"
+msgstr "Пн"
 
-#: hotel/models.py:76
+#: hotel/models.py:103
+msgid "Tue"
+msgstr "Вт"
+
+#: hotel/models.py:104
+msgid "Wed"
+msgstr "Ср"
+
+#: hotel/models.py:105
+msgid "Thu"
+msgstr "Чт"
+
+#: hotel/models.py:106
+msgid "Fri"
+msgstr "Пт"
+
+#: hotel/models.py:107
+msgid "Sat"
+msgstr "Сб"
+
+#: hotel/models.py:108
+msgid "Sun"
+msgstr "Вс"
+
+#: hotel/models.py:109
 msgid "shown on the site"
 msgstr "показывать на сайте"
 
-#: hotel/models.py:81 hotel/models.py:113
+#: hotel/models.py:113 hotel/models.py:220
 msgid "suite"
 msgstr "номер"
 
-#: hotel/models.py:82
+#: hotel/models.py:114
 msgid "suites"
 msgstr "номера"
 
-#: hotel/models.py:115 hotel/models.py:122
+#: hotel/models.py:184 hotel/models.py:224
 msgid "photo"
 msgstr "фото"
 
-#: hotel/models.py:116
+#: hotel/models.py:186
+msgid "thumbnail"
+msgstr "миниатюра"
+
+#: hotel/models.py:188
 msgid "caption (Russian)"
 msgstr "подпись (рус.)"
 
-#: hotel/models.py:117
+#: hotel/models.py:189
 msgid "caption (English)"
 msgstr "подпись (англ.)"
 
-#: hotel/models.py:118
+#: hotel/models.py:190
 msgid "order"
 msgstr "порядок"
 
-#: hotel/models.py:123
+#: hotel/models.py:225
 msgid "photos"
 msgstr "фотографии"
 
-#: hotel/templates/hotel/_suite_card.html:7
-#: hotel/templates/hotel/suite_detail.html:19
+#: hotel/models.py:241
+msgid "hotel photo"
+msgstr "фото отеля"
+
+#: hotel/models.py:242
+msgid "hotel photos"
+msgstr "фото отеля"
+
+#: hotel/templates/hotel/_gallery.html:7
+msgid "Previous photo"
+msgstr "Предыдущее фото"
+
+#: hotel/templates/hotel/_gallery.html:8
+msgid "Next photo"
+msgstr "Следующее фото"
+
+#: hotel/templates/hotel/_gallery.html:25
+#: hotel/templates/hotel/_suite_card.html:8
 msgid "Photo coming soon"
 msgstr "Фото скоро появится"
 
-#: hotel/templates/hotel/_suite_card.html:12
-#: hotel/templates/hotel/suite_detail.html:25
+#: hotel/templates/hotel/_price.html:1
+#, python-format
+msgid "%(price)s ₽ per night"
+msgstr "%(price)s ₽ за ночь"
+
+#: hotel/templates/hotel/_price.html:1
+#, python-format
+msgid "from %(price)s ₽ per night"
+msgstr "от %(price)s ₽ за ночь"
+
+#: hotel/templates/hotel/_suite_card.html:14
+#: hotel/templates/hotel/suite_detail.html:19
 #, python-format
 msgid "Up to %(guests)s guest"
 msgid_plural "Up to %(guests)s guests"
@@ -178,17 +277,11 @@ msgstr[1] "До %(guests)s гостей"
 msgstr[2] "До %(guests)s гостей"
 msgstr[3] "До %(guests)s гостей"
 
-#: hotel/templates/hotel/_suite_card.html:14
-#: hotel/templates/hotel/suite_detail.html:23
-#, python-format
-msgid "from %(price)s ₽ per night"
-msgstr "от %(price)s ₽ за ночь"
-
-#: hotel/templates/hotel/_suite_card.html:15
+#: hotel/templates/hotel/_suite_card.html:17
 msgid "View suite"
 msgstr "Подробнее"
 
-#: hotel/templates/hotel/about.html:3 hotel/templates/hotel/base.html:28
+#: hotel/templates/hotel/about.html:3 hotel/templates/hotel/base.html:29
 msgid "About"
 msgstr "Об отеле"
 
@@ -198,8 +291,8 @@ msgstr "Об отеле"
 
 #: hotel/templates/hotel/about.html:11
 msgid ""
-"Pushka Hotel is a small hotel with just seven suites. We chose to stay small"
-" so that we can give every guest our full attention: from the first message "
+"Pushka Hotel is a small hotel with just seven suites. We chose to stay small "
+"so that we can give every guest our full attention: from the first message "
 "to the moment you check out."
 msgstr ""
 "«Пушка» — небольшой отель всего на семь номеров. Мы сознательно остаёмся "
@@ -233,41 +326,44 @@ msgstr "Бесплатный Wi-Fi во всём отеле."
 msgid "Suites for two, three and four guests."
 msgstr "Номера для двух, трёх и четырёх гостей."
 
+#: hotel/templates/hotel/about.html:24
+msgid "Inside the hotel"
+msgstr "В отеле"
+
 #: hotel/templates/hotel/base.html:8
 msgid "Pushka Hotel: seven cosy suites. Book online."
 msgstr "Отель «Пушка»: семь уютных номеров. Бронирование онлайн."
 
-#: hotel/templates/hotel/base.html:23
+#: hotel/templates/hotel/base.html:24
 msgid "Menu"
 msgstr "Меню"
 
-#: hotel/templates/hotel/base.html:24
+#: hotel/templates/hotel/base.html:25
 msgid "Main menu"
 msgstr "Главное меню"
 
-#: hotel/templates/hotel/base.html:26
+#: hotel/templates/hotel/base.html:27
 msgid "Home"
 msgstr "Главная"
 
-#: hotel/templates/hotel/base.html:27
-#: hotel/templates/hotel/suite_detail.html:9
+#: hotel/templates/hotel/base.html:28 hotel/templates/hotel/suite_detail.html:9
 #: hotel/templates/hotel/suite_list.html:3
 #: hotel/templates/hotel/suite_list.html:8
 msgid "Suites"
 msgstr "Номера"
 
-#: hotel/templates/hotel/base.html:29 hotel/templates/hotel/contacts.html:3
+#: hotel/templates/hotel/base.html:30 hotel/templates/hotel/contacts.html:3
 #: hotel/templates/hotel/contacts.html:7
 msgid "Contacts"
 msgstr "Контакты"
 
-#: hotel/templates/hotel/base.html:54
-#: hotel/templates/hotel/suite_detail.html:27
+#: hotel/templates/hotel/base.html:55
+#: hotel/templates/hotel/suite_detail.html:21
 msgid "Check-in"
 msgstr "Заезд"
 
-#: hotel/templates/hotel/base.html:54
-#: hotel/templates/hotel/suite_detail.html:27
+#: hotel/templates/hotel/base.html:55
+#: hotel/templates/hotel/suite_detail.html:21
 msgid "Check-out"
 msgstr "Выезд"
 
@@ -346,7 +442,11 @@ msgstr "Наши номера"
 msgid "All suites"
 msgstr "Все номера"
 
-#: hotel/templates/hotel/suite_detail.html:29
+#: hotel/templates/hotel/suite_detail.html:25
+msgid "Price per night"
+msgstr "Цена за ночь"
+
+#: hotel/templates/hotel/suite_detail.html:33
 msgid ""
 "Online booking is coming soon. Until then, please call or email us to book "
 "this suite."
@@ -354,11 +454,11 @@ msgstr ""
 "Онлайн-бронирование скоро заработает. А пока забронировать номер можно по "
 "телефону или почте."
 
-#: hotel/templates/hotel/suite_detail.html:30
+#: hotel/templates/hotel/suite_detail.html:34
 msgid "Book this suite"
 msgstr "Забронировать"
 
-#: hotel/templates/hotel/suite_detail.html:35
+#: hotel/templates/hotel/suite_detail.html:39
 msgid "In the suite"
 msgstr "В номере"
 

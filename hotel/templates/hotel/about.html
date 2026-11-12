@@ -18,4 +18,12 @@
     </ul>
   </div>
 </section>
+{% if photos %}
+<section class="section section-alt">
+  <div class="container">
+    <h2>{% translate "Inside the hotel" %}</h2>
+    <div class="about-gallery">{% include "hotel/_gallery.html" %}</div>
+  </div>
+</section>
+{% endif %}
 {% endblock %}
