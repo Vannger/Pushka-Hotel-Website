@@ -71,7 +71,7 @@ right way up, stripped of camera metadata and given a thumbnail automatically.
 
 The photos of suites 5 and 6 were taken on a phone, so they were enhanced with
 Real-ESRGAN (`realesr-general-x4v3`, denoise strength 0.35) before being added.
-The photos of suites 2–4 and the hall are professional shots, only resized.
+The photos of suites 2–4 and the hall were already sharp, so they were only resized.
 
 ## Placeholders to replace
 
