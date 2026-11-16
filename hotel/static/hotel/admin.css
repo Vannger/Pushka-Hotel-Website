@@ -1,7 +1,3 @@
-/* Keep all seven weekday prices visible in the suite list without scrolling. */
-#result_list input.vIntegerField { width: 4.2em; }
-#result_list td, #result_list th { padding-left: 5px; padding-right: 5px; }
-
 /* Put the seven price fields of a suite on one line. */
 fieldset.price-days .form-row > div { flex-wrap: wrap; gap: 8px 18px; }
 fieldset.price-days .fieldBox { margin-right: 0; }

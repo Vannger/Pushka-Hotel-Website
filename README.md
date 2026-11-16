@@ -1,13 +1,17 @@
 # Pushka Hotel Website
 
-Bilingual (Russian / English) website for Pushka Hotel, built with Django and PostgreSQL.
+One-page website for Pushka Hotel's guests who rent a room by the hour, in Russian
+and English, built with Django and PostgreSQL.
 
-## Roadmap
+The page has three things only:
 
-1. **Foundation and bilingual site**: pages, suites, admin panel, translations. *(this step)*
-2. **Booking without payment**: availability calendar, booking requests, no double bookings, email notifications.
-3. **Online payment**: YooKassa with 54-FZ receipts; the booking request form stays as a fallback.
-4. **Launch**: Russian hosting, domain, HTTPS, privacy policy and personal data consent (152-FZ).
+- **Promo texts**: the headline and four short blocks.
+- **Room photos**: the photos of all rooms mixed together, without names or numbers,
+  because the hotel chooses the room for the guest.
+- **Contacts**: address, phone, email and a map.
+
+There are no suite pages, prices or booking. The earlier multi-page version with
+them is in the history of the `feature/foundation` branch.
 
 ## Running locally
 
@@ -19,7 +23,7 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env               # then edit the values
 python manage.py migrate           # also creates the seven suites
-python manage.py load_photos       # adds the suite and hotel photos from photos/
+python manage.py load_photos       # adds the room photos from photos/
 python manage.py createsuperuser
 python manage.py runserver
 ```
@@ -39,12 +43,12 @@ If `POSTGRES_DB` is empty in `.env`, a local SQLite file is used instead.
 
 | What | Where |
 |---|---|
-| Suites, photos, prices, hotel contacts | Admin panel (stored in the database) |
-| Prices for each day of the week | Admin panel → Suites: the list is an editable price table (Mon–Sun) |
+| Address, phone, email, map link | Admin panel → Hotel information |
+| Room photos | Admin panel → Suites → open a suite → Photos |
+| Hiding all photos of one room | Admin panel → Suites: untick "shown on the site" |
 | Original photos for the first load | `photos/` (one folder per suite, captions in `photos/photos.json`) |
-| Suite texts in both languages | `*_ru` / `*_en` fields on each suite |
-| Interface texts (menus, buttons, page copy) | Templates in `hotel/templates/hotel/`, Russian translation in `locale/ru/LC_MESSAGES/django.po` |
-| Styles and logo | `hotel/static/hotel/` |
+| Promo texts and other page copy | `hotel/templates/hotel/home.html`, Russian translation in `locale/ru/LC_MESSAGES/django.po` |
+| Styles, script, logo, fonts | `hotel/static/hotel/` |
 
 Templates are written in English and translated to Russian through gettext.
 After changing interface text:
@@ -55,13 +59,11 @@ python manage.py makemessages -l ru -l en   # updates the .po files (needs GNU g
 python manage.py compilemessages
 ```
 
-## Prices
-
-Each suite has a price per night for every day of the week. The price of a night
-belongs to the day it starts on: the Friday price is the night from Friday to
-Saturday. `Suite.price_for_stay(check_in, check_out)` adds up the nights of a stay.
-
 ## Photos
+
+The page deals the photos out like cards: the first photo of every suite, then the
+second of every suite, and so on. Captions are used only as alternative text.
+The photos of the hall (`photos/hotel/`) are loaded but not shown.
 
 `python manage.py load_photos` loads `photos/` into the database and media folder.
 It skips suites that already have photos; `--replace` reloads them.
@@ -73,12 +75,19 @@ The photos of suites 5 and 6 were taken on a phone, so they were enhanced with
 Real-ESRGAN (`realesr-general-x4v3`, denoise strength 0.35) before being added.
 The photos of suites 2–4 and the hall were already sharp, so they were only resized.
 
+## What is kept but not shown
+
+Suite names, descriptions, capacities and the prices for each day of the week stay
+in the database, and `Suite.price_for_stay()` still works. The admin panel keeps
+them in a collapsed block called "Not shown on the site". They are there in case
+separate suite pages are needed again.
+
 ## Placeholders to replace
 
-- Suite prices (8 000 / 6 500 / 5 000 ₽ on every day): edit in the admin panel.
 - Address, phone, email and map link: admin panel → Hotel information.
 - Photos for suites 1 and 7.
-- Suite descriptions and amenities are drafts and need checking against the real rooms.
+- The promo texts are drafts. Check that what they promise is true for every room:
+  a wide bed and a private bathroom.
 
 ## Tests
 

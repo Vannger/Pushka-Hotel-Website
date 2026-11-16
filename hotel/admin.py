@@ -1,8 +1,9 @@
 from django.contrib import admin
+from django.db.models import Count
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
-from .models import WEEKDAY_PRICE_FIELDS, HotelInfo, HotelPhoto, Suite, SuitePhoto
+from .models import WEEKDAY_PRICE_FIELDS, HotelInfo, Suite, SuitePhoto
 
 admin.site.site_header = _("Pushka Hotel administration")
 admin.site.site_title = _("Pushka Hotel")
@@ -24,45 +25,56 @@ class SuitePhotoInline(admin.TabularInline):
 
 @admin.register(Suite)
 class SuiteAdmin(admin.ModelAdmin):
-    # The list doubles as a price table: every weekday price can be edited
-    # right in the list and saved with one button.
-    list_display = ("number", "name_ru", *WEEKDAY_PRICE_FIELDS)
+    # The site is a single page that shows the photos of all suites mixed
+    # together, so a suite is mostly a folder of photos here.
+    list_display = ("number", "name_ru", "photo_count", "is_active")
     list_display_links = ("number", "name_ru")
-    list_editable = WEEKDAY_PRICE_FIELDS
+    list_editable = ("is_active",)
     prepopulated_fields = {"slug": ("name_en",)}
     inlines = [SuitePhotoInline]
     fieldsets = (
-        (None, {"fields": ("number", "slug", "capacity", "area_m2", "is_active")}),
+        (None, {"fields": ("number", "name_ru", "is_active")}),
         (
-            _("Price per night by day of the week, ₽"),
+            _("Not shown on the site"),
             {
-                "fields": (WEEKDAY_PRICE_FIELDS,),
-                "classes": ("price-days",),
+                "classes": ("collapse", "price-days"),
                 "description": _(
-                    "Each price is for the night that starts on that day. "
-                    "For example, Friday is the night from Friday to Saturday."
+                    "The site does not show suite names, descriptions or prices. "
+                    "These fields are kept in case separate suite pages are needed again."
+                ),
+                "fields": (
+                    "slug",
+                    "name_en",
+                    "capacity",
+                    "area_m2",
+                    WEEKDAY_PRICE_FIELDS,
+                    "summary_ru",
+                    "summary_en",
+                    "description_ru",
+                    "description_en",
+                    "amenities_ru",
+                    "amenities_en",
                 ),
             },
         ),
-        (_("Russian"), {"fields": ("name_ru", "summary_ru", "description_ru", "amenities_ru")}),
-        (_("English"), {"fields": ("name_en", "summary_en", "description_en", "amenities_en")}),
     )
 
     class Media:
         css = {"all": ("hotel/admin.css",)}
 
+    def get_queryset(self, request):
+        return super().get_queryset(request).annotate(photo_count=Count("photos"))
 
-@admin.register(HotelPhoto)
-class HotelPhotoAdmin(admin.ModelAdmin):
-    list_display = (preview, "alt_ru", "order")
-    list_display_links = (preview, "alt_ru")
-    list_editable = ("order",)
-    fields = (preview, "image", "alt_ru", "alt_en", "order")
-    readonly_fields = (preview,)
+    @admin.display(description=_("photos"), ordering="photo_count")
+    def photo_count(self, obj):
+        return obj.photo_count
 
 
 @admin.register(HotelInfo)
 class HotelInfoAdmin(admin.ModelAdmin):
+    # Check-in and check-out times are not shown on the one-page site.
+    fields = ("name_ru", "name_en", "address_ru", "address_en", "phone", "email", "map_embed_url")
+
     def has_add_permission(self, request):
         return not HotelInfo.objects.exists()
 

@@ -1,8 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
-from django.utils import translation
 
-from hotel.models import Suite
+from hotel.models import HotelInfo, Suite
 
 
 class SeedDataTests(TestCase):
@@ -11,35 +10,14 @@ class SeedDataTests(TestCase):
         self.assertEqual(capacities, {1: 4, 2: 2, 3: 3, 4: 2, 5: 2, 6: 2, 7: 2})
 
 
-class PageTests(TestCase):
-    pages = ["hotel:home", "hotel:suite_list", "hotel:about", "hotel:contacts"]
-
-    def test_pages_render_in_both_languages(self):
-        for lang in ("ru", "en"):
-            with translation.override(lang):
-                for name in self.pages:
-                    url = reverse(name)
-                    self.assertTrue(url.startswith(f"/{lang}/"))
-                    response = self.client.get(url)
-                    self.assertEqual(response.status_code, 200, url)
-
-    def test_suite_detail_is_translated(self):
-        suite = Suite.objects.get(number=1)
-        with translation.override("ru"):
-            response = self.client.get(suite.get_absolute_url())
-        self.assertContains(response, "Семейный люкс №1")
-        self.assertContains(response, "До 4 гостей")
-        with translation.override("en"):
-            response = self.client.get(suite.get_absolute_url())
-        self.assertContains(response, "Family Suite No. 1")
-        self.assertContains(response, "Up to 4 guests")
-
-    def test_inactive_suite_is_hidden(self):
-        suite = Suite.objects.get(number=2)
-        suite.is_active = False
-        suite.save()
-        with translation.override("en"):
-            self.assertEqual(self.client.get(suite.get_absolute_url()).status_code, 404)
+class OnePageTests(TestCase):
+    def test_page_renders_in_both_languages(self):
+        ru = self.client.get("/ru/")
+        self.assertContains(ru, "Время только для двоих")
+        self.assertContains(ru, "Номера на час")
+        en = self.client.get("/en/")
+        self.assertContains(en, "Time for just the two of you")
+        self.assertContains(en, "Rooms by the hour")
 
     def test_root_redirects_to_language(self):
         response = self.client.get("/")
@@ -47,7 +25,34 @@ class PageTests(TestCase):
         self.assertTrue(response["Location"].startswith("/ru/"))
 
     def test_language_switch_keeps_page(self):
-        response = self.client.post(
-            reverse("set_language"), {"language": "en", "next": "/ru/suites/"}
-        )
-        self.assertRedirects(response, "/en/suites/", fetch_redirect_response=False)
+        response = self.client.post(reverse("set_language"), {"language": "en", "next": "/ru/"})
+        self.assertRedirects(response, "/en/", fetch_redirect_response=False)
+
+    def test_there_are_no_other_pages(self):
+        for path in ("/ru/suites/", "/ru/suites/suite-2/", "/ru/about/", "/ru/contacts/"):
+            self.assertEqual(self.client.get(path).status_code, 404, path)
+
+    def test_suites_and_prices_are_not_mentioned(self):
+        response = self.client.get("/ru/")
+        self.assertNotContains(response, "Люкс")
+        self.assertNotContains(response, "₽")
+
+    def test_contacts_are_shown(self):
+        info = HotelInfo.load()
+        info.address_ru = "Тверская ул., 1"
+        info.phone = "+7 (900) 123-45-67"
+        info.email = "hello@pushka.example"
+        info.save()
+        response = self.client.get("/ru/")
+        self.assertContains(response, "Тверская ул., 1")
+        self.assertContains(response, 'href="tel:+79001234567"')
+        self.assertContains(response, "+7 (900) 123-45-67")
+        self.assertContains(response, "mailto:hello@pushka.example")
+
+    def test_no_call_buttons_without_a_phone(self):
+        info = HotelInfo.load()
+        info.phone = ""
+        info.save()
+        response = self.client.get("/ru/")
+        self.assertNotContains(response, "tel:")
+        self.assertNotContains(response, "call-bar")

@@ -1,7 +1,7 @@
+import re
 from datetime import timedelta
 
 from django.db import models
-from django.urls import reverse
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 
@@ -75,6 +75,11 @@ class HotelInfo(TranslatedFieldsMixin, models.Model):
     def address(self):
         return self.tr("address")
 
+    @property
+    def phone_href(self):
+        """The phone as a link for the call buttons: `tel:+79001234567`."""
+        return "tel:" + re.sub(r"[^\d+]", "", self.phone)
+
 
 def _price_field(label):
     return models.PositiveIntegerField(label)
@@ -115,9 +120,6 @@ class Suite(TranslatedFieldsMixin, models.Model):
 
     def __str__(self):
         return f"{self.number}. {self.name_ru}"
-
-    def get_absolute_url(self):
-        return reverse("hotel:suite_detail", kwargs={"slug": self.slug})
 
     @property
     def name(self):
@@ -211,6 +213,11 @@ class Photo(TranslatedFieldsMixin, models.Model):
     @property
     def thumb_url(self):
         return (self.thumbnail or self.image).url
+
+    @property
+    def caption(self):
+        """The caption alone. Unlike `alt`, it never falls back to the suite name."""
+        return self.tr("alt")
 
 
 class SuitePhoto(Photo):
