@@ -148,6 +148,11 @@
           <p>{% translate "We strictly keep everything confidential. Our hotel is small and intimate, so you will not run into a crowd of tourists in the lobby. Check-in is as quick as possible, the administrators ask no personal questions and never call after you leave. You can pay in cash or by bank transfer when you check in." %}</p>
         </details>
         <details>
+          {# The drink itself is not named: Russian law bans alcohol advertising online. #}
+          <summary>{% translate "Is there a gift on Sundays?" %}</summary>
+          <p>{% translate "Yes. Every Sunday from 00:00 to 23:59, with any hourly rate (2 hours for 3,500 ₽ or 3 hours for 4,000 ₽), a compliment from the hotel will be waiting for you in the room when you arrive." %}</p>
+        </details>
+        <details>
           <summary>{% translate "Do we pay extra for a second guest or more guests?" %}</summary>
           <p>{% translate "No, the price is fixed per room for a couple (3,500 ₽ for 2 hours or 4,000 ₽ for 3 hours). If you are planning a visit in a larger group (for example, 3 or 4 people), just let the administrator know in advance when confirming the booking. We will pick the most spacious room and discuss comfortable terms." %}</p>
         </details>
@@ -156,8 +161,8 @@
           <p>{% translate "Of course. If the room is not booked for the next slot, you can extend your stay for as long as you like at 1,000 ₽ per hour, simply by calling reception from your room." %}</p>
         </details>
         <details>
-          <summary>{% translate "Where is the hotel?" %}</summary>
-          <p>{% translate "The hotel is at 5 Bolshoy Putinkovsky Lane, Moscow. It is a quiet lane 2 minutes on foot from Pushkinskaya, Tverskaya and Chekhovskaya metro stations." %}</p>
+          <summary>{% translate "Where is the hotel, and what about parking?" %}</summary>
+          <p>{% translate "The hotel is at 5 Bolshoy Putinkovsky Lane, Moscow. It is a quiet lane 2 minutes on foot from Pushkinskaya, Tverskaya and Chekhovskaya metro stations. There is city parking in the nearby lanes (free on Sundays)." %}</p>
         </details>
       </div>
     </section>
@@ -167,7 +172,7 @@
         <div>
           <h2>{% translate "Find us" %}</h2>
           <p class="lead">{% translate "Call or message us, and we will tell you whether a room is free right now." %}</p>
-          <p class="no-sign">{% translate "We have no sign outside: Pushka is found only by those who know about it. When you reach building 5, call us and we will show you the way in." %}</p>
+          <p class="no-sign">{% translate "We have no sign outside, which keeps things calm for our guests, and we are still easy to find. When you reach building 5, call us and we will show you the way in." %}</p>
           {% if hotel.has_messengers %}
             <div class="messengers">
               {% if hotel.telegram_url %}<a class="btn btn-ghost" href="{{ hotel.telegram_url }}" target="_blank" rel="noopener">Telegram</a>{% endif %}

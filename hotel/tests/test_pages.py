@@ -93,10 +93,11 @@ class OnePageTests(TestCase):
             self.assertContains(ru, text)
         en = self.client.get("/en/")
         self.assertContains(en, "Windows onto the courtyard")
-        self.assertNotContains(ru, "парковк")
-        # The boss ruled out any mention of alcohol.
+        # Russian law bans alcohol advertising online, so the Sunday gift is not named.
         self.assertNotContains(ru, "Алкогол")
         self.assertNotContains(ru, "Просекко")
+        self.assertContains(ru, "Есть ли подарок по воскресеньям?")
+        self.assertContains(ru, "по воскресеньям — бесплатно")
 
     def test_boss_feedback_texts(self):
         ru = self.client.get("/ru/")
@@ -104,7 +105,7 @@ class OnePageTests(TestCase):
             "Почему пары выбирают «Пушку»",
             "Продление каждого следующего часа",
             "Частые вопросы гостей",
-            "Мы работаем без вывески",
+            "Вывески у нас нет",
             "Номер вы выбираете сами",
             "побыть вместе",
         ):
