@@ -43,7 +43,7 @@ If `POSTGRES_DB` is empty in `.env`, a local SQLite file is used instead.
 
 | What | Where |
 |---|---|
-| Address, phone, email, map link | Admin panel → Hotel information |
+| Address, how to find us, phone, Telegram, WhatsApp, MAX, email, map link | Admin panel → Hotel information |
 | Room photos | Admin panel → Suites → open a suite → Photos |
 | Hiding all photos of one room | Admin panel → Suites: untick "shown on the site" |
 | Original photos for the first load | `photos/` (one folder per suite, captions in `photos/photos.json`) |
@@ -84,7 +84,8 @@ separate suite pages are needed again.
 
 ## Placeholders to replace
 
-- Address, phone, email and map link: admin panel → Hotel information.
+- Address, how to find us, phone, messengers, email and map link: admin panel → Hotel information.
+  Messenger buttons appear only for the messengers that are filled in.
 - Photos for suites 1 and 7.
 - The promo texts are drafts. Check that what they promise is true for every room:
   a wide bed and a private bathroom.

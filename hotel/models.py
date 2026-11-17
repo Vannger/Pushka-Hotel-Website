@@ -47,12 +47,37 @@ class HotelInfo(TranslatedFieldsMixin, models.Model):
     address_en = models.CharField(_("address (English)"), max_length=255, blank=True)
     phone = models.CharField(_("phone"), max_length=50, blank=True)
     email = models.EmailField(_("email"), blank=True)
+    telegram = models.CharField(
+        _("Telegram"),
+        max_length=64,
+        blank=True,
+        help_text=_("Username without @, for example pushka_hotel."),
+    )
+    whatsapp = models.CharField(
+        _("WhatsApp"),
+        max_length=50,
+        blank=True,
+        help_text=_("Phone number used for WhatsApp, in any format."),
+    )
+    max_url = models.URLField(
+        _("MAX link"), blank=True, help_text=_("Link to the chat in the MAX messenger.")
+    )
+    directions_ru = models.CharField(
+        _("how to find us (Russian)"),
+        max_length=255,
+        blank=True,
+        help_text=_("For example: 5 minutes from Pushkinskaya metro, parking in the yard."),
+    )
+    directions_en = models.CharField(_("how to find us (English)"), max_length=255, blank=True)
     check_in_time = models.TimeField(_("check-in time"), default="14:00")
     check_out_time = models.TimeField(_("check-out time"), default="12:00")
     map_embed_url = models.URLField(
         _("map embed URL"),
         blank=True,
-        help_text=_("Yandex Maps constructor link for the contacts page (optional)."),
+        help_text=_(
+            "In the Yandex Maps constructor, choose the iframe code and paste only "
+            "the link from src=\"...\" here."
+        ),
     )
 
     class Meta:
@@ -74,6 +99,24 @@ class HotelInfo(TranslatedFieldsMixin, models.Model):
     @property
     def address(self):
         return self.tr("address")
+
+    @property
+    def directions(self):
+        return self.tr("directions")
+
+    @property
+    def telegram_url(self):
+        username = self.telegram.strip().lstrip("@")
+        return f"https://t.me/{username}" if username else ""
+
+    @property
+    def whatsapp_url(self):
+        digits = re.sub(r"\D", "", self.whatsapp)
+        return f"https://wa.me/{digits}" if digits else ""
+
+    @property
+    def has_messengers(self):
+        return bool(self.telegram_url or self.whatsapp_url or self.max_url)
 
     @property
     def phone_href(self):

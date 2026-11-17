@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-16 15:10+0300\n"
+"POT-Creation-Date: 2026-11-17 16:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgid ""
 "kept in case separate suite pages are needed again."
 msgstr ""
 
-#: hotel/admin.py:68 hotel/models.py:232
+#: hotel/admin.py:68 hotel/models.py:275
 msgid "photos"
 msgstr ""
 
@@ -83,11 +83,11 @@ msgstr ""
 msgid "Sunday"
 msgstr ""
 
-#: hotel/models.py:44 hotel/models.py:91
+#: hotel/models.py:44 hotel/models.py:134
 msgid "name (Russian)"
 msgstr ""
 
-#: hotel/models.py:45 hotel/models.py:92
+#: hotel/models.py:45 hotel/models.py:135
 msgid "name (English)"
 msgstr ""
 
@@ -107,135 +107,173 @@ msgstr ""
 msgid "email"
 msgstr ""
 
-#: hotel/models.py:50
+#: hotel/models.py:51
+msgid "Telegram"
+msgstr ""
+
+#: hotel/models.py:54
+msgid "Username without @, for example pushka_hotel."
+msgstr ""
+
+#: hotel/models.py:57
+msgid "WhatsApp"
+msgstr ""
+
+#: hotel/models.py:60
+msgid "Phone number used for WhatsApp, in any format."
+msgstr ""
+
+#: hotel/models.py:63
+msgid "MAX link"
+msgstr ""
+
+#: hotel/models.py:63
+msgid "Link to the chat in the MAX messenger."
+msgstr ""
+
+#: hotel/models.py:66
+msgid "how to find us (Russian)"
+msgstr ""
+
+#: hotel/models.py:69
+msgid "For example: 5 minutes from Pushkinskaya metro, parking in the yard."
+msgstr ""
+
+#: hotel/models.py:71
+msgid "how to find us (English)"
+msgstr ""
+
+#: hotel/models.py:72
 msgid "check-in time"
 msgstr ""
 
-#: hotel/models.py:51
+#: hotel/models.py:73
 msgid "check-out time"
 msgstr ""
 
-#: hotel/models.py:53
+#: hotel/models.py:75
 msgid "map embed URL"
 msgstr ""
 
-#: hotel/models.py:55
-msgid "Yandex Maps constructor link for the contacts page (optional)."
+#: hotel/models.py:78
+msgid ""
+"In the Yandex Maps constructor, choose the iframe code and paste only the "
+"link from src=\"...\" here."
 msgstr ""
 
-#: hotel/models.py:59 hotel/models.py:60
+#: hotel/models.py:84 hotel/models.py:85
 msgid "hotel information"
 msgstr ""
 
-#: hotel/models.py:89
+#: hotel/models.py:132
 msgid "suite number"
 msgstr ""
 
-#: hotel/models.py:90
+#: hotel/models.py:133
 msgid "URL name"
 msgstr ""
 
-#: hotel/models.py:93
+#: hotel/models.py:136
 msgid "short description (Russian)"
 msgstr ""
 
-#: hotel/models.py:94
+#: hotel/models.py:137
 msgid "short description (English)"
 msgstr ""
 
-#: hotel/models.py:95
+#: hotel/models.py:138
 msgid "description (Russian)"
 msgstr ""
 
-#: hotel/models.py:96
+#: hotel/models.py:139
 msgid "description (English)"
 msgstr ""
 
-#: hotel/models.py:98
+#: hotel/models.py:141
 msgid "amenities (Russian)"
 msgstr ""
 
-#: hotel/models.py:98 hotel/models.py:101
+#: hotel/models.py:141 hotel/models.py:144
 msgid "One item per line."
 msgstr ""
 
-#: hotel/models.py:101
+#: hotel/models.py:144
 msgid "amenities (English)"
 msgstr ""
 
-#: hotel/models.py:103
+#: hotel/models.py:146
 msgid "maximum guests"
 msgstr ""
 
-#: hotel/models.py:104
+#: hotel/models.py:147
 msgid "area, m²"
 msgstr ""
 
-#: hotel/models.py:107
+#: hotel/models.py:150
 msgid "Mon"
 msgstr ""
 
-#: hotel/models.py:108
+#: hotel/models.py:151
 msgid "Tue"
 msgstr ""
 
-#: hotel/models.py:109
+#: hotel/models.py:152
 msgid "Wed"
 msgstr ""
 
-#: hotel/models.py:110
+#: hotel/models.py:153
 msgid "Thu"
 msgstr ""
 
-#: hotel/models.py:111
+#: hotel/models.py:154
 msgid "Fri"
 msgstr ""
 
-#: hotel/models.py:112
+#: hotel/models.py:155
 msgid "Sat"
 msgstr ""
 
-#: hotel/models.py:113
+#: hotel/models.py:156
 msgid "Sun"
 msgstr ""
 
-#: hotel/models.py:114
+#: hotel/models.py:157
 msgid "shown on the site"
 msgstr ""
 
-#: hotel/models.py:118 hotel/models.py:227
+#: hotel/models.py:161 hotel/models.py:270
 msgid "suite"
 msgstr ""
 
-#: hotel/models.py:119
+#: hotel/models.py:162
 msgid "suites"
 msgstr ""
 
-#: hotel/models.py:186 hotel/models.py:231
+#: hotel/models.py:229 hotel/models.py:274
 msgid "photo"
 msgstr ""
 
-#: hotel/models.py:188
+#: hotel/models.py:231
 msgid "thumbnail"
 msgstr ""
 
-#: hotel/models.py:190
+#: hotel/models.py:233
 msgid "caption (Russian)"
 msgstr ""
 
-#: hotel/models.py:191
+#: hotel/models.py:234
 msgid "caption (English)"
 msgstr ""
 
-#: hotel/models.py:192
+#: hotel/models.py:235
 msgid "order"
 msgstr ""
 
-#: hotel/models.py:248
+#: hotel/models.py:291
 msgid "hotel photo"
 msgstr ""
 
-#: hotel/models.py:249
+#: hotel/models.py:292
 msgid "hotel photos"
 msgstr ""
 
@@ -272,7 +310,7 @@ msgid ""
 "together."
 msgstr ""
 
-#: hotel/templates/hotel/home.html:51 hotel/templates/hotel/home.html:139
+#: hotel/templates/hotel/home.html:51 hotel/templates/hotel/home.html:147
 msgid "Call us"
 msgstr ""
 
@@ -280,116 +318,122 @@ msgstr ""
 msgid "See the rooms"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:60
-msgid "Only the two of you"
+#: hotel/templates/hotel/home.html:54
+msgid "We reply within minutes"
 msgstr ""
 
 #: hotel/templates/hotel/home.html:61
+msgid "Only the two of you"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:62
 msgid ""
 "Close the door, and the whole city stays outside. In here there is only the "
 "two of you and time that belongs to nobody else."
 msgstr ""
 
-#: hotel/templates/hotel/home.html:64
+#: hotel/templates/hotel/home.html:65
 msgid "Just between us"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:65
+#: hotel/templates/hotel/home.html:66
 msgid ""
 "We know how to keep a secret. We ask no unnecessary questions and never talk "
 "about our guests."
 msgstr ""
 
-#: hotel/templates/hotel/home.html:68
+#: hotel/templates/hotel/home.html:69
 msgid "Everything is ready"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:69
+#: hotel/templates/hotel/home.html:70
 msgid ""
 "A wide bed, fresh linen, soft light and your own bathroom. All that is "
 "missing is you."
 msgstr ""
 
-#: hotel/templates/hotel/home.html:72
+#: hotel/templates/hotel/home.html:73
 msgid "Your time, your rules"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:73
+#: hotel/templates/hotel/home.html:74
 msgid ""
 "Drop in for a little while or stay longer. How long the date lasts is up to "
 "you alone."
 msgstr ""
 
-#: hotel/templates/hotel/home.html:81
+#: hotel/templates/hotel/home.html:82
 msgid "Take a look inside"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:82
+#: hotel/templates/hotel/home.html:83
 msgid ""
 "We choose the room for you from those that are free when you arrive. "
 "Whichever one you get, it will be just as cosy."
 msgstr ""
 
-#: hotel/templates/hotel/home.html:85
+#: hotel/templates/hotel/home.html:86
 msgid "Room photo"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:91
+#: hotel/templates/hotel/home.html:92
 msgid "Show all photos"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:92
+#: hotel/templates/hotel/home.html:93
 msgid "Photo viewer"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:94
+#: hotel/templates/hotel/home.html:95
 msgid "Close"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:95
+#: hotel/templates/hotel/home.html:96
 msgid "Previous photo"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:96
+#: hotel/templates/hotel/home.html:97
 msgid "Next photo"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:100
+#: hotel/templates/hotel/home.html:101
 msgid "Photos coming soon"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:107
+#: hotel/templates/hotel/home.html:108
 msgid "What happens at Pushka stays at Pushka."
 msgstr ""
 
-#: hotel/templates/hotel/home.html:114
+#: hotel/templates/hotel/home.html:115
 msgid "Find us"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:115
-msgid "Call us, and we will tell you whether a room is free right now."
-msgstr ""
-
-#: hotel/templates/hotel/home.html:117
-msgid "Address"
-msgstr ""
-
-#: hotel/templates/hotel/home.html:118
-msgid "Phone"
-msgstr ""
-
-#: hotel/templates/hotel/home.html:119
-msgid "Email"
-msgstr ""
-
-#: hotel/templates/hotel/home.html:123
-msgid "Map"
+#: hotel/templates/hotel/home.html:116
+msgid ""
+"Call or message us. We reply within minutes and will tell you whether a room "
+"is free right now."
 msgstr ""
 
 #: hotel/templates/hotel/home.html:125
+msgid "Address"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:126
+msgid "Phone"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:127
+msgid "Email"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:131
+msgid "Map"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:133
 msgid "The map will appear here once the address is added."
 msgstr ""
 
-#: hotel/templates/hotel/home.html:134
+#: hotel/templates/hotel/home.html:142
 msgid "For adults only"
 msgstr ""

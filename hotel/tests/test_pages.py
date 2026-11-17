@@ -56,3 +56,22 @@ class OnePageTests(TestCase):
         response = self.client.get("/ru/")
         self.assertNotContains(response, "tel:")
         self.assertNotContains(response, "call-bar")
+
+    def test_messenger_buttons_and_directions(self):
+        info = HotelInfo.load()
+        info.address_ru = "Тверская ул., 1"
+        info.directions_ru = "5 минут от метро «Пушкинская»"
+        info.telegram = "@pushka_hotel"
+        info.whatsapp = "+7 (900) 123-45-67"
+        info.max_url = "https://max.ru/pushka"
+        info.save()
+        response = self.client.get("/ru/")
+        self.assertContains(response, 'href="https://t.me/pushka_hotel"')
+        self.assertContains(response, 'href="https://wa.me/79001234567"')
+        self.assertContains(response, 'href="https://max.ru/pushka"')
+        self.assertContains(response, "5 минут от метро «Пушкинская»")
+        self.assertContains(response, "Отвечаем за несколько минут")
+
+    def test_no_messenger_block_when_none_are_set(self):
+        response = self.client.get("/ru/")
+        self.assertNotContains(response, 'class="messengers"')

@@ -73,7 +73,20 @@ class SuiteAdmin(admin.ModelAdmin):
 @admin.register(HotelInfo)
 class HotelInfoAdmin(admin.ModelAdmin):
     # Check-in and check-out times are not shown on the one-page site.
-    fields = ("name_ru", "name_en", "address_ru", "address_en", "phone", "email", "map_embed_url")
+    fields = (
+        "name_ru",
+        "name_en",
+        "address_ru",
+        "address_en",
+        "directions_ru",
+        "directions_en",
+        "phone",
+        "telegram",
+        "whatsapp",
+        "max_url",
+        "email",
+        "map_embed_url",
+    )
 
     def has_add_permission(self, request):
         return not HotelInfo.objects.exists()

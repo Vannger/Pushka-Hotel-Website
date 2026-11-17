@@ -93,6 +93,11 @@ h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); }
 .hero h1 { max-width: 11em; text-shadow: 0 2px 24px rgba(0, 0, 0, .5); }
 .hero .lead { color: rgba(245, 236, 223, .88); font-size: 1.25rem; max-width: 27em; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.fast-reply { margin: 18px 0 0; color: rgba(245, 236, 223, .8); font-size: .95rem; }
+.fast-reply::before {
+  content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 10px; border-radius: 50%;
+  background: #6fcf7f; box-shadow: 0 0 0 4px rgba(111, 207, 127, .18); vertical-align: 1px;
+}
 @media (max-width: 760px) {
   .hero {
     min-height: 0; padding: 72px 0 64px;
@@ -179,6 +184,9 @@ h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); }
 /* Contacts */
 .contacts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 48px; align-items: start; }
 .contacts dl { margin: 32px 0 0; }
+.messengers { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.messengers .btn { padding: 9px 20px; font-size: .95rem; }
+.directions { display: block; margin-top: 4px; color: var(--muted); font-size: 1rem; }
 .contacts dt { margin-top: 20px; color: var(--muted); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .contacts dd { margin: 4px 0 0; font-size: 1.15rem; }
 .contacts dd a { text-decoration: none; }
