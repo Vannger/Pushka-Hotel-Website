@@ -1,0 +1,23 @@
+{
+  // Press F5 in VS Code and pick one of these.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run the site",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["runserver"],
+      "django": true,
+      "justMyCode": true
+    },
+    {
+      "name": "Update the database (migrate)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "args": ["migrate"],
+      "console": "integratedTerminal"
+    }
+  ]
+}

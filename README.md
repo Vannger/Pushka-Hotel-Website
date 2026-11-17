@@ -74,6 +74,22 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+### In VS Code
+
+Do the first-time setup above once (steps 1 to 4, but you can skip `runserver`).
+Then:
+
+1. Install the **Python** extension by Microsoft (Ctrl+Shift+X, search "Python").
+2. File → Open Folder… and choose the `Pushka-Hotel-Website` folder.
+3. Press Ctrl+Shift+P, run **Python: Select Interpreter** and pick the one marked
+   `.venv`. VS Code remembers this.
+4. Press F5 and choose **Run the site**. Open http://127.0.0.1:8000/.
+   Shift+F5 stops it. After `git pull`, run **Update the database (migrate)** the
+   same way before running the site.
+
+The built-in terminal (Ctrl+`) activates `.venv` by itself, so any
+`python manage.py ...` command from above works there too.
+
 To create the PostgreSQL database:
 
 ```sql
