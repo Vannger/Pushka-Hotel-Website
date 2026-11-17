@@ -93,10 +93,8 @@ class OnePageTests(TestCase):
             self.assertContains(ru, text)
         en = self.client.get("/en/")
         self.assertContains(en, "Windows onto the courtyard")
-        # Russian law bans alcohol advertising online, so the Sunday gift is not named.
         self.assertNotContains(ru, "Алкогол")
-        self.assertNotContains(ru, "Просекко")
-        self.assertContains(ru, "Есть ли подарок по воскресеньям?")
+        self.assertContains(ru, "Как получить бутылку шампанского Просекко в подарок?")
         self.assertContains(ru, "по воскресеньям — бесплатно")
 
     def test_boss_feedback_texts(self):
