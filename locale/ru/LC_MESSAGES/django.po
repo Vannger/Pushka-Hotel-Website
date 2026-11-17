@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-17 23:36+0300\n"
+"POT-Creation-Date: 2026-11-18 01:33+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -553,15 +553,13 @@ msgstr "Как соблюдается конфиденциальность пр�
 
 #: hotel/templates/hotel/home.html:187
 msgid ""
-"Our hotel is small and intimate, "
-"so you will not run into a crowd of tourists in the lobby. Check-in is as "
-"quick as possible, the administrators ask no personal questions and never "
-"call after you leave."
+"Our hotel is small and intimate, so you will not run into a crowd of "
+"tourists in the lobby. Check-in is as quick as possible, the administrators "
+"ask no personal questions and never call after you leave."
 msgstr ""
-"Наш отель имеет камерный формат "
-"— вы не столкнетесь с толпой туристов в лобби. Заселение проходит "
-"максимально быстро, администраторы не задают личных вопросов и не совершают "
-"звонков после выезда."
+"Наш отель имеет камерный формат — вы не столкнетесь с толпой туристов в "
+"лобби. Заселение проходит максимально быстро, администраторы не задают "
+"личных вопросов и не совершают звонков после выезда."
 
 #: hotel/templates/hotel/home.html:191
 msgid "How do we get a bottle of Prosecco as a gift?"
@@ -580,15 +578,11 @@ msgid "Do we pay extra for a second guest or more guests?"
 msgstr "Нужно ли доплачивать за второго гостя или гостей?"
 
 #: hotel/templates/hotel/home.html:196
-msgid ""
-"The prices are set for two people. If there are to be any extra people"
-"required, it will cost 1 000 ₽ extra per extra person"
-
+msgid "The price covers two people. Each extra person costs 1,000 ₽."
 msgstr ""
 "Стоимость включает в себя только две персоны. Если понадобятся "
-"дополнительные места, они будут стоить по 1 000 ₽ за каждую "
-"дополнительную персону"
-
+"дополнительные места, они будут стоить по 1 000 ₽ за каждую дополнительную "
+"персону."
 
 #: hotel/templates/hotel/home.html:199
 msgid "Can we extend our time if we want to stay longer?"
@@ -596,10 +590,11 @@ msgstr "Можно ли продлить время, если мы захоти�
 
 #: hotel/templates/hotel/home.html:200
 msgid ""
-"Of course. If the room is not booked for the next slot, you can extend your "
-"stay for as long as you like at 1,000 ₽ per hour."
+"Of course. If the room is not booked for the next slot, an extra hour costs "
+"1,000 ₽."
 msgstr ""
-"Конечно. Если номер не забронирован на следующее время, продление стоит 1 000 ₽ в час"
+"Конечно. Если номер не забронирован на следующее время, продление стоит "
+"1 000 ₽ в час."
 
 #: hotel/templates/hotel/home.html:203
 msgid "Where is the hotel, and what about parking?"
@@ -630,11 +625,11 @@ msgstr ""
 #: hotel/templates/hotel/home.html:214
 msgid ""
 "We have no sign outside, which keeps things calm for our guests, and we are "
-"still easy to find. If you have trouble finding us, you can always call us"
-"and ask for help."
+"still easy to find. If you have trouble finding us, call us and we will "
+"help."
 msgstr ""
-"Вывески у нас нет — так гостям спокойнее, а найти нас всё равно просто. "
-"Если что мы всегда готовы вам помочь найти нас."
+"Вывески у нас нет — так гостям спокойнее, а найти нас всё равно просто. Если"
+" что, мы всегда готовы помочь вам нас найти."
 
 #: hotel/templates/hotel/home.html:223
 msgid "Address"

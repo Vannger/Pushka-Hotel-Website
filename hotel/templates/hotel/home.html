@@ -64,7 +64,7 @@
       </div>
       <div class="container promo">
         <article class="promo-item">
-          <h3>{% translate "Only the two of you" %}</h3>
+          <h3>{% translate "Only you" %}</h3>
           <p>{% translate "Close the door, and the whole city stays outside." %}</p>
         </article>
         <article class="promo-item">
@@ -184,20 +184,20 @@
         <h2>{% translate "Frequently asked questions" %}</h2>
         <details open>
           <summary>{% translate "How is privacy kept when we check in?" %}</summary>
-          <p>{% translate "We strictly keep everything confidential. Our hotel is small and intimate, so you will not run into a crowd of tourists in the lobby. Check-in is as quick as possible, the administrators ask no personal questions and never call after you leave." %}</p>
+          <p>{% translate "Our hotel is small and intimate, so you will not run into a crowd of tourists in the lobby. Check-in is as quick as possible, the administrators ask no personal questions and never call after you leave." %}</p>
         </details>
         <details>
           {# The owner chose to name the drink, knowing Russian law restricts alcohol advertising online. #}
           <summary>{% translate "How do we get a bottle of Prosecco as a gift?" %}</summary>
-          <p>{% translate "The offer runs every Sunday from 00:00 to 23:59 when you book any hourly rate (2 hours for 3,500 ₽ or 3 hours for 4,000 ₽). By the time you arrive, a chilled bottle of Prosecco and two glasses will be waiting for you in the room." %}</p>
+          <p>{% translate "The offer runs every Sunday from 00:00 to 23:59 when you book any hourly rate (2 hours for 3,500 ₽ or 3 hours for 4,000 ₽)." %}</p>
         </details>
         <details>
           <summary>{% translate "Do we pay extra for a second guest or more guests?" %}</summary>
-          <p>{% translate "No, the price is fixed per room for a couple (3,500 ₽ for 2 hours or 4,000 ₽ for 3 hours). If you are planning a visit in a larger group (for example, 3 or 4 people), just let the administrator know in advance when confirming the booking. We will pick the most spacious room and discuss comfortable terms." %}</p>
+          <p>{% translate "The price covers two people. Each extra person costs 1,000 ₽." %}</p>
         </details>
         <details>
           <summary>{% translate "Can we extend our time if we want to stay longer?" %}</summary>
-          <p>{% translate "Of course. If the room is not booked for the next slot, you can extend your stay for as long as you like at 1,000 ₽ per hour, simply by calling reception from your room." %}</p>
+          <p>{% translate "Of course. If the room is not booked for the next slot, an extra hour costs 1,000 ₽." %}</p>
         </details>
         <details>
           <summary>{% translate "Where is the hotel, and what about parking?" %}</summary>
@@ -211,7 +211,7 @@
         <div>
           <h2>{% translate "Find us" %}</h2>
           <p class="lead">{% translate "Call or message us, and we will tell you whether a room is free right now." %}</p>
-          <p class="no-sign">{% translate "We have no sign outside, which keeps things calm for our guests, and we are still easy to find. When you reach building 5, call us and we will show you the way in." %}</p>
+          <p class="no-sign">{% translate "We have no sign outside, which keeps things calm for our guests, and we are still easy to find. If you have trouble finding us, call us and we will help." %}</p>
           {% if hotel.has_messengers %}
             <div class="messengers">
               {% if hotel.telegram_url %}<a class="btn btn-ghost" href="{{ hotel.telegram_url }}" target="_blank" rel="noopener">Telegram</a>{% endif %}
