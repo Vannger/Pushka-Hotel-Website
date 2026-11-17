@@ -90,6 +90,14 @@ Then:
 The built-in terminal (Ctrl+`) activates `.venv` by itself, so any
 `python manage.py ...` command from above works there too.
 
+### One file for someone without the server
+
+`python manage.py export_html` saves the Russian page as `pushka-hotel.html`, with
+the styles, fonts and photos built in. It opens with a double-click in any browser.
+Only the map and the messenger links need the internet, and there is no language
+switch. Add `--lang en` for the English page. Run it again after changing photos or
+contacts, because the file is a copy and does not update itself.
+
 To create the PostgreSQL database:
 
 ```sql
