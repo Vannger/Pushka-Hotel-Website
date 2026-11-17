@@ -184,10 +184,8 @@ separate suite pages are needed again.
 
 ## Placeholders to replace
 
-- The phone, email, address, directions, map and WhatsApp and Telegram links are filled
-  in by migrations `0005` and `0006`, and can be changed in admin panel → Hotel information.
-- MAX has no link by phone number. Copy the invite link from the MAX app
-  (Settings → «Пригласить друзей» → «Скопировать ссылку») into the MAX field.
+- The phone, email, address, directions, map and messenger links are filled in by
+  migrations `0005` to `0008`, and can be changed in admin panel → Hotel information.
 - Suites 1 and 7 are hidden because they are not let by the hour.
   Messenger buttons appear only for the messengers that are filled in.
 - The promo texts only promise what the hotel confirmed for every room: quiet, windows
