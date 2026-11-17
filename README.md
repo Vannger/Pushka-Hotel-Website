@@ -90,6 +90,38 @@ Then:
 The built-in terminal (Ctrl+`) activates `.venv` by itself, so any
 `python manage.py ...` command from above works there too.
 
+### Changing the texts yourself
+
+Every text on the page lives in one file: `locale/ru/LC_MESSAGES/django.po`.
+Each text has two lines there:
+
+```
+msgid "Time just for you"
+msgstr "Время только для вас"
+```
+
+- `msgstr` is the Russian text on the site. Change only the part inside the quotes.
+- `msgid` is the English text and also the text's name. Do not touch it here,
+  or the Russian text stops showing.
+- Keep the quotes. If the text itself needs quotation marks, use «ёлочки»,
+  or write `\"` for straight ones.
+- A long text can be split over several lines, each in its own quotes. They are
+  joined together.
+- If a text has a `#, fuzzy` line above it, the site ignores it. Delete that line
+  once the text is right.
+
+To find a text, press Ctrl+Shift+F in VS Code and search for a few words of
+it in Russian. After saving, press F5 → **Run the site**: VS Code compiles the
+texts first. From a terminal, run `python manage.py compile_texts`, then
+restart the server.
+
+To change an English text, change the same English sentence in **both**
+`hotel/templates/hotel/home.html` and in its `msgid` in `django.po`, so they
+stay identical, then compile again.
+
+Phone, email, address, directions, map and messengers are not in this file.
+Change them in the admin panel under **Информация об отеле** (hotel information).
+
 ### One file for someone without the server
 
 `python manage.py export_html` saves the Russian page as `pushka-hotel.html`, with

@@ -101,14 +101,19 @@ class OnePageTests(TestCase):
         ru = self.client.get("/ru/")
         for text in (
             "Почему пары выбирают «Пушку»",
-            "Продление каждого следующего часа",
             "Частые вопросы гостей",
             "Вывески у нас нет",
             "Номер вы выбираете сами",
             "побыть вместе",
         ):
             self.assertContains(ru, text)
-        for text in ("наедине", "никому не рассказываем", "Не хватает только вас", "Загляните ненадолго"):
+        for text in (
+            "наедине",
+            "никому не рассказываем",
+            "Не хватает только вас",
+            "Загляните ненадолго",
+            "Возможна оплата наличными",
+        ):
             self.assertNotContains(ru, text)
 
     def test_hourly_setup_migration(self):
@@ -130,3 +135,16 @@ class OnePageTests(TestCase):
         info = HotelInfo.load()
         info.telegram = "@pushka_hotel"
         self.assertEqual(info.telegram_url, "https://t.me/pushka_hotel")
+
+    def test_rates_block(self):
+        ru = self.client.get("/ru/")
+        for text in ("Тариф «Свидание»", "Тариф «Наслаждение»", "3\u00a0500\u00a0₽", "4\u00a0000\u00a0₽", 'href="#tariffs"'):
+            self.assertContains(ru, text)
+        # The extension price is said once, under the rates, not in the promo cards.
+        self.assertContains(ru, "Продление каждого следующего часа", count=1)
+        en = self.client.get("/en/")
+        self.assertContains(en, "The “Pleasure” rate")
+
+    def test_new_logo(self):
+        ru = self.client.get("/ru/")
+        self.assertContains(ru, "logo-light.svg")

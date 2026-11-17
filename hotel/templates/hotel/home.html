@@ -24,9 +24,10 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="{% url 'hotel:home' %}" aria-label="{{ hotel.name }}">
-        <img src="{% static 'hotel/img/logo-light.svg' %}" alt="Pushka Hotel" width="165" height="42">
+        <img src="{% static 'hotel/img/logo-light.svg' %}" alt="Pushka Hotel" width="64" height="64">
       </a>
       <nav class="main-nav" aria-label="{% translate 'Main menu' %}">
+        <a class="nav-link" href="#tariffs">{% translate "Rates" %}</a>
         <a class="nav-link" href="#rooms">{% translate "Rooms" %}</a>
         <a class="nav-link" href="#contacts">{% translate "Contacts" %}</a>
         {% if hotel.phone %}<a class="nav-phone" href="{{ hotel.phone_href }}">{{ hotel.phone }}</a>{% endif %}
@@ -77,7 +78,6 @@
         <article class="promo-item">
           <h3>{% translate "Your time, your rules" %}</h3>
           <p>{% translate "How long the date lasts is up to you alone." %}</p>
-          <p class="promo-extra">{% translate "Want to stay longer? Each extra hour is 1,000 ₽, or ask the administrator about a special overnight rate." %}</p>
         </article>
       </div>
       <div class="container">
@@ -134,6 +134,45 @@
       </div>
     </section>
 
+    <section class="section" id="tariffs">
+      <div class="container">
+        <div class="section-head">
+          <h2>{% translate "Clear rates for your dates" %}</h2>
+          <p>{% translate "No hidden charges and no extra fee for a second guest. Fresh towels, slippers and personal toiletry kits are already included." %}</p>
+        </div>
+        <div class="tariffs">
+          <article class="tariff">
+            <p class="tariff-tag">{% translate "Perfect for a first date" %}</p>
+            <h3>{% translate "The “Date” rate" %}</h3>
+            <p class="tariff-text">{% translate "Just the right time to have a glass of wine, relax and be together in the centre of Moscow." %}</p>
+            <p class="tariff-price"><strong>{% translate "3,500 ₽" %}</strong> <span>{% translate "/ 2 hours" %}</span></p>
+            <ul>
+              <li>{% translate "A cosy room with a double bed" %}</li>
+              <li>{% translate "Private bathroom and shower" %}</li>
+              <li>{% translate "No extra charge for guests (the price is for the whole room)" %}</li>
+              <li class="tariff-gift">{% translate "A bottle of Prosecco as a gift on Sundays" %}</li>
+            </ul>
+            {% if hotel.phone %}<a class="btn btn-ghost" href="{{ hotel.phone_href }}">{% translate "Call us" %}</a>{% endif %}
+          </article>
+          <article class="tariff tariff-best">
+            <span class="tariff-badge">{% translate "Couples’ choice · Best value" %}</span>
+            <p class="tariff-tag">{% translate "As much pleasure as you like, without hurrying" %}</p>
+            <h3>{% translate "The “Pleasure” rate" %}</h3>
+            <p class="tariff-text">{% translate "An extra hour for only 500 ₽, so you need not hurry anywhere and can enjoy each other’s company." %}</p>
+            <p class="tariff-price"><strong>{% translate "4,000 ₽" %}</strong> <span>{% translate "/ 3 hours" %}</span></p>
+            <ul>
+              <li>{% translate "3 full hours just for the two of you (you save 1,250 ₽)" %}</li>
+              <li>{% translate "Fresh bed linen, towels and slippers" %}</li>
+              <li>{% translate "Wine and champagne glasses in the room" %}</li>
+              <li class="tariff-gift">{% translate "A bottle of Prosecco as a gift on Sundays" %}</li>
+            </ul>
+            {% if hotel.phone %}<a class="btn" href="{{ hotel.phone_href }}">{% translate "Call us" %}</a>{% endif %}
+          </article>
+        </div>
+        <p class="tariff-note">{% translate "Want to stay longer? Each extra hour is 1,000 ₽, or ask the administrator about a special overnight rate." %}</p>
+      </div>
+    </section>
+
     <section class="quote">
       <div class="container">
         <p>{% translate "What happens at Pushka stays at Pushka." %}</p>
@@ -145,7 +184,7 @@
         <h2>{% translate "Frequently asked questions" %}</h2>
         <details open>
           <summary>{% translate "How is privacy kept when we check in?" %}</summary>
-          <p>{% translate "We strictly keep everything confidential. Our hotel is small and intimate, so you will not run into a crowd of tourists in the lobby. Check-in is as quick as possible, the administrators ask no personal questions and never call after you leave. You can pay in cash or by bank transfer when you check in." %}</p>
+          <p>{% translate "We strictly keep everything confidential. Our hotel is small and intimate, so you will not run into a crowd of tourists in the lobby. Check-in is as quick as possible, the administrators ask no personal questions and never call after you leave." %}</p>
         </details>
         <details>
           {# The owner chose to name the drink, knowing Russian law restricts alcohol advertising online. #}

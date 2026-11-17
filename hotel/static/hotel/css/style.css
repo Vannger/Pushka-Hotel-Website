@@ -55,7 +55,8 @@ h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); }
   border-bottom: 1px solid var(--border);
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
-.logo img { height: 42px; width: auto; }
+.logo { display: block; padding: 6px 0; }
+.logo img { display: block; height: 64px; width: auto; }
 .main-nav { display: flex; align-items: center; gap: 24px; }
 .nav-link { color: var(--text); text-decoration: none; }
 .nav-link:hover { color: var(--gold); }
@@ -66,7 +67,7 @@ h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); }
 .lang-switch button[aria-pressed="true"] { background: var(--gold); color: var(--bg); }
 @media (max-width: 760px) {
   .nav-link, .nav-phone { display: none; }
-  .logo img { height: 38px; }
+  .logo img { height: 52px; }
 }
 
 /* Buttons */
@@ -107,6 +108,37 @@ h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); }
   .has-call-bar .hero-actions .btn:not(.btn-ghost) { display: none; }
 }
 
+/* Rates */
+.tariffs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 920px; }
+.tariff {
+  position: relative; display: flex; flex-direction: column; padding: 32px 30px 30px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.tariff-best { border-color: rgba(220, 174, 102, .6); background: linear-gradient(160deg, rgba(122, 42, 34, .45) 0%, var(--surface) 60%); }
+.tariff-badge {
+  position: absolute; top: -12px; right: 24px; padding: 3px 12px; border-radius: 999px;
+  background: var(--gold); color: var(--bg); font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+}
+.tariff-tag { margin: 0 0 10px; color: var(--gold); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.tariff h3 { font-size: clamp(1.5rem, 2.6vw, 1.9rem); font-style: italic; margin-bottom: .3em; }
+.tariff-text { margin: 0; color: var(--muted); }
+.tariff-price { margin: 22px 0 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); color: var(--muted); }
+.tariff-price strong { font: 600 2.6rem/1 var(--serif); font-variant-numeric: lining-nums; color: var(--text); margin-right: 6px; }
+.tariff-best .tariff-price strong { color: var(--gold-light); }
+.tariff ul { list-style: none; margin: 0 0 28px; padding: 0; display: grid; gap: 10px; }
+.tariff li { position: relative; padding-left: 26px; line-height: 1.45; }
+.tariff li::before { content: ""; position: absolute; left: 2px; top: .38em; width: 11px; height: 6px; border-left: 2px solid var(--gold); border-bottom: 2px solid var(--gold); transform: rotate(-45deg); }
+.tariff .tariff-gift { color: var(--gold-light); }
+.tariff .btn { margin-top: auto; align-self: flex-start; }
+.tariff-note { margin: 28px 0 0; color: var(--muted); max-width: 46em; }
+@media (max-width: 760px) {
+  .tariffs { grid-template-columns: 1fr; gap: 28px; }
+  .tariff { padding: 28px 22px 24px; }
+  .tariff ul { margin-bottom: 0; }
+  /* The call button is already fixed to the bottom of the screen. */
+  .has-call-bar .tariff .btn { display: none; }
+}
+
 /* Questions */
 .faq { max-width: 52em; }
 .faq h2 { margin-bottom: 28px; }
@@ -139,7 +171,6 @@ h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); }
 }
 .promo-item h3 { font-size: clamp(1.45rem, 2.6vw, 1.9rem); font-style: italic; }
 .promo-item p { margin: 0; color: var(--muted); max-width: 30em; }
-.promo-item .promo-extra { margin-top: 12px; color: var(--text); }
 @media (max-width: 760px) { .promo { grid-template-columns: 1fr; gap: 40px; } }
 
 /* In every room */

@@ -1,0 +1,13 @@
+{
+  // Runs before "Run the site", so edited texts show up straight away.
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile texts",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": ["manage.py", "compile_texts"],
+      "problemMatcher": []
+    }
+  ]
+}

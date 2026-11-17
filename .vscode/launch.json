@@ -8,6 +8,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/manage.py",
       "args": ["runserver"],
+      "preLaunchTask": "Compile texts",
       "django": true,
       "justMyCode": true
     },
