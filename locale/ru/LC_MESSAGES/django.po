@@ -344,8 +344,8 @@ msgstr ""
 "идет о личной жизни."
 
 #: hotel/templates/hotel/home.html:67
-msgid "Only the two of you"
-msgstr "Только вы двое"
+msgid "Only you"
+msgstr "Только вы"
 
 #: hotel/templates/hotel/home.html:68
 msgid "Close the door, and the whole city stays outside."
@@ -553,12 +553,12 @@ msgstr "Как соблюдается конфиденциальность пр�
 
 #: hotel/templates/hotel/home.html:187
 msgid ""
-"We strictly keep everything confidential. Our hotel is small and intimate, "
+"Our hotel is small and intimate, "
 "so you will not run into a crowd of tourists in the lobby. Check-in is as "
 "quick as possible, the administrators ask no personal questions and never "
 "call after you leave."
 msgstr ""
-"Мы строго соблюдаем политику неразглашения. Наш отель имеет камерный формат "
+"Наш отель имеет камерный формат "
 "— вы не столкнетесь с толпой туристов в лобби. Заселение проходит "
 "максимально быстро, администраторы не задают личных вопросов и не совершают "
 "звонков после выезда."
@@ -570,14 +570,10 @@ msgstr "Как получить бутылку шампанского Просе
 #: hotel/templates/hotel/home.html:192
 msgid ""
 "The offer runs every Sunday from 00:00 to 23:59 when you book any hourly "
-"rate (2 hours for 3,500 ₽ or 3 hours for 4,000 ₽). By the time you arrive, a"
-" chilled bottle of Prosecco and two glasses will be waiting for you in the "
-"room."
+"rate (2 hours for 3,500 ₽ or 3 hours for 4,000 ₽)."
 msgstr ""
 "Акция действует каждое воскресенье с 00:00 до 23:59 при бронировании любого "
-"почасового тарифа (на 2 часа за 3 500 ₽ или на 3 часа за 4 000 ₽). К моменту"
-" вашего приезда охлажденная бутылка Просекко и два бокала уже будут ждать "
-"вас в номере."
+"почасового тарифа (на 2 часа за 3 500 ₽ или на 3 часа за 4 000 ₽)."
 
 #: hotel/templates/hotel/home.html:195
 msgid "Do we pay extra for a second guest or more guests?"
@@ -585,16 +581,14 @@ msgstr "Нужно ли доплачивать за второго гостя и
 
 #: hotel/templates/hotel/home.html:196
 msgid ""
-"No, the price is fixed per room for a couple (3,500 ₽ for 2 hours or 4,000 ₽"
-" for 3 hours). If you are planning a visit in a larger group (for example, 3"
-" or 4 people), just let the administrator know in advance when confirming "
-"the booking. We will pick the most spacious room and discuss comfortable "
-"terms."
+"The prices are set for two people. If there are to be any extra people"
+"required, it will cost 1 000 ₽ extra per extra person"
+
 msgstr ""
-"Нет, цена фиксирована за номер для пары (3 500 ₽ за 2 часа или 4 000 ₽ за 3 "
-"часа). Если вы планируете визит в расширенном составе (например, 3–4 "
-"человека), просто предупредите администратора заранее при подтверждении "
-"брони — мы подберем наиболее просторный номер и обсудим комфортные условия."
+"Стоимость включает в себя только две персоны. Если понадобятся "
+"дополнительные места, они будут стоить по 1 000 ₽ за каждую "
+"дополнительную персону"
+
 
 #: hotel/templates/hotel/home.html:199
 msgid "Can we extend our time if we want to stay longer?"
@@ -603,12 +597,9 @@ msgstr "Можно ли продлить время, если мы захоти�
 #: hotel/templates/hotel/home.html:200
 msgid ""
 "Of course. If the room is not booked for the next slot, you can extend your "
-"stay for as long as you like at 1,000 ₽ per hour, simply by calling "
-"reception from your room."
+"stay for as long as you like at 1,000 ₽ per hour."
 msgstr ""
-"Конечно. Если номер не забронирован на следующее время, вы можете продлить "
-"пребывание на любой удобный срок по ставке 1 000 ₽ за час, просто позвонив "
-"на ресепшн из номера."
+"Конечно. Если номер не забронирован на следующее время, продление стоит 1 000 ₽ в час"
 
 #: hotel/templates/hotel/home.html:203
 msgid "Where is the hotel, and what about parking?"
@@ -639,11 +630,11 @@ msgstr ""
 #: hotel/templates/hotel/home.html:214
 msgid ""
 "We have no sign outside, which keeps things calm for our guests, and we are "
-"still easy to find. When you reach building 5, call us and we will show you "
-"the way in."
+"still easy to find. If you have trouble finding us, you can always call us"
+"and ask for help."
 msgstr ""
 "Вывески у нас нет — так гостям спокойнее, а найти нас всё равно просто. "
-"Подойдёте к дому 5 — позвоните, и мы подскажем, как войти."
+"Если что мы всегда готовы вам помочь найти нас."
 
 #: hotel/templates/hotel/home.html:223
 msgid "Address"
