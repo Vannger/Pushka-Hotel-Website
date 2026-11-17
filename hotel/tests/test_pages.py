@@ -125,6 +125,7 @@ class OnePageTests(TestCase):
         self.assertContains(response, "2 минуты пешком от метро «Пушкинская», «Тверская» и «Чеховская»")
         self.assertContains(response, 'href="https://wa.me/79653174032"')
         self.assertContains(response, 'href="https://t.me/+79653174032"')
+        self.assertContains(response, 'href="https://max.ru/u/f9LHodD0cOLHhU72vBDy5Bp6WeHujlbYNGtDpc8FmKjgJLkQ11XJA7PH-6o"')
         self.assertContains(response, "yandex.ru/maps/?text=")
         self.assertContains(response, 'class="map"')
         self.assertTrue(info.map_embed_url.startswith("https://yandex.ru/map-widget/"))
