@@ -5,12 +5,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% translate "Rooms by the hour" %} · {{ hotel.name }}</title>
-  {% translate "Cosy rooms by the hour for two. Privacy, comfort and no unnecessary questions." as description %}
+  <title>{% translate "Rooms from two hours" %} · {{ hotel.name }}</title>
+  {% translate "Cosy rooms for two from two hours. Privacy, comfort and no unnecessary questions." as description %}
   <meta name="description" content="{{ hotel.name }}. {{ description }}">
   <meta name="theme-color" content="#130c0b">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{% translate 'Rooms by the hour' %} · {{ hotel.name }}">
+  <meta property="og:title" content="{% translate 'Rooms from two hours' %} · {{ hotel.name }}">
   <meta property="og:description" content="{{ description }}">
   <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'hotel/img/hero.jpg' %}">
   <link rel="icon" href="{% static 'hotel/img/house.svg' %}" type="image/svg+xml">
@@ -44,34 +44,40 @@
   <main>
     <section class="hero" style="--hero-image: url('{% static 'hotel/img/hero.jpg' %}')">
       <div class="container hero-inner">
-        <p class="kicker">{% translate "Rooms by the hour" %}</p>
-        <h1>{% translate "Time for just the two of you" %}</h1>
-        <p class="lead">{% translate "Cosy rooms where nobody will disturb you. Come whenever you want to be alone together." %}</p>
+        <h1>{% translate "Time just for you" %}</h1>
+        <p class="lead">{% translate "Cosy rooms where nobody will disturb you. Come whenever you want to be together." %}</p>
         <div class="hero-actions">
           {% if hotel.phone %}<a class="btn" href="{{ hotel.phone_href }}">{% translate "Call us" %}</a>{% endif %}
           <a class="btn btn-ghost" href="#rooms">{% translate "See the rooms" %}</a>
         </div>
-        <p class="fast-reply">{% translate "We reply within minutes" %}</p>
+        <p class="hero-note">{% translate "Rooms from two hours" %}</p>
       </div>
     </section>
 
     <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>{% translate "Why couples choose Pushka" %}</h2>
+          <p>{% translate "We understand how much discretion and the absence of formalities matter when it comes to your private life." %}</p>
+        </div>
+      </div>
       <div class="container promo">
         <article class="promo-item">
-          <h2>{% translate "Only the two of you" %}</h2>
-          <p>{% translate "Close the door, and the whole city stays outside. The hotel is quiet, and the windows look onto the courtyard, not the street." %}</p>
+          <h3>{% translate "Only the two of you" %}</h3>
+          <p>{% translate "Close the door, and the whole city stays outside." %}</p>
         </article>
         <article class="promo-item">
-          <h2>{% translate "Just between us" %}</h2>
-          <p>{% translate "We know how to keep a secret. We ask no unnecessary questions and never talk about our guests." %}</p>
+          <h3>{% translate "Just between us" %}</h3>
+          <p>{% translate "We know how to keep a secret and ask no unnecessary questions." %}</p>
         </article>
         <article class="promo-item">
-          <h2>{% translate "Everything is ready" %}</h2>
-          <p>{% translate "Fresh linen and air conditioning, plus chocolates, water and tea as our small gift. All that is missing is you." %}</p>
+          <h3>{% translate "Everything is ready" %}</h3>
+          <p>{% translate "Chocolates, water and tea are our small gift to you." %}</p>
         </article>
         <article class="promo-item">
-          <h2>{% translate "Your time, your rules" %}</h2>
-          <p>{% translate "Drop in for a little while or stay longer. How long the date lasts is up to you alone." %}</p>
+          <h3>{% translate "Your time, your rules" %}</h3>
+          <p>{% translate "How long the date lasts is up to you alone." %}</p>
+          <p class="promo-extra">{% translate "Want to stay longer? Each extra hour is 1,000 ₽, or ask the administrator about a special overnight rate." %}</p>
         </article>
       </div>
       <div class="container">
@@ -90,12 +96,14 @@
             {% translate "A quiet hotel" %}
           </li>
           <li>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M12 9v12M3 13h18M12 9C10 5 6 5 7 8c.5 1 3 1 5 1zM12 9c2-4 6-4 5-1-.5 1-3 1-5 1z"/></svg>
-            {% translate "Chocolates, water and tea as a gift" %}
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v3H9zM8 6h8l1 3v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V9z"/><path d="M7 12h10"/></svg>
+            {% translate "Toiletry kits" %}
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20c-1.5 0-2-1-2-2.5C3 13 4 6 7.5 6S12 13 12 17.5c0 1.5-.5 2.5-2 2.5zM3.6 12h7.8"/><path d="M14 20c-1.5 0-2-1-2-2.5M14 20h3c1.5 0 2-1 2-2.5 0-4.5-1-11.5-4.5-11.5-1 0-1.8.6-2.4 1.6M12.6 12h7.8"/></svg>
+            {% translate "Slippers" %}
           </li>
         </ul>
-        {# A plain statement on purpose: Russian law bans alcohol advertising online. #}
-        <p class="perks-note">{% translate "Alcoholic drinks are available on request." %}</p>
       </div>
     </section>
 
@@ -103,7 +111,7 @@
       <div class="container">
         <div class="section-head">
           <h2>{% translate "Take a look inside" %}</h2>
-          <p>{% translate "We choose the room for you from those that are free when you arrive. Whichever one you get, it will be just as cosy." %}</p>
+          <p>{% translate "You choose the room yourself, from those that are free when you arrive. Whichever one you pick, it will be just as cosy." %}</p>
         </div>
         {% if photos %}
           {% translate "Room photo" as room_photo %}
@@ -132,11 +140,34 @@
       </div>
     </section>
 
+    <section class="section" id="faq">
+      <div class="container faq">
+        <h2>{% translate "Frequently asked questions" %}</h2>
+        <details open>
+          <summary>{% translate "How is privacy kept when we check in?" %}</summary>
+          <p>{% translate "We strictly keep everything confidential. Our hotel is small and intimate, so you will not run into a crowd of tourists in the lobby. Check-in is as quick as possible, the administrators ask no personal questions and never call after you leave. You can pay in cash or by bank transfer when you check in." %}</p>
+        </details>
+        <details>
+          <summary>{% translate "Do we pay extra for a second guest or more guests?" %}</summary>
+          <p>{% translate "No, the price is fixed per room for a couple (3,500 ₽ for 2 hours or 4,000 ₽ for 3 hours). If you are planning a visit in a larger group (for example, 3 or 4 people), just let the administrator know in advance when confirming the booking. We will pick the most spacious room and discuss comfortable terms." %}</p>
+        </details>
+        <details>
+          <summary>{% translate "Can we extend our time if we want to stay longer?" %}</summary>
+          <p>{% translate "Of course. If the room is not booked for the next slot, you can extend your stay for as long as you like at 1,000 ₽ per hour, simply by calling reception from your room." %}</p>
+        </details>
+        <details>
+          <summary>{% translate "Where is the hotel?" %}</summary>
+          <p>{% translate "The hotel is at 5 Bolshoy Putinkovsky Lane, Moscow. It is a quiet lane 2 minutes on foot from Pushkinskaya, Tverskaya and Chekhovskaya metro stations." %}</p>
+        </details>
+      </div>
+    </section>
+
     <section class="section" id="contacts">
       <div class="container contacts">
         <div>
           <h2>{% translate "Find us" %}</h2>
-          <p class="lead">{% translate "Call or message us. We reply within minutes and will tell you whether a room is free right now." %}</p>
+          <p class="lead">{% translate "Call or message us, and we will tell you whether a room is free right now." %}</p>
+          <p class="no-sign">{% translate "We have no sign outside: Pushka is found only by those who know about it. When you reach building 5, call us and we will show you the way in." %}</p>
           {% if hotel.has_messengers %}
             <div class="messengers">
               {% if hotel.telegram_url %}<a class="btn btn-ghost" href="{{ hotel.telegram_url }}" target="_blank" rel="noopener">Telegram</a>{% endif %}

@@ -13,11 +13,12 @@ class SeedDataTests(TestCase):
 class OnePageTests(TestCase):
     def test_page_renders_in_both_languages(self):
         ru = self.client.get("/ru/")
-        self.assertContains(ru, "Время только для двоих")
-        self.assertContains(ru, "Номера на час")
+        self.assertContains(ru, "Время только для вас")
+        self.assertContains(ru, "Номера от двух часов")
+        self.assertNotContains(ru, "Номера на час")
         en = self.client.get("/en/")
-        self.assertContains(en, "Time for just the two of you")
-        self.assertContains(en, "Rooms by the hour")
+        self.assertContains(en, "Time just for you")
+        self.assertContains(en, "Rooms from two hours")
 
     def test_root_redirects_to_language(self):
         response = self.client.get("/")
@@ -32,10 +33,9 @@ class OnePageTests(TestCase):
         for path in ("/ru/suites/", "/ru/suites/suite-2/", "/ru/about/", "/ru/contacts/"):
             self.assertEqual(self.client.get(path).status_code, 404, path)
 
-    def test_suites_and_prices_are_not_mentioned(self):
+    def test_suite_names_are_not_mentioned(self):
         response = self.client.get("/ru/")
         self.assertNotContains(response, "Люкс")
-        self.assertNotContains(response, "₽")
 
     def test_contacts_are_shown(self):
         info = HotelInfo.load()
@@ -70,7 +70,7 @@ class OnePageTests(TestCase):
         self.assertContains(response, 'href="https://wa.me/79001234567"')
         self.assertContains(response, 'href="https://max.ru/pushka"')
         self.assertContains(response, "5 минут от метро «Пушкинская»")
-        self.assertContains(response, "Отвечаем за несколько минут")
+        self.assertNotContains(response, "за несколько минут")
 
     def test_no_messenger_block_when_none_are_set(self):
         info = HotelInfo.load()
@@ -89,12 +89,28 @@ class OnePageTests(TestCase):
 
     def test_room_perks_are_listed(self):
         ru = self.client.get("/ru/")
-        for text in ("В каждом номере", "Кондиционер", "Окна во внутренний двор", "Шоколад, вода и чай в подарок"):
+        for text in ("В каждом номере", "Кондиционер", "Окна во внутренний двор", "Гигиенические наборы", "Тапочки"):
             self.assertContains(ru, text)
         en = self.client.get("/en/")
         self.assertContains(en, "Windows onto the courtyard")
         self.assertNotContains(ru, "парковк")
-        self.assertContains(ru, "Алкогольные напитки — по запросу.")
+        # The boss ruled out any mention of alcohol.
+        self.assertNotContains(ru, "Алкогол")
+        self.assertNotContains(ru, "Просекко")
+
+    def test_boss_feedback_texts(self):
+        ru = self.client.get("/ru/")
+        for text in (
+            "Почему пары выбирают «Пушку»",
+            "Продление каждого следующего часа",
+            "Частые вопросы гостей",
+            "Мы работаем без вывески",
+            "Номер вы выбираете сами",
+            "побыть вместе",
+        ):
+            self.assertContains(ru, text)
+        for text in ("наедине", "никому не рассказываем", "Не хватает только вас", "Загляните ненадолго"):
+            self.assertNotContains(ru, text)
 
     def test_hourly_setup_migration(self):
         hidden = set(Suite.objects.filter(is_active=False).values_list("number", flat=True))
@@ -102,7 +118,7 @@ class OnePageTests(TestCase):
         info = HotelInfo.load()
         response = self.client.get("/ru/")
         self.assertContains(response, "Большой Путинковский переулок, 5, Москва")
-        self.assertContains(response, "«Чеховская»")
+        self.assertContains(response, "2 минуты пешком от метро «Пушкинская», «Тверская» и «Чеховская»")
         self.assertContains(response, 'href="https://wa.me/79653174032"')
         self.assertContains(response, 'href="https://t.me/+79653174032"')
         self.assertContains(response, "yandex.ru/maps/?text=")
