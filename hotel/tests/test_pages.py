@@ -75,3 +75,20 @@ class OnePageTests(TestCase):
     def test_no_messenger_block_when_none_are_set(self):
         response = self.client.get("/ru/")
         self.assertNotContains(response, 'class="messengers"')
+
+    def test_real_contacts_are_filled_in_by_migration(self):
+        info = HotelInfo.load()
+        self.assertEqual(info.phone, "+7 965 317-40-32")
+        self.assertEqual(info.email, "pushkahotel@yandex.ru")
+        response = self.client.get("/ru/")
+        self.assertContains(response, 'href="tel:+79653174032"')
+        self.assertContains(response, "mailto:pushkahotel@yandex.ru")
+
+    def test_room_perks_are_listed(self):
+        ru = self.client.get("/ru/")
+        for text in ("В каждом номере", "Кондиционер", "Окна во внутренний двор", "Шоколад, вода и чай в подарок"):
+            self.assertContains(ru, text)
+        en = self.client.get("/en/")
+        self.assertContains(en, "Windows onto the courtyard")
+        self.assertNotContains(ru, "парковк")
+        self.assertContains(ru, "Алкогольные напитки — по запросу.")

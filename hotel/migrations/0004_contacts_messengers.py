@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
             name="directions_ru",
             field=models.CharField(
                 blank=True,
-                help_text="For example: 5 minutes from Pushkinskaya metro, parking in the yard.",
+                help_text="For example: 5 minutes on foot from Pushkinskaya metro.",
                 max_length=255,
                 verbose_name="how to find us (Russian)",
             ),

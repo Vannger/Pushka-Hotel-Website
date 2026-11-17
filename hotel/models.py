@@ -66,7 +66,7 @@ class HotelInfo(TranslatedFieldsMixin, models.Model):
         _("how to find us (Russian)"),
         max_length=255,
         blank=True,
-        help_text=_("For example: 5 minutes from Pushkinskaya metro, parking in the yard."),
+        help_text=_("For example: 5 minutes on foot from Pushkinskaya metro."),
     )
     directions_en = models.CharField(_("how to find us (English)"), max_length=255, blank=True)
     check_in_time = models.TimeField(_("check-in time"), default="14:00")

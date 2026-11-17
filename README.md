@@ -84,11 +84,15 @@ separate suite pages are needed again.
 
 ## Placeholders to replace
 
-- Address, how to find us, phone, messengers, email and map link: admin panel → Hotel information.
+- Address, how to find us, messengers and map link: admin panel → Hotel information.
+  The phone and email are filled in by migration `0005`.
   Messenger buttons appear only for the messengers that are filled in.
 - Photos for suites 1 and 7.
-- The promo texts are drafts. Check that what they promise is true for every room:
-  a wide bed and a private bathroom.
+- The promo texts only promise what the hotel confirmed for every room: quiet, windows
+  onto the courtyard, air conditioning, and complimentary chocolates, water and tea.
+- Alcoholic drinks are mentioned in one plain line only, because Russian law bans
+  alcohol advertising online (38-FZ, art. 21). Keep it that way, and keep alcohol
+  off the banners.
 
 ## Tests
 
