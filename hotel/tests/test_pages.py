@@ -73,6 +73,9 @@ class OnePageTests(TestCase):
         self.assertContains(response, "Отвечаем за несколько минут")
 
     def test_no_messenger_block_when_none_are_set(self):
+        info = HotelInfo.load()
+        info.telegram = info.whatsapp = info.max_url = ""
+        info.save()
         response = self.client.get("/ru/")
         self.assertNotContains(response, 'class="messengers"')
 
@@ -92,3 +95,23 @@ class OnePageTests(TestCase):
         self.assertContains(en, "Windows onto the courtyard")
         self.assertNotContains(ru, "парковк")
         self.assertContains(ru, "Алкогольные напитки — по запросу.")
+
+    def test_hourly_setup_migration(self):
+        hidden = set(Suite.objects.filter(is_active=False).values_list("number", flat=True))
+        self.assertEqual(hidden, {1, 7})
+        info = HotelInfo.load()
+        response = self.client.get("/ru/")
+        self.assertContains(response, "Большой Путинковский переулок, 5, Москва")
+        self.assertContains(response, "«Чеховская»")
+        self.assertContains(response, 'href="https://wa.me/79653174032"')
+        self.assertContains(response, 'href="https://t.me/+79653174032"')
+        self.assertContains(response, "yandex.ru/maps/?text=")
+        self.assertContains(response, 'class="map"')
+        self.assertTrue(info.map_embed_url.startswith("https://yandex.ru/map-widget/"))
+        en = self.client.get("/en/")
+        self.assertContains(en, "5 Bolshoy Putinkovsky Lane, Moscow")
+
+    def test_telegram_username_still_works(self):
+        info = HotelInfo.load()
+        info.telegram = "@pushka_hotel"
+        self.assertEqual(info.telegram_url, "https://t.me/pushka_hotel")

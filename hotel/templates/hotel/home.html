@@ -145,7 +145,7 @@
             </div>
           {% endif %}
           <dl>
-            {% if hotel.address %}<dt>{% translate "Address" %}</dt><dd>{{ hotel.address }}{% if hotel.directions %}<span class="directions">{{ hotel.directions }}</span>{% endif %}</dd>{% endif %}
+            {% if hotel.address %}<dt>{% translate "Address" %}</dt><dd>{{ hotel.address }}{% if hotel.directions %}<span class="directions">{{ hotel.directions }}</span>{% endif %}{% if hotel.route_url %}<a class="route-link" href="{{ hotel.route_url }}" target="_blank" rel="noopener">{% translate "Open in Yandex Maps" %} →</a>{% endif %}</dd>{% endif %}
             {% if hotel.phone %}<dt>{% translate "Phone" %}</dt><dd><a class="contact-phone" href="{{ hotel.phone_href }}">{{ hotel.phone }}</a></dd>{% endif %}
             {% if hotel.email %}<dt>{% translate "Email" %}</dt><dd><a href="mailto:{{ hotel.email }}">{{ hotel.email }}</a></dd>{% endif %}
           </dl>

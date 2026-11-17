@@ -30,6 +30,50 @@ python manage.py runserver
 
 Open http://127.0.0.1:8000/ (redirects to `/ru/`) and the admin panel at `/ru/admin/`.
 
+### On Windows
+
+The quickest way to look at the site is with SQLite, so PostgreSQL is not needed.
+
+1. Install [Python](https://www.python.org/downloads/) 3.12 or newer and tick
+   "Add python.exe to PATH" in the installer. Install [Git](https://git-scm.com/download/win).
+2. Open PowerShell and run:
+
+   ```powershell
+   git clone https://github.com/Vannger/Pushka-Hotel-Website.git
+   cd Pushka-Hotel-Website
+   git checkout feature/hourly-one-page
+   py -m venv .venv
+   .venv\Scripts\Activate.ps1
+   pip install -r requirements.txt
+   copy .env.example .env
+   notepad .env
+   ```
+
+   If PowerShell refuses to run `Activate.ps1`, run
+   `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once and try again.
+3. In Notepad, make the line `POSTGRES_DB=` empty, save and close.
+4. Back in PowerShell:
+
+   ```powershell
+   python manage.py migrate
+   python manage.py load_photos
+   python manage.py createsuperuser
+   python manage.py runserver
+   ```
+
+5. Open http://127.0.0.1:8000/ for the site and http://127.0.0.1:8000/ru/admin/ for
+   the admin panel. Press Ctrl+C in PowerShell to stop the server.
+
+Next time, only these are needed:
+
+```powershell
+cd Pushka-Hotel-Website
+.venv\Scripts\Activate.ps1
+git pull
+python manage.py migrate
+python manage.py runserver
+```
+
 To create the PostgreSQL database:
 
 ```sql
@@ -84,10 +128,12 @@ separate suite pages are needed again.
 
 ## Placeholders to replace
 
-- Address, how to find us, messengers and map link: admin panel → Hotel information.
-  The phone and email are filled in by migration `0005`.
+- The phone, email, address, directions, map and WhatsApp and Telegram links are filled
+  in by migrations `0005` and `0006`, and can be changed in admin panel → Hotel information.
+- MAX has no link by phone number. Copy the invite link from the MAX app
+  (Settings → «Пригласить друзей» → «Скопировать ссылку») into the MAX field.
+- Suites 1 and 7 are hidden because they are not let by the hour.
   Messenger buttons appear only for the messengers that are filled in.
-- Photos for suites 1 and 7.
 - The promo texts only promise what the hotel confirmed for every room: quiet, windows
   onto the courtyard, air conditioning, and complimentary chocolates, water and tea.
 - Alcoholic drinks are mentioned in one plain line only, because Russian law bans

@@ -1,4 +1,5 @@
 import re
+from urllib.parse import quote_plus
 from datetime import timedelta
 
 from django.db import models
@@ -51,7 +52,7 @@ class HotelInfo(TranslatedFieldsMixin, models.Model):
         _("Telegram"),
         max_length=64,
         blank=True,
-        help_text=_("Username without @, for example pushka_hotel."),
+        help_text=_("Phone number, or a username without @, for example pushka_hotel."),
     )
     whatsapp = models.CharField(
         _("WhatsApp"),
@@ -106,8 +107,20 @@ class HotelInfo(TranslatedFieldsMixin, models.Model):
 
     @property
     def telegram_url(self):
-        username = self.telegram.strip().lstrip("@")
-        return f"https://t.me/{username}" if username else ""
+        value = self.telegram.strip().lstrip("@")
+        if not value:
+            return ""
+        if re.fullmatch(r"[\d\s()+-]+", value):
+            # t.me/+79001234567 opens a chat with the account behind that number.
+            return "https://t.me/+" + re.sub(r"\D", "", value)
+        return f"https://t.me/{value}"
+
+    @property
+    def route_url(self):
+        """Yandex Maps search for the address, for the "Get directions" link."""
+        if not self.address_ru:
+            return ""
+        return "https://yandex.ru/maps/?text=" + quote_plus(self.address_ru)
 
     @property
     def whatsapp_url(self):

@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
             name="telegram",
             field=models.CharField(
                 blank=True,
-                help_text="Username without @, for example pushka_hotel.",
+                help_text="Phone number, or a username without @, for example pushka_hotel.",
                 max_length=64,
                 verbose_name="Telegram",
             ),

@@ -199,12 +199,13 @@ h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); }
 .messengers { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 .messengers .btn { padding: 9px 20px; font-size: .95rem; }
 .directions { display: block; margin-top: 4px; color: var(--muted); font-size: 1rem; }
+.route-link { display: inline-block; margin-top: 8px; font-size: 1rem; }
 .contacts dt { margin-top: 20px; color: var(--muted); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .contacts dd { margin: 4px 0 0; font-size: 1.15rem; }
 .contacts dd a { text-decoration: none; }
 .contacts dd a:hover { text-decoration: underline; }
 .contact-phone { font: 600 1.7rem var(--serif); font-variant-numeric: lining-nums; white-space: nowrap; }
-.map { width: 100%; min-height: 380px; border: 0; border-radius: var(--radius); }
+.map { width: 100%; min-height: 380px; border: 0; border-radius: var(--radius); background: var(--surface); }
 .map-placeholder {
   display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px;
   background: var(--surface); color: var(--muted); border: 1px dashed var(--border);

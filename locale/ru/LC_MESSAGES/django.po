@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-17 16:21+0300\n"
+"POT-Creation-Date: 2026-11-17 16:45+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr ""
 "Названия номеров, описания и цены на сайте не показываются. Эти поля "
 "сохранены на случай, если отдельные страницы номеров понадобятся снова."
 
-#: hotel/admin.py:68 hotel/models.py:275
+#: hotel/admin.py:68 hotel/models.py:288
 msgid "photos"
 msgstr "фотографии"
 
@@ -57,107 +57,108 @@ msgstr "фотографии"
 msgid "Hotel"
 msgstr "Отель"
 
-#: hotel/models.py:21
+#: hotel/models.py:22
 msgid "Monday"
 msgstr "понедельник"
 
-#: hotel/models.py:22
+#: hotel/models.py:23
 msgid "Tuesday"
 msgstr "вторник"
 
-#: hotel/models.py:23
+#: hotel/models.py:24
 msgid "Wednesday"
 msgstr "среда"
 
-#: hotel/models.py:24
+#: hotel/models.py:25
 msgid "Thursday"
 msgstr "четверг"
 
-#: hotel/models.py:25
+#: hotel/models.py:26
 msgid "Friday"
 msgstr "пятница"
 
-#: hotel/models.py:26
+#: hotel/models.py:27
 msgid "Saturday"
 msgstr "суббота"
 
-#: hotel/models.py:27
+#: hotel/models.py:28
 msgid "Sunday"
 msgstr "воскресенье"
 
-#: hotel/models.py:44 hotel/models.py:134
+#: hotel/models.py:45 hotel/models.py:147
 msgid "name (Russian)"
 msgstr "название (рус.)"
 
-#: hotel/models.py:45 hotel/models.py:135
+#: hotel/models.py:46 hotel/models.py:148
 msgid "name (English)"
 msgstr "название (англ.)"
 
-#: hotel/models.py:46
+#: hotel/models.py:47
 msgid "address (Russian)"
 msgstr "адрес (рус.)"
 
-#: hotel/models.py:47
+#: hotel/models.py:48
 msgid "address (English)"
 msgstr "адрес (англ.)"
 
-#: hotel/models.py:48
+#: hotel/models.py:49
 msgid "phone"
 msgstr "телефон"
 
-#: hotel/models.py:49
+#: hotel/models.py:50
 msgid "email"
 msgstr "эл. почта"
 
-#: hotel/models.py:51
+#: hotel/models.py:52
 msgid "Telegram"
 msgstr "Telegram"
 
-#: hotel/models.py:54
-msgid "Username without @, for example pushka_hotel."
-msgstr "Имя пользователя без @, например pushka_hotel."
+#: hotel/models.py:55
+#| msgid "Username without @, for example pushka_hotel."
+msgid "Phone number, or a username without @, for example pushka_hotel."
+msgstr "Номер телефона или имя пользователя без @, например pushka_hotel."
 
-#: hotel/models.py:57
+#: hotel/models.py:58
 msgid "WhatsApp"
 msgstr "WhatsApp"
 
-#: hotel/models.py:60
+#: hotel/models.py:61
 msgid "Phone number used for WhatsApp, in any format."
 msgstr "Номер телефона для WhatsApp в любом формате."
 
-#: hotel/models.py:63
+#: hotel/models.py:64
 msgid "MAX link"
 msgstr "Ссылка на MAX"
 
-#: hotel/models.py:63
+#: hotel/models.py:64
 msgid "Link to the chat in the MAX messenger."
 msgstr "Ссылка на чат в мессенджере MAX."
 
-#: hotel/models.py:66
+#: hotel/models.py:67
 msgid "how to find us (Russian)"
 msgstr "как нас найти (рус.)"
 
-#: hotel/models.py:69
+#: hotel/models.py:70
 msgid "For example: 5 minutes on foot from Pushkinskaya metro."
 msgstr "Например: 5 минут пешком от метро «Пушкинская»."
 
-#: hotel/models.py:71
+#: hotel/models.py:72
 msgid "how to find us (English)"
 msgstr "как нас найти (англ.)"
 
-#: hotel/models.py:72
+#: hotel/models.py:73
 msgid "check-in time"
 msgstr "время заезда"
 
-#: hotel/models.py:73
+#: hotel/models.py:74
 msgid "check-out time"
 msgstr "время выезда"
 
-#: hotel/models.py:75
+#: hotel/models.py:76
 msgid "map embed URL"
 msgstr "ссылка на карту"
 
-#: hotel/models.py:78
+#: hotel/models.py:79
 msgid ""
 "In the Yandex Maps constructor, choose the iframe code and paste only the "
 "link from src=\"...\" here."
@@ -165,119 +166,119 @@ msgstr ""
 "В конструкторе Яндекс Карт выберите код iframe и вставьте сюда только ссылку"
 " из src=\"...\"."
 
-#: hotel/models.py:84 hotel/models.py:85
+#: hotel/models.py:85 hotel/models.py:86
 msgid "hotel information"
 msgstr "информация об отеле"
 
-#: hotel/models.py:132
+#: hotel/models.py:145
 msgid "suite number"
 msgstr "номер люкса"
 
-#: hotel/models.py:133
+#: hotel/models.py:146
 msgid "URL name"
 msgstr "имя в адресе страницы"
 
-#: hotel/models.py:136
+#: hotel/models.py:149
 msgid "short description (Russian)"
 msgstr "краткое описание (рус.)"
 
-#: hotel/models.py:137
+#: hotel/models.py:150
 msgid "short description (English)"
 msgstr "краткое описание (англ.)"
 
-#: hotel/models.py:138
+#: hotel/models.py:151
 msgid "description (Russian)"
 msgstr "описание (рус.)"
 
-#: hotel/models.py:139
+#: hotel/models.py:152
 msgid "description (English)"
 msgstr "описание (англ.)"
 
-#: hotel/models.py:141
+#: hotel/models.py:154
 msgid "amenities (Russian)"
 msgstr "удобства (рус.)"
 
-#: hotel/models.py:141 hotel/models.py:144
+#: hotel/models.py:154 hotel/models.py:157
 msgid "One item per line."
 msgstr "По одному пункту в строке."
 
-#: hotel/models.py:144
+#: hotel/models.py:157
 msgid "amenities (English)"
 msgstr "удобства (англ.)"
 
-#: hotel/models.py:146
+#: hotel/models.py:159
 msgid "maximum guests"
 msgstr "максимум гостей"
 
-#: hotel/models.py:147
+#: hotel/models.py:160
 msgid "area, m²"
 msgstr "площадь, м²"
 
-#: hotel/models.py:150
+#: hotel/models.py:163
 msgid "Mon"
 msgstr "Пн"
 
-#: hotel/models.py:151
+#: hotel/models.py:164
 msgid "Tue"
 msgstr "Вт"
 
-#: hotel/models.py:152
+#: hotel/models.py:165
 msgid "Wed"
 msgstr "Ср"
 
-#: hotel/models.py:153
+#: hotel/models.py:166
 msgid "Thu"
 msgstr "Чт"
 
-#: hotel/models.py:154
+#: hotel/models.py:167
 msgid "Fri"
 msgstr "Пт"
 
-#: hotel/models.py:155
+#: hotel/models.py:168
 msgid "Sat"
 msgstr "Сб"
 
-#: hotel/models.py:156
+#: hotel/models.py:169
 msgid "Sun"
 msgstr "Вс"
 
-#: hotel/models.py:157
+#: hotel/models.py:170
 msgid "shown on the site"
 msgstr "показывать на сайте"
 
-#: hotel/models.py:161 hotel/models.py:270
+#: hotel/models.py:174 hotel/models.py:283
 msgid "suite"
 msgstr "номер"
 
-#: hotel/models.py:162
+#: hotel/models.py:175
 msgid "suites"
 msgstr "номера"
 
-#: hotel/models.py:229 hotel/models.py:274
+#: hotel/models.py:242 hotel/models.py:287
 msgid "photo"
 msgstr "фото"
 
-#: hotel/models.py:231
+#: hotel/models.py:244
 msgid "thumbnail"
 msgstr "миниатюра"
 
-#: hotel/models.py:233
+#: hotel/models.py:246
 msgid "caption (Russian)"
 msgstr "подпись (рус.)"
 
-#: hotel/models.py:234
+#: hotel/models.py:247
 msgid "caption (English)"
 msgstr "подпись (англ.)"
 
-#: hotel/models.py:235
+#: hotel/models.py:248
 msgid "order"
 msgstr "порядок"
 
-#: hotel/models.py:291
+#: hotel/models.py:304
 msgid "hotel photo"
 msgstr "фото отеля"
 
-#: hotel/models.py:292
+#: hotel/models.py:305
 msgid "hotel photos"
 msgstr "фото отеля"
 
@@ -461,6 +462,10 @@ msgstr ""
 #: hotel/templates/hotel/home.html:148
 msgid "Address"
 msgstr "Адрес"
+
+#: hotel/templates/hotel/home.html:148
+msgid "Open in Yandex Maps"
+msgstr "Открыть в Яндекс Картах"
 
 #: hotel/templates/hotel/home.html:149
 msgid "Phone"
