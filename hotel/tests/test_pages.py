@@ -114,6 +114,7 @@ class OnePageTests(TestCase):
             "Возможна оплата наличными",
             "Номер вы выбираете сами",
             "Без доплат за гостей",
+            "доплат за второго гостя",
         ):
             self.assertNotContains(ru, text)
 
