@@ -111,7 +111,6 @@
       <div class="container">
         <div class="section-head">
           <h2>{% translate "Take a look inside" %}</h2>
-          <p>{% translate "You choose the room yourself, from those that are free when you arrive. Whichever one you pick, it will be just as cosy." %}</p>
         </div>
         {% if photos %}
           {% translate "Room photo" as room_photo %}
@@ -149,7 +148,6 @@
             <ul>
               <li>{% translate "A cosy room with a double bed" %}</li>
               <li>{% translate "Private bathroom and shower" %}</li>
-              <li>{% translate "No extra charge for guests (the price is for the whole room)" %}</li>
               <li class="tariff-gift">{% translate "A bottle of Prosecco as a gift on Sundays" %}</li>
             </ul>
             {% if hotel.phone %}<a class="btn btn-ghost" href="{{ hotel.phone_href }}">{% translate "Call us" %}</a>{% endif %}
