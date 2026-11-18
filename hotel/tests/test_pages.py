@@ -130,7 +130,8 @@ class OnePageTests(TestCase):
         self.assertContains(response, 'href="https://max.ru/u/f9LHodD0cOLHhU72vBDy5Bp6WeHujlbYNGtDpc8FmKjgJLkQ11XJA7PH-6o"')
         self.assertContains(response, "yandex.ru/maps/?text=")
         self.assertContains(response, 'class="map"')
-        self.assertTrue(info.map_embed_url.startswith("https://yandex.ru/map-widget/"))
+        self.assertContains(response, "hotel/img/map.jpg")
+        self.assertNotContains(response, "<iframe")
         en = self.client.get("/en/")
         self.assertContains(en, "5 Bolshoy Putinkovsky Lane, Moscow")
 

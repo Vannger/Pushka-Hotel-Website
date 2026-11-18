@@ -119,14 +119,14 @@ To change an English text, change the same English sentence in **both**
 `hotel/templates/hotel/home.html` and in its `msgid` in `django.po`, so they
 stay identical, then compile again.
 
-Phone, email, address, directions, map and messengers are not in this file.
+Phone, email, address, directions and messengers are not in this file.
 Change them in the admin panel under **Информация об отеле** (hotel information).
 
 ### One file for someone without the server
 
 `python manage.py export_html` saves the Russian page as `pushka-hotel.html`, with
 the styles, fonts and photos built in. It opens with a double-click in any browser.
-Only the map and the messenger links need the internet, and there is no language
+Only the messenger links and the Yandex Maps link need the internet, and there is no language
 switch. Add `--lang en` for the English page. Run it again after changing photos or
 contacts, because the file is a copy and does not update itself.
 
@@ -143,7 +143,8 @@ If `POSTGRES_DB` is empty in `.env`, a local SQLite file is used instead.
 
 | What | Where |
 |---|---|
-| Address, how to find us, phone, Telegram, WhatsApp, MAX, email, map link | Admin panel → Hotel information |
+| Address, how to find us, phone, Telegram, WhatsApp, MAX, email | Admin panel → Hotel information |
+| Map picture (from the hotel's business card) | `hotel/static/hotel/img/map.jpg` |
 | Room photos | Admin panel → Suites → open a suite → Photos |
 | Hiding all photos of one room | Admin panel → Suites: untick "shown on the site" |
 | Original photos for the first load | `photos/` (one folder per suite, captions in `photos/photos.json`) |
@@ -184,7 +185,7 @@ separate suite pages are needed again.
 
 ## Placeholders to replace
 
-- The phone, email, address, directions, map and messenger links are filled in by
+- The phone, email, address, directions and messenger links are filled in by
   migrations `0005` to `0008`, and can be changed in admin panel → Hotel information.
 - Suites 1 and 7 are hidden because they are not let by the hour.
   Messenger buttons appear only for the messengers that are filled in.

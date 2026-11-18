@@ -248,14 +248,11 @@ h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); }
 .contacts dd a { text-decoration: none; }
 .contacts dd a:hover { text-decoration: underline; }
 .contact-phone { font: 600 1.7rem var(--serif); font-variant-numeric: lining-nums; white-space: nowrap; }
-.map { width: 100%; min-height: 380px; border: 0; border-radius: var(--radius); background: var(--surface); }
-.map-placeholder {
-  display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px;
-  background: var(--surface); color: var(--muted); border: 1px dashed var(--border);
-}
+.map { display: block; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); }
+.map img { display: block; width: 100%; height: auto; transition: transform .4s; }
+a.map:hover img { transform: scale(1.02); }
 @media (max-width: 760px) {
   .contacts { grid-template-columns: 1fr; gap: 32px; }
-  .map { min-height: 280px; }
 }
 
 /* Footer */

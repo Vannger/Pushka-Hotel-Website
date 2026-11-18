@@ -85,7 +85,6 @@ class HotelInfoAdmin(admin.ModelAdmin):
         "whatsapp",
         "max_url",
         "email",
-        "map_embed_url",
     )
 
     def has_add_permission(self, request):

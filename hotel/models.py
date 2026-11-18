@@ -72,14 +72,6 @@ class HotelInfo(TranslatedFieldsMixin, models.Model):
     directions_en = models.CharField(_("how to find us (English)"), max_length=255, blank=True)
     check_in_time = models.TimeField(_("check-in time"), default="14:00")
     check_out_time = models.TimeField(_("check-out time"), default="12:00")
-    map_embed_url = models.URLField(
-        _("map embed URL"),
-        blank=True,
-        help_text=_(
-            "In the Yandex Maps constructor, choose the iframe code and paste only "
-            "the link from src=\"...\" here."
-        ),
-    )
 
     class Meta:
         verbose_name = _("hotel information")
