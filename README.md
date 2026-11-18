@@ -139,6 +139,37 @@ CREATE DATABASE pushka OWNER pushka;
 
 If `POSTGRES_DB` is empty in `.env`, a local SQLite file is used instead.
 
+## Putting the site on Reg.ru
+
+The site runs on Reg.ru shared hosting with the **ispmanager** panel, through
+`deploy/regru.sh`. It uses SQLite there, so no database needs to be ordered.
+
+In the Reg.ru panel, once:
+
+1. Attach the domain to the hosting and add it under **Сайты**.
+2. **Сайты** → the domain → **Изменить**: turn on **CGI-скрипты** and **Python**,
+   pick the newest Python 3 (3.10 or newer) and save.
+3. Turn on SSH access for the hosting and note the login, server and password.
+4. Order the free SSL certificate for the domain. The admin login only works over https.
+
+Then over SSH (in PowerShell: `ssh <login>@<server>`):
+
+```bash
+git clone https://github.com/Vannger/Pushka-Hotel-Website.git pushka-hotel-website
+bash pushka-hotel-website/deploy/regru.sh <domain>
+cd ~/pushka-hotel-website && ~/pushka-venv/bin/python manage.py createsuperuser
+```
+
+The script prints the Python version it used. The site's Python in the panel must be
+the same. To update the site later:
+
+```bash
+cd ~/pushka-hotel-website && git pull && bash deploy/regru.sh <domain>
+```
+
+The code, `.env` and the database stay in `~/pushka-hotel-website`, outside the web
+folder. Only `passenger_wsgi.py`, `static/` and `media/` go into `~/www/<domain>/`.
+
 ## Where things live
 
 | What | Where |

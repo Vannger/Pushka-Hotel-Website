@@ -6,6 +6,7 @@ All environment-specific values are read from environment variables
 """
 
 import os
+import sys
 from pathlib import Path
 
 from django.utils.translation import gettext_lazy as _
@@ -75,8 +76,17 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 
+# Some shared hosting servers have an SQLite too old for Django. If the
+# pysqlite3-binary package is installed, its newer SQLite is used instead.
+try:
+    import pysqlite3  # noqa: F401
+
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
+
 # Database: PostgreSQL when POSTGRES_DB is set, otherwise a local SQLite file
-# so the project can be tried out without installing PostgreSQL.
+# (DJANGO_SQLITE_PATH, or db.sqlite3 next to manage.py).
 if os.environ.get("POSTGRES_DB"):
     DATABASES = {
         "default": {
@@ -92,7 +102,7 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "NAME": os.environ.get("DJANGO_SQLITE_PATH") or BASE_DIR / "db.sqlite3",
         }
     }
 
@@ -117,10 +127,12 @@ USE_I18N = True
 USE_TZ = True
 
 
-STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
-MEDIA_URL = "media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# On the hosting, STATIC_ROOT and MEDIA_ROOT point into the site's web folder,
+# so the web server hands out these files itself.
+STATIC_URL = "/static/"
+STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT") or BASE_DIR / "staticfiles"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.environ.get("DJANGO_MEDIA_ROOT") or BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
