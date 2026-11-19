@@ -181,6 +181,13 @@
       "alt_ru": "Душевая кабина",
       "alt_en": "Shower cabin",
       "source": "Room5 (11).jpg"
+    },
+    {
+      "file": "12.jpg",
+      "alt_ru": "Кровать у окна",
+      "alt_en": "Bed by the window",
+      "source": "Photo1.jpg",
+      "featured": true
     }
   ],
   "suite-6": [
@@ -255,6 +262,13 @@
       "alt_ru": "Раковина и зеркало",
       "alt_en": "Sink and mirror",
       "source": "Room6 (12).jpg"
+    },
+    {
+      "file": "13.jpg",
+      "alt_ru": "Кровать с мягким изголовьем",
+      "alt_en": "Bed with an upholstered headboard",
+      "source": "Photo2.jpg",
+      "featured": true
     }
   ]
 }

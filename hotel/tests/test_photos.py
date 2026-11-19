@@ -7,7 +7,6 @@ from pathlib import Path
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from django.test import TestCase, override_settings
-from django.utils import translation
 from PIL import Image
 
 from hotel.models import HotelPhoto, Suite, SuitePhoto
@@ -104,15 +103,62 @@ class LoadPhotosCommandTests(TempMediaMixin, TestCase):
         self.assertEqual(SuitePhoto.objects.count(), 2)
         self.assertEqual(HotelPhoto.objects.count(), 1)
 
-    def test_pages_show_the_photos(self):
+    def test_page_shows_room_photos_only(self):
         self.load()
-        suite = Suite.objects.get(number=2)
-        with translation.override("en"):
-            detail = self.client.get(suite.get_absolute_url())
-            home = self.client.get("/en/")
-            about = self.client.get("/en/about/")
-        self.assertContains(detail, "data-gallery-thumb", count=2)
-        self.assertContains(detail, 'alt="Bathroom"')
-        # Suites with photos come first on the home page.
-        self.assertEqual(home.context["suites"][0], suite)
-        self.assertContains(about, "Corridor")
+        page = self.client.get("/en/")
+        self.assertContains(page, "data-photo", count=2)
+        self.assertContains(page, 'alt="Bathroom"')
+        self.assertNotContains(page, "Corridor")
+
+
+class RoomPhotosOnPageTests(TempMediaMixin, TestCase):
+    def add_photo(self, number, order, **captions):
+        return SuitePhoto.objects.create(
+            suite=Suite.objects.get(number=number),
+            image=SimpleUploadedFile(f"{number}-{order}.jpg", image_bytes((1200, 800))),
+            order=order,
+            **captions,
+        )
+
+    def test_photos_of_different_rooms_are_mixed(self):
+        a1 = self.add_photo(2, 1)
+        a2 = self.add_photo(2, 2)
+        a3 = self.add_photo(2, 3)
+        b1 = self.add_photo(5, 1)
+        c1 = self.add_photo(6, 1)
+        c2 = self.add_photo(6, 2)
+        page = self.client.get("/ru/")
+        self.assertEqual(page.context["photos"], [a1, b1, c1, a2, c2, a3])
+
+    def test_photos_do_not_name_the_room(self):
+        self.add_photo(2, 1)
+        self.add_photo(3, 1, alt_ru="Кровать у окна", alt_en="Bed by the window")
+        ru = self.client.get("/ru/")
+        self.assertContains(ru, 'alt="Фото номера"')
+        self.assertContains(ru, 'alt="Кровать у окна"')
+        self.assertNotContains(ru, "Люкс")
+        en = self.client.get("/en/")
+        self.assertContains(en, 'alt="Room photo"')
+        self.assertNotContains(en, "Suite")
+
+    def test_hidden_suite_photos_are_not_shown(self):
+        self.add_photo(2, 1)
+        self.add_photo(3, 1)
+        Suite.objects.filter(number=3).update(is_active=False)
+        page = self.client.get("/ru/")
+        self.assertEqual(len(page.context["photos"]), 1)
+
+    def test_featured_photos_come_first(self):
+        a1 = self.add_photo(2, 1)
+        b1 = self.add_photo(5, 1)
+        b2 = self.add_photo(5, 2, featured=True)
+        page = self.client.get("/ru/")
+        self.assertEqual(page.context["photos"], [b2, a1, b1])
+        self.assertContains(page, 'class="is-featured"', count=1)
+        # A featured photo uses the full-size image, not the thumbnail.
+        self.assertContains(page, f'src="{b2.image.url}"')
+
+    def test_page_works_without_photos(self):
+        page = self.client.get("/ru/")
+        self.assertContains(page, "Фотографии скоро появятся")
+        self.assertNotContains(page, "data-gallery")

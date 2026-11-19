@@ -70,6 +70,7 @@ class Command(BaseCommand):
                             alt_en=item.get("alt_en", ""),
                             order=order,
                             **extra,
+                            **({"featured": True} if item.get("featured") else {}),
                         )
                         photo.image = File(fh, name=f"{group}-{item['file']}")
                         photo.save()

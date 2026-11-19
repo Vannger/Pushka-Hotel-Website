@@ -6,6 +6,7 @@ All environment-specific values are read from environment variables
 """
 
 import os
+import sys
 from pathlib import Path
 
 from django.utils.translation import gettext_lazy as _
@@ -27,6 +28,8 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-insecure-key-change-m
 DEBUG = env_bool("DJANGO_DEBUG", True)
 ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1")
 CSRF_TRUSTED_ORIGINS = env_list("DJANGO_CSRF_TRUSTED_ORIGINS")
+# Other allowed domains are redirected here (see hotel.middleware).
+PRIMARY_HOST = os.environ.get("DJANGO_PRIMARY_HOST", "").strip().lower()
 
 if not DEBUG and SECRET_KEY.startswith("dev-only"):
     raise RuntimeError("Set DJANGO_SECRET_KEY before running with DJANGO_DEBUG=False.")
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "hotel.middleware.PrimaryHostMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -75,8 +79,17 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 
+# Some shared hosting servers have an SQLite too old for Django. If the
+# pysqlite3-binary package is installed, its newer SQLite is used instead.
+try:
+    import pysqlite3  # noqa: F401
+
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
+
 # Database: PostgreSQL when POSTGRES_DB is set, otherwise a local SQLite file
-# so the project can be tried out without installing PostgreSQL.
+# (DJANGO_SQLITE_PATH, or db.sqlite3 next to manage.py).
 if os.environ.get("POSTGRES_DB"):
     DATABASES = {
         "default": {
@@ -92,7 +105,7 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "NAME": os.environ.get("DJANGO_SQLITE_PATH") or BASE_DIR / "db.sqlite3",
         }
     }
 
@@ -117,15 +130,33 @@ USE_I18N = True
 USE_TZ = True
 
 
-STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
-MEDIA_URL = "media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# On the hosting, STATIC_ROOT and MEDIA_ROOT point into the site's web folder,
+# so the web server hands out these files itself.
+STATIC_URL = "/static/"
+STATIC_ROOT = os.environ.get("DJANGO_STATIC_ROOT") or BASE_DIR / "staticfiles"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.environ.get("DJANGO_MEDIA_ROOT") or BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    # Send http:// visitors to https://. Turn on only once https works.
+    SECURE_SSL_REDIRECT = env_bool("DJANGO_SSL_REDIRECT", False)
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+
+
+# Warnings and errors (for example a rejected domain name, which shows as a
+# "400 Bad Request" page) go to the web server's error log, even with
+# DEBUG off. On Reg.ru that log is in ~/logs.
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"stderr": {"class": "logging.StreamHandler"}},
+    "loggers": {
+        "django.request": {"handlers": ["stderr"], "level": "WARNING"},
+        "django.security": {"handlers": ["stderr"], "level": "WARNING"},
+    },
+}

@@ -1,43 +1,244 @@
-{% extends "hotel/base.html" %}
-{% load i18n static %}
-{% block content %}
-<section class="hero" style="--hero-image: url('{% static 'hotel/img/hero.jpg' %}')">
-  <div class="container hero-inner">
-    <h1>{{ hotel.name }}</h1>
-    <p class="lead">{% translate "A small, quiet hotel with seven cosy suites, where every guest is welcomed like family." %}</p>
-    <div class="hero-actions">
-      <a class="btn btn-light" href="{% url 'hotel:suite_list' %}">{% translate "Choose a suite" %}</a>
-      <a class="btn btn-ghost" href="{% url 'hotel:contacts' %}">{% translate "Contact us" %}</a>
+{% load static i18n %}<!doctype html>
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% translate "Rooms from two hours" %} · {{ hotel.name }}</title>
+  {% translate "Cosy rooms for two from two hours. Privacy, comfort and no unnecessary questions." as description %}
+  <meta name="description" content="{{ hotel.name }}. {{ description }}">
+  <meta name="theme-color" content="#130c0b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{% translate 'Rooms from two hours' %} · {{ hotel.name }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'hotel/img/hero.jpg' %}">
+  <link rel="icon" href="{% static 'hotel/img/house.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+  <script src="{% static 'hotel/js/site.js' %}" defer></script>
+  {% for code, name in LANGUAGES %}
+    {% language code %}<link rel="alternate" hreflang="{{ code }}" href="{{ request.scheme }}://{{ request.get_host }}{% url 'hotel:home' %}">{% endlanguage %}
+  {% endfor %}
+</head>
+<body{% if hotel.phone %} class="has-call-bar"{% endif %}>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="{% url 'hotel:home' %}" aria-label="{{ hotel.name }}">
+        <img src="{% static 'hotel/img/logo-light.svg' %}" alt="Pushka Hotel" width="64" height="64">
+      </a>
+      <nav class="main-nav" aria-label="{% translate 'Main menu' %}">
+        <a class="nav-link" href="#tariffs">{% translate "Rates" %}</a>
+        <a class="nav-link" href="#rooms">{% translate "Rooms" %}</a>
+        <a class="nav-link" href="#contacts">{% translate "Contacts" %}</a>
+        {% if hotel.phone %}<a class="nav-phone" href="{{ hotel.phone_href }}">{{ hotel.phone }}</a>{% endif %}
+        <form class="lang-switch" action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          {% for code, name in LANGUAGES %}
+            <button type="submit" name="language" value="{{ code }}" {% if code == LANGUAGE_CODE %}aria-pressed="true"{% endif %} title="{{ name }}">{{ code|upper }}</button>
+          {% endfor %}
+        </form>
+      </nav>
     </div>
-  </div>
-</section>
+  </header>
 
-<section class="section">
-  <div class="container features">
-    <div class="feature">
-      <h3>{% translate "Seven suites" %}</h3>
-      <p>{% translate "Suites for two, a suite for three and a family suite for up to four guests." %}</p>
-    </div>
-    <div class="feature">
-      <h3>{% translate "Personal service" %}</h3>
-      <p>{% translate "We are a small hotel, so we know every guest and are always happy to help." %}</p>
-    </div>
-    <div class="feature">
-      <h3>{% translate "Easy booking" %}</h3>
-      <p>{% translate "Choose your dates and suite online. We will confirm your booking quickly." %}</p>
-    </div>
-  </div>
-</section>
+  <main>
+    <section class="hero" style="--hero-image: url('{% static 'hotel/img/hero.jpg' %}')">
+      <div class="container hero-inner">
+        <h1>{% translate "Time just for you" %}</h1>
+        <p class="lead">{% translate "Cosy rooms where nobody will disturb you. Come whenever you want to be together." %}</p>
+        <div class="hero-actions">
+          {% if hotel.phone %}<a class="btn" href="{{ hotel.phone_href }}">{% translate "Call us" %}</a>{% endif %}
+          <a class="btn btn-ghost" href="#rooms">{% translate "See the rooms" %}</a>
+        </div>
+        <p class="hero-note">{% translate "Rooms from two hours" %}</p>
+      </div>
+    </section>
 
-<section class="section section-alt">
-  <div class="container">
-    <div class="section-head">
-      <h2>{% translate "Our suites" %}</h2>
-      <a href="{% url 'hotel:suite_list' %}">{% translate "All suites" %} →</a>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>{% translate "Why couples choose Pushka" %}</h2>
+          <p>{% translate "We understand how much discretion and the absence of formalities matter when it comes to your private life." %}</p>
+        </div>
+      </div>
+      <div class="container promo">
+        <article class="promo-item">
+          <h3>{% translate "Only you" %}</h3>
+          <p>{% translate "Close the door, and the whole city stays outside." %}</p>
+        </article>
+        <article class="promo-item">
+          <h3>{% translate "Just between us" %}</h3>
+          <p>{% translate "We know how to keep a secret and ask no unnecessary questions." %}</p>
+        </article>
+        <article class="promo-item">
+          <h3>{% translate "Everything is ready" %}</h3>
+          <p>{% translate "Chocolates, water and tea are our small gift to you." %}</p>
+        </article>
+        <article class="promo-item">
+          <h3>{% translate "Your time, your rules" %}</h3>
+          <p>{% translate "How long the date lasts is up to you alone." %}</p>
+        </article>
+      </div>
+      <div class="container">
+        <h2 class="perks-title">{% translate "In every room" %}</h2>
+        <ul class="perks">
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M4.5 6.5l15 11M19.5 6.5l-15 11M9 3.5l3 2.5 3-2.5M9 20.5l3-2.5 3 2.5"/></svg>
+            {% translate "Air conditioning" %}
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 3v18M4 12h16"/></svg>
+            {% translate "Windows onto the courtyard" %}
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+            {% translate "A quiet hotel" %}
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v3H9zM8 6h8l1 3v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V9z"/><path d="M7 12h10"/></svg>
+            {% translate "Toiletry kits" %}
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20c-1.5 0-2-1-2-2.5C3 13 4 6 7.5 6S12 13 12 17.5c0 1.5-.5 2.5-2 2.5zM3.6 12h7.8"/><path d="M14 20c-1.5 0-2-1-2-2.5M14 20h3c1.5 0 2-1 2-2.5 0-4.5-1-11.5-4.5-11.5-1 0-1.8.6-2.4 1.6M12.6 12h7.8"/></svg>
+            {% translate "Slippers" %}
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="rooms">
+      <div class="container">
+        <div class="section-head">
+          <h2>{% translate "Take a look inside" %}</h2>
+        </div>
+        {% if photos %}
+          {% translate "Room photo" as room_photo %}
+          <ul class="photo-grid" data-gallery>
+            {% for photo in photos %}
+              <li{% if photo.featured %} class="is-featured"{% endif %}><a href="{{ photo.image.url }}" data-photo><img src="{% if photo.featured %}{{ photo.image.url }}{% else %}{{ photo.thumb_url }}{% endif %}" alt="{{ photo.caption|default:room_photo }}" loading="lazy"></a></li>
+            {% endfor %}
+          </ul>
+          <p class="photo-more"><button type="button" class="btn btn-ghost" data-gallery-more hidden>{% translate "Show all photos" %} ({{ photos|length }})</button></p>
+          <dialog class="lightbox" data-lightbox aria-label="{% translate 'Photo viewer' %}">
+            <img alt="" data-lightbox-image>
+            <button type="button" class="lightbox-close" data-lightbox-close aria-label="{% translate 'Close' %}">×</button>
+            <button type="button" class="lightbox-nav lightbox-prev" data-lightbox-prev aria-label="{% translate 'Previous photo' %}">‹</button>
+            <button type="button" class="lightbox-nav lightbox-next" data-lightbox-next aria-label="{% translate 'Next photo' %}">›</button>
+            <span class="lightbox-count" data-lightbox-count></span>
+          </dialog>
+        {% else %}
+          <p class="photo-placeholder">{% translate "Photos coming soon" %}</p>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="section" id="tariffs">
+      <div class="container">
+        <div class="section-head">
+          <h2>{% translate "Clear rates for your dates" %}</h2>
+        </div>
+        <div class="tariffs">
+          <article class="tariff">
+            <p class="tariff-tag">{% translate "Perfect for a first date" %}</p>
+            <h3>{% translate "The “Date” rate" %}</h3>
+            <p class="tariff-text">{% translate "Just the right time to have a glass of wine, relax and be together in the centre of Moscow." %}</p>
+            <p class="tariff-price"><strong>{% translate "3,500 ₽" %}</strong> <span>{% translate "/ 2 hours" %}</span></p>
+            <ul>
+              <li>{% translate "A cosy room with a double bed" %}</li>
+              <li>{% translate "Private bathroom and shower" %}</li>
+              <li class="tariff-gift">{% translate "A bottle of Prosecco as a gift on Sundays" %}</li>
+            </ul>
+            {% if hotel.phone %}<a class="btn btn-ghost" href="{{ hotel.phone_href }}">{% translate "Call us" %}</a>{% endif %}
+          </article>
+          <article class="tariff tariff-best">
+            <span class="tariff-badge">{% translate "Couples’ choice · Best value" %}</span>
+            <p class="tariff-tag">{% translate "As much pleasure as you like, without hurrying" %}</p>
+            <h3>{% translate "The “Pleasure” rate" %}</h3>
+            <p class="tariff-text">{% translate "An extra hour for only 500 ₽, so you need not hurry anywhere and can enjoy each other’s company." %}</p>
+            <p class="tariff-price"><strong>{% translate "4,000 ₽" %}</strong> <span>{% translate "/ 3 hours" %}</span></p>
+            <ul>
+              <li>{% translate "3 full hours just for the two of you (you save 1,250 ₽)" %}</li>
+              <li>{% translate "Fresh bed linen, towels and slippers" %}</li>
+              <li>{% translate "Wine and champagne glasses in the room" %}</li>
+              <li class="tariff-gift">{% translate "A bottle of Prosecco as a gift on Sundays" %}</li>
+            </ul>
+            {% if hotel.phone %}<a class="btn" href="{{ hotel.phone_href }}">{% translate "Call us" %}</a>{% endif %}
+          </article>
+        </div>
+        <p class="tariff-note">{% translate "Want to stay longer? Each extra hour is 1,000 ₽, or ask the administrator about a special overnight rate." %}</p>
+      </div>
+    </section>
+
+    <section class="quote">
+      <div class="container">
+        <p>{% translate "What happens at Pushka stays at Pushka." %}</p>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container faq">
+        <h2>{% translate "Frequently asked questions" %}</h2>
+        <details open>
+          <summary>{% translate "How is privacy kept when we check in?" %}</summary>
+          <p>{% translate "Our hotel is small and intimate, so you will not run into a crowd of tourists in the lobby. Check-in is as quick as possible, the administrators ask no personal questions and never call after you leave." %}</p>
+        </details>
+        <details>
+          {# The owner chose to name the drink, knowing Russian law restricts alcohol advertising online. #}
+          <summary>{% translate "How do we get a bottle of Prosecco as a gift?" %}</summary>
+          <p>{% translate "The offer runs every Sunday from 00:00 to 23:59 when you book any hourly rate (2 hours for 3,500 ₽ or 3 hours for 4,000 ₽)." %}</p>
+        </details>
+        <details>
+          <summary>{% translate "Do we pay extra for a second guest or more guests?" %}</summary>
+          <p>{% translate "The price covers two people. Each extra person costs 1,000 ₽." %}</p>
+        </details>
+        <details>
+          <summary>{% translate "Can we extend our time if we want to stay longer?" %}</summary>
+          <p>{% translate "Of course. If the room is not booked for the next slot, an extra hour costs 1,000 ₽." %}</p>
+        </details>
+        <details>
+          <summary>{% translate "Where is the hotel, and what about parking?" %}</summary>
+          <p>{% translate "The hotel is at 5 Bolshoy Putinkovsky Lane, Moscow. It is a quiet lane 2 minutes on foot from Pushkinskaya, Tverskaya and Chekhovskaya metro stations. There is city parking in the nearby lanes (free on Sundays)." %}</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="contacts">
+      <div class="container contacts">
+        <div>
+          <h2>{% translate "Find us" %}</h2>
+          <p class="lead">{% translate "Call or message us, and we will tell you whether a room is free right now." %}</p>
+          <p class="no-sign">{% translate "We have no sign outside, which keeps things calm for our guests, and we are still easy to find. If you have trouble finding us, call us and we will help." %}</p>
+          {% if hotel.has_messengers %}
+            <div class="messengers">
+              {% if hotel.telegram_url %}<a class="btn btn-ghost" href="{{ hotel.telegram_url }}" target="_blank" rel="noopener">Telegram</a>{% endif %}
+              {% if hotel.whatsapp_url %}<a class="btn btn-ghost" href="{{ hotel.whatsapp_url }}" target="_blank" rel="noopener">WhatsApp</a>{% endif %}
+              {% if hotel.max_url %}<a class="btn btn-ghost" href="{{ hotel.max_url }}" target="_blank" rel="noopener">MAX</a>{% endif %}
+            </div>
+          {% endif %}
+          <dl>
+            {% if hotel.address %}<dt>{% translate "Address" %}</dt><dd>{{ hotel.address }}{% if hotel.directions %}<span class="directions">{{ hotel.directions }}</span>{% endif %}{% if hotel.route_url %}<a class="route-link" href="{{ hotel.route_url }}" target="_blank" rel="noopener">{% translate "Open in Yandex Maps" %} →</a>{% endif %}</dd>{% endif %}
+            {% if hotel.phone %}<dt>{% translate "Phone" %}</dt><dd><a class="contact-phone" href="{{ hotel.phone_href }}">{{ hotel.phone }}</a></dd>{% endif %}
+            {% if hotel.email %}<dt>{% translate "Email" %}</dt><dd><a href="mailto:{{ hotel.email }}">{{ hotel.email }}</a></dd>{% endif %}
+          </dl>
+        </div>
+        {% translate "Map: the way into Pushka hotel from Bolshoy Putinkovsky Lane, building 5" as map_alt %}
+        {% if hotel.route_url %}<a class="map" href="{{ hotel.route_url }}" target="_blank" rel="noopener" title="{% translate 'Open in Yandex Maps' %}">{% else %}<div class="map">{% endif %}
+          <img src="{% static 'hotel/img/map.jpg' %}" alt="{{ map_alt }}" width="1701" height="993" loading="lazy">
+        {% if hotel.route_url %}</a>{% else %}</div>{% endif %}
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© {% now "Y" %} {{ hotel.name }}</span>
+      <span class="age-mark" title="{% translate 'For adults only' %}">18+</span>
     </div>
-    <div class="suite-grid">
-      {% for suite in suites %}{% include "hotel/_suite_card.html" %}{% endfor %}
-    </div>
-  </div>
-</section>
-{% endblock %}
+  </footer>
+
+  {% if hotel.phone %}
+    <a class="call-bar" href="{{ hotel.phone_href }}">{% translate "Call us" %} · {{ hotel.phone }}</a>
+  {% endif %}
+</body>
+</html>

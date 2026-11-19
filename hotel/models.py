@@ -1,7 +1,8 @@
+import re
+from urllib.parse import quote_plus
 from datetime import timedelta
 
 from django.db import models
-from django.urls import reverse
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 
@@ -47,13 +48,30 @@ class HotelInfo(TranslatedFieldsMixin, models.Model):
     address_en = models.CharField(_("address (English)"), max_length=255, blank=True)
     phone = models.CharField(_("phone"), max_length=50, blank=True)
     email = models.EmailField(_("email"), blank=True)
+    telegram = models.CharField(
+        _("Telegram"),
+        max_length=64,
+        blank=True,
+        help_text=_("Phone number, or a username without @, for example pushka_hotel."),
+    )
+    whatsapp = models.CharField(
+        _("WhatsApp"),
+        max_length=50,
+        blank=True,
+        help_text=_("Phone number used for WhatsApp, in any format."),
+    )
+    max_url = models.URLField(
+        _("MAX link"), blank=True, help_text=_("Link to the chat in the MAX messenger.")
+    )
+    directions_ru = models.CharField(
+        _("how to find us (Russian)"),
+        max_length=255,
+        blank=True,
+        help_text=_("For example: 5 minutes on foot from Pushkinskaya metro."),
+    )
+    directions_en = models.CharField(_("how to find us (English)"), max_length=255, blank=True)
     check_in_time = models.TimeField(_("check-in time"), default="14:00")
     check_out_time = models.TimeField(_("check-out time"), default="12:00")
-    map_embed_url = models.URLField(
-        _("map embed URL"),
-        blank=True,
-        help_text=_("Yandex Maps constructor link for the contacts page (optional)."),
-    )
 
     class Meta:
         verbose_name = _("hotel information")
@@ -74,6 +92,41 @@ class HotelInfo(TranslatedFieldsMixin, models.Model):
     @property
     def address(self):
         return self.tr("address")
+
+    @property
+    def directions(self):
+        return self.tr("directions")
+
+    @property
+    def telegram_url(self):
+        value = self.telegram.strip().lstrip("@")
+        if not value:
+            return ""
+        if re.fullmatch(r"[\d\s()+-]+", value):
+            # t.me/+79001234567 opens a chat with the account behind that number.
+            return "https://t.me/+" + re.sub(r"\D", "", value)
+        return f"https://t.me/{value}"
+
+    @property
+    def route_url(self):
+        """Yandex Maps search for the address, for the "Get directions" link."""
+        if not self.address_ru:
+            return ""
+        return "https://yandex.ru/maps/?text=" + quote_plus(self.address_ru)
+
+    @property
+    def whatsapp_url(self):
+        digits = re.sub(r"\D", "", self.whatsapp)
+        return f"https://wa.me/{digits}" if digits else ""
+
+    @property
+    def has_messengers(self):
+        return bool(self.telegram_url or self.whatsapp_url or self.max_url)
+
+    @property
+    def phone_href(self):
+        """The phone as a link for the call buttons: `tel:+79001234567`."""
+        return "tel:" + re.sub(r"[^\d+]", "", self.phone)
 
 
 def _price_field(label):
@@ -115,9 +168,6 @@ class Suite(TranslatedFieldsMixin, models.Model):
 
     def __str__(self):
         return f"{self.number}. {self.name_ru}"
-
-    def get_absolute_url(self):
-        return reverse("hotel:suite_detail", kwargs={"slug": self.slug})
 
     @property
     def name(self):
@@ -212,12 +262,22 @@ class Photo(TranslatedFieldsMixin, models.Model):
     def thumb_url(self):
         return (self.thumbnail or self.image).url
 
+    @property
+    def caption(self):
+        """The caption alone. Unlike `alt`, it never falls back to the suite name."""
+        return self.tr("alt")
+
 
 class SuitePhoto(Photo):
     upload_folder = "suites"
 
     suite = models.ForeignKey(
         Suite, on_delete=models.CASCADE, related_name="photos", verbose_name=_("suite")
+    )
+    featured = models.BooleanField(
+        _("shown first"),
+        default=False,
+        help_text=_("Shown before the “Show all photos” button. The others appear after it is pressed."),
     )
 
     class Meta(Photo.Meta):

@@ -1,30 +1,22 @@
-from django.shortcuts import get_object_or_404, render
+from itertools import chain, zip_longest
 
-from .models import HotelPhoto, Suite
+from django.shortcuts import render
+
+from .models import Suite
 
 
-def _active_suites():
-    return Suite.objects.filter(is_active=True).prefetch_related("photos")
+def room_photos():
+    """Photos of every room shown on the site, mixed together.
+
+    Guests are not promised a particular room, so the page shows the photos
+    without names or numbers. They are dealt out like cards: the first photo
+    of each room, then the second of each, and so on. Photos marked "shown first" come before all the others.
+    """
+    suites = Suite.objects.filter(is_active=True).prefetch_related("photos")
+    rounds = zip_longest(*(suite.photos.all() for suite in suites))
+    photos = [photo for photo in chain.from_iterable(rounds) if photo is not None]
+    return [p for p in photos if p.featured] + [p for p in photos if not p.featured]
 
 
 def home(request):
-    # Feature suites that already have photos; keep the suite order otherwise.
-    suites = sorted(_active_suites(), key=lambda suite: suite.cover is None)[:3]
-    return render(request, "hotel/home.html", {"suites": suites})
-
-
-def suite_list(request):
-    return render(request, "hotel/suite_list.html", {"suites": _active_suites()})
-
-
-def suite_detail(request, slug):
-    suite = get_object_or_404(_active_suites(), slug=slug)
-    return render(request, "hotel/suite_detail.html", {"suite": suite})
-
-
-def about(request):
-    return render(request, "hotel/about.html", {"photos": HotelPhoto.objects.all()})
-
-
-def contacts(request):
-    return render(request, "hotel/contacts.html")
+    return render(request, "hotel/home.html", {"photos": room_photos()})

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-12 16:17+0300\n"
+"POT-Creation-Date: 2026-11-17 16:45+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,439 +17,451 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: config/settings.py:111 hotel/admin.py:47
+#: config/settings.py:111
 msgid "Russian"
 msgstr ""
 
-#: config/settings.py:112 hotel/admin.py:48
+#: config/settings.py:112
 msgid "English"
 msgstr ""
 
-#: hotel/admin.py:7
+#: hotel/admin.py:8
 msgid "Pushka Hotel administration"
 msgstr ""
 
-#: hotel/admin.py:8
+#: hotel/admin.py:9
 msgid "Pushka Hotel"
 msgstr ""
 
-#: hotel/admin.py:11
+#: hotel/admin.py:12
 msgid "preview"
 msgstr ""
 
-#: hotel/admin.py:37
-msgid "Price per night by day of the week, ₽"
+#: hotel/admin.py:38
+msgid "Not shown on the site"
 msgstr ""
 
 #: hotel/admin.py:42
 msgid ""
-"Each price is for the night that starts on that day. For example, Friday is "
-"the night from Friday to Saturday."
+"The site does not show suite names, descriptions or prices. These fields are "
+"kept in case separate suite pages are needed again."
+msgstr ""
+
+#: hotel/admin.py:68 hotel/models.py:288
+msgid "photos"
 msgstr ""
 
 #: hotel/apps.py:8
 msgid "Hotel"
 msgstr ""
 
-#: hotel/models.py:21
+#: hotel/models.py:22
 msgid "Monday"
 msgstr ""
 
-#: hotel/models.py:22
+#: hotel/models.py:23
 msgid "Tuesday"
 msgstr ""
 
-#: hotel/models.py:23
+#: hotel/models.py:24
 msgid "Wednesday"
 msgstr ""
 
-#: hotel/models.py:24
+#: hotel/models.py:25
 msgid "Thursday"
 msgstr ""
 
-#: hotel/models.py:25
+#: hotel/models.py:26
 msgid "Friday"
 msgstr ""
 
-#: hotel/models.py:26
+#: hotel/models.py:27
 msgid "Saturday"
 msgstr ""
 
-#: hotel/models.py:27
+#: hotel/models.py:28
 msgid "Sunday"
 msgstr ""
 
-#: hotel/models.py:44 hotel/models.py:86
+#: hotel/models.py:45 hotel/models.py:147
 msgid "name (Russian)"
 msgstr ""
 
-#: hotel/models.py:45 hotel/models.py:87
+#: hotel/models.py:46 hotel/models.py:148
 msgid "name (English)"
 msgstr ""
 
-#: hotel/models.py:46
+#: hotel/models.py:47
 msgid "address (Russian)"
 msgstr ""
 
-#: hotel/models.py:47
+#: hotel/models.py:48
 msgid "address (English)"
 msgstr ""
 
-#: hotel/models.py:48
+#: hotel/models.py:49
 msgid "phone"
 msgstr ""
 
-#: hotel/models.py:49
+#: hotel/models.py:50
 msgid "email"
 msgstr ""
 
-#: hotel/models.py:50
-msgid "check-in time"
-msgstr ""
-
-#: hotel/models.py:51
-msgid "check-out time"
-msgstr ""
-
-#: hotel/models.py:53
-msgid "map embed URL"
+#: hotel/models.py:52
+msgid "Telegram"
 msgstr ""
 
 #: hotel/models.py:55
-msgid "Yandex Maps constructor link for the contacts page (optional)."
+msgid "Phone number, or a username without @, for example pushka_hotel."
 msgstr ""
 
-#: hotel/models.py:59 hotel/models.py:60
+#: hotel/models.py:58
+msgid "WhatsApp"
+msgstr ""
+
+#: hotel/models.py:61
+msgid "Phone number used for WhatsApp, in any format."
+msgstr ""
+
+#: hotel/models.py:64
+msgid "MAX link"
+msgstr ""
+
+#: hotel/models.py:64
+msgid "Link to the chat in the MAX messenger."
+msgstr ""
+
+#: hotel/models.py:67
+msgid "how to find us (Russian)"
+msgstr ""
+
+#: hotel/models.py:70
+msgid "For example: 5 minutes on foot from Pushkinskaya metro."
+msgstr ""
+
+#: hotel/models.py:72
+msgid "how to find us (English)"
+msgstr ""
+
+#: hotel/models.py:73
+msgid "check-in time"
+msgstr ""
+
+#: hotel/models.py:74
+msgid "check-out time"
+msgstr ""
+
+#: hotel/models.py:76
+msgid "map embed URL"
+msgstr ""
+
+#: hotel/models.py:79
+msgid ""
+"In the Yandex Maps constructor, choose the iframe code and paste only the "
+"link from src=\"...\" here."
+msgstr ""
+
+#: hotel/models.py:85 hotel/models.py:86
 msgid "hotel information"
 msgstr ""
 
-#: hotel/models.py:84
+#: hotel/models.py:145
 msgid "suite number"
 msgstr ""
 
-#: hotel/models.py:85
+#: hotel/models.py:146
 msgid "URL name"
 msgstr ""
 
-#: hotel/models.py:88
+#: hotel/models.py:149
 msgid "short description (Russian)"
 msgstr ""
 
-#: hotel/models.py:89
+#: hotel/models.py:150
 msgid "short description (English)"
 msgstr ""
 
-#: hotel/models.py:90
+#: hotel/models.py:151
 msgid "description (Russian)"
 msgstr ""
 
-#: hotel/models.py:91
+#: hotel/models.py:152
 msgid "description (English)"
 msgstr ""
 
-#: hotel/models.py:93
+#: hotel/models.py:154
 msgid "amenities (Russian)"
 msgstr ""
 
-#: hotel/models.py:93 hotel/models.py:96
+#: hotel/models.py:154 hotel/models.py:157
 msgid "One item per line."
 msgstr ""
 
-#: hotel/models.py:96
+#: hotel/models.py:157
 msgid "amenities (English)"
 msgstr ""
 
-#: hotel/models.py:98
+#: hotel/models.py:159
 msgid "maximum guests"
 msgstr ""
 
-#: hotel/models.py:99
+#: hotel/models.py:160
 msgid "area, m²"
 msgstr ""
 
-#: hotel/models.py:102
+#: hotel/models.py:163
 msgid "Mon"
 msgstr ""
 
-#: hotel/models.py:103
+#: hotel/models.py:164
 msgid "Tue"
 msgstr ""
 
-#: hotel/models.py:104
+#: hotel/models.py:165
 msgid "Wed"
 msgstr ""
 
-#: hotel/models.py:105
+#: hotel/models.py:166
 msgid "Thu"
 msgstr ""
 
-#: hotel/models.py:106
+#: hotel/models.py:167
 msgid "Fri"
 msgstr ""
 
-#: hotel/models.py:107
+#: hotel/models.py:168
 msgid "Sat"
 msgstr ""
 
-#: hotel/models.py:108
+#: hotel/models.py:169
 msgid "Sun"
 msgstr ""
 
-#: hotel/models.py:109
+#: hotel/models.py:170
 msgid "shown on the site"
 msgstr ""
 
-#: hotel/models.py:113 hotel/models.py:220
+#: hotel/models.py:174 hotel/models.py:283
 msgid "suite"
 msgstr ""
 
-#: hotel/models.py:114
+#: hotel/models.py:175
 msgid "suites"
 msgstr ""
 
-#: hotel/models.py:184 hotel/models.py:224
+#: hotel/models.py:242 hotel/models.py:287
 msgid "photo"
 msgstr ""
 
-#: hotel/models.py:186
+#: hotel/models.py:244
 msgid "thumbnail"
 msgstr ""
 
-#: hotel/models.py:188
+#: hotel/models.py:246
 msgid "caption (Russian)"
 msgstr ""
 
-#: hotel/models.py:189
+#: hotel/models.py:247
 msgid "caption (English)"
 msgstr ""
 
-#: hotel/models.py:190
+#: hotel/models.py:248
 msgid "order"
 msgstr ""
 
-#: hotel/models.py:225
-msgid "photos"
-msgstr ""
-
-#: hotel/models.py:241
+#: hotel/models.py:304
 msgid "hotel photo"
 msgstr ""
 
-#: hotel/models.py:242
+#: hotel/models.py:305
 msgid "hotel photos"
 msgstr ""
 
-#: hotel/templates/hotel/_gallery.html:7
-msgid "Previous photo"
-msgstr ""
-
-#: hotel/templates/hotel/_gallery.html:8
-msgid "Next photo"
-msgstr ""
-
-#: hotel/templates/hotel/_gallery.html:25
-#: hotel/templates/hotel/_suite_card.html:8
-msgid "Photo coming soon"
-msgstr ""
-
-#: hotel/templates/hotel/_price.html:1
-#, python-format
-msgid "%(price)s ₽ per night"
-msgstr ""
-
-#: hotel/templates/hotel/_price.html:1
-#, python-format
-msgid "from %(price)s ₽ per night"
-msgstr ""
-
-#: hotel/templates/hotel/_suite_card.html:14
-#: hotel/templates/hotel/suite_detail.html:19
-#, python-format
-msgid "Up to %(guests)s guest"
-msgid_plural "Up to %(guests)s guests"
-msgstr[0] ""
-msgstr[1] ""
-
-#: hotel/templates/hotel/_suite_card.html:17
-msgid "View suite"
-msgstr ""
-
-#: hotel/templates/hotel/about.html:3 hotel/templates/hotel/base.html:29
-msgid "About"
-msgstr ""
-
-#: hotel/templates/hotel/about.html:7
-msgid "About the hotel"
-msgstr ""
-
-#: hotel/templates/hotel/about.html:11
-msgid ""
-"Pushka Hotel is a small hotel with just seven suites. We chose to stay small "
-"so that we can give every guest our full attention: from the first message "
-"to the moment you check out."
-msgstr ""
-
-#: hotel/templates/hotel/about.html:12
-msgid ""
-"Each suite has its own bathroom and everything you need for a comfortable "
-"stay. Whether you are travelling as a couple, with a friend or with your "
-"whole family, we will find the right suite for you."
-msgstr ""
-
-#: hotel/templates/hotel/about.html:13
-msgid "Good to know"
-msgstr ""
-
-#: hotel/templates/hotel/about.html:15
-#, python-format
-msgid "Check-in from %(checkin)s, check-out until %(checkout)s."
-msgstr ""
-
-#: hotel/templates/hotel/about.html:16
-msgid "Free Wi-Fi throughout the hotel."
-msgstr ""
-
-#: hotel/templates/hotel/about.html:17
-msgid "Suites for two, three and four guests."
-msgstr ""
-
-#: hotel/templates/hotel/about.html:24
-msgid "Inside the hotel"
-msgstr ""
-
-#: hotel/templates/hotel/base.html:8
-msgid "Pushka Hotel: seven cosy suites. Book online."
-msgstr ""
-
-#: hotel/templates/hotel/base.html:24
-msgid "Menu"
-msgstr ""
-
-#: hotel/templates/hotel/base.html:25
-msgid "Main menu"
-msgstr ""
-
-#: hotel/templates/hotel/base.html:27
-msgid "Home"
-msgstr ""
-
-#: hotel/templates/hotel/base.html:28 hotel/templates/hotel/suite_detail.html:9
-#: hotel/templates/hotel/suite_list.html:3
-#: hotel/templates/hotel/suite_list.html:8
-msgid "Suites"
-msgstr ""
-
-#: hotel/templates/hotel/base.html:30 hotel/templates/hotel/contacts.html:3
-#: hotel/templates/hotel/contacts.html:7
-msgid "Contacts"
-msgstr ""
-
-#: hotel/templates/hotel/base.html:55
-#: hotel/templates/hotel/suite_detail.html:21
-msgid "Check-in"
-msgstr ""
-
-#: hotel/templates/hotel/base.html:55
-#: hotel/templates/hotel/suite_detail.html:21
-msgid "Check-out"
-msgstr ""
-
-#: hotel/templates/hotel/contacts.html:12
-msgid "Address"
-msgstr ""
-
-#: hotel/templates/hotel/contacts.html:13
-msgid "Phone"
-msgstr ""
-
-#: hotel/templates/hotel/contacts.html:14
-msgid "Email"
-msgstr ""
-
-#: hotel/templates/hotel/contacts.html:15
-msgid "Check-in / check-out"
-msgstr ""
-
-#: hotel/templates/hotel/contacts.html:18
-msgid "Map"
-msgstr ""
-
-#: hotel/templates/hotel/contacts.html:20
-msgid "The map will appear here once the address is added."
-msgstr ""
-
-#: hotel/templates/hotel/home.html:7
-msgid ""
-"A small, quiet hotel with seven cosy suites, where every guest is welcomed "
-"like family."
+#: hotel/templates/hotel/home.html:8 hotel/templates/hotel/home.html:13
+#: hotel/templates/hotel/home.html:47
+msgid "Rooms by the hour"
 msgstr ""
 
 #: hotel/templates/hotel/home.html:9
-msgid "Choose a suite"
-msgstr ""
-
-#: hotel/templates/hotel/home.html:10
-msgid "Contact us"
-msgstr ""
-
-#: hotel/templates/hotel/home.html:18
-msgid "Seven suites"
-msgstr ""
-
-#: hotel/templates/hotel/home.html:19
 msgid ""
-"Suites for two, a suite for three and a family suite for up to four guests."
+"Cosy rooms by the hour for two. Privacy, comfort and no unnecessary "
+"questions."
 msgstr ""
 
-#: hotel/templates/hotel/home.html:22
-msgid "Personal service"
+#: hotel/templates/hotel/home.html:29
+msgid "Main menu"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:23
+#: hotel/templates/hotel/home.html:30
+msgid "Rooms"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:31
+msgid "Contacts"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:48
+msgid "Time for just the two of you"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:49
 msgid ""
-"We are a small hotel, so we know every guest and are always happy to help."
+"Cosy rooms where nobody will disturb you. Come whenever you want to be alone "
+"together."
 msgstr ""
 
-#: hotel/templates/hotel/home.html:26
-msgid "Easy booking"
+#: hotel/templates/hotel/home.html:51 hotel/templates/hotel/home.html:170
+msgid "Call us"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:27
+#: hotel/templates/hotel/home.html:52
+msgid "See the rooms"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:54
+msgid "We reply within minutes"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:61
+msgid "Only the two of you"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:62
 msgid ""
-"Choose your dates and suite online. We will confirm your booking quickly."
+"Close the door, and the whole city stays outside. The hotel is quiet, and "
+"the windows look onto the courtyard, not the street."
 msgstr ""
 
-#: hotel/templates/hotel/home.html:35
-msgid "Our suites"
+#: hotel/templates/hotel/home.html:65
+msgid "Just between us"
 msgstr ""
 
-#: hotel/templates/hotel/home.html:36
-msgid "All suites"
-msgstr ""
-
-#: hotel/templates/hotel/suite_detail.html:25
-msgid "Price per night"
-msgstr ""
-
-#: hotel/templates/hotel/suite_detail.html:33
+#: hotel/templates/hotel/home.html:66
 msgid ""
-"Online booking is coming soon. Until then, please call or email us to book "
-"this suite."
+"We know how to keep a secret. We ask no unnecessary questions and never talk "
+"about our guests."
 msgstr ""
 
-#: hotel/templates/hotel/suite_detail.html:34
-msgid "Book this suite"
+#: hotel/templates/hotel/home.html:69
+msgid "Everything is ready"
 msgstr ""
 
-#: hotel/templates/hotel/suite_detail.html:39
-msgid "In the suite"
-msgstr ""
-
-#: hotel/templates/hotel/suite_list.html:9
+#: hotel/templates/hotel/home.html:70
 msgid ""
-"Seven suites for every kind of stay. All prices are per suite per night."
+"Fresh linen and air conditioning, plus chocolates, water and tea as our "
+"small gift. All that is missing is you."
 msgstr ""
 
-#: hotel/templates/hotel/suite_list.html:14
-msgid "No suites are available right now."
+#: hotel/templates/hotel/home.html:73
+msgid "Your time, your rules"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:74
+msgid ""
+"Drop in for a little while or stay longer. How long the date lasts is up to "
+"you alone."
+msgstr ""
+
+#: hotel/templates/hotel/home.html:78
+msgid "In every room"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:82
+msgid "Air conditioning"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:86
+msgid "Windows onto the courtyard"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:90
+msgid "A quiet hotel"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:94
+msgid "Chocolates, water and tea as a gift"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:98
+msgid "Alcoholic drinks are available on request."
+msgstr ""
+
+#: hotel/templates/hotel/home.html:105
+msgid "Take a look inside"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:106
+msgid ""
+"We choose the room for you from those that are free when you arrive. "
+"Whichever one you get, it will be just as cosy."
+msgstr ""
+
+#: hotel/templates/hotel/home.html:109
+msgid "Room photo"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:115
+msgid "Show all photos"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:116
+msgid "Photo viewer"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:118
+msgid "Close"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:119
+msgid "Previous photo"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:120
+msgid "Next photo"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:124
+msgid "Photos coming soon"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:131
+msgid "What happens at Pushka stays at Pushka."
+msgstr ""
+
+#: hotel/templates/hotel/home.html:138
+msgid "Find us"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:139
+msgid ""
+"Call or message us. We reply within minutes and will tell you whether a room "
+"is free right now."
+msgstr ""
+
+#: hotel/templates/hotel/home.html:148
+msgid "Address"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:148
+msgid "Open in Yandex Maps"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:149
+msgid "Phone"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:150
+msgid "Email"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:154
+msgid "Map"
+msgstr ""
+
+#: hotel/templates/hotel/home.html:156
+msgid "The map will appear here once the address is added."
+msgstr ""
+
+#: hotel/templates/hotel/home.html:165
+msgid "For adults only"
 msgstr ""
