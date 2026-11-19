@@ -160,6 +160,10 @@ bash pushka-hotel-website/deploy/regru.sh <domain>
 cd ~/pushka-hotel-website && ~/pushka-venv/bin/python manage.py createsuperuser
 ```
 
+To open the same site on a second domain, add it in the panel as an alias
+(**Сайты** → the domain → **Изменить** → «Псевдонимы») and list it after the main
+domain: `bash deploy/regru.sh pushka-hotel.ru pushka-hotel.online`.
+
 The script prints the Python version it used. The site's Python in the panel must be
 the same. To update the site later:
 

@@ -2,7 +2,10 @@
 # Puts the site on Reg.ru shared hosting (ispmanager panel), or updates it.
 #
 # Run it over SSH from your home folder:
-#     bash pushka-hotel-website/deploy/regru.sh pushkahotel.com
+#     bash pushka-hotel-website/deploy/regru.sh pushka-hotel.ru
+#
+# Extra domains that open the same site (aliases) go after the main one:
+#     bash pushka-hotel-website/deploy/regru.sh pushka-hotel.ru pushka-hotel.online
 #
 # Run it again after every `git pull` to update the site. It is safe to repeat:
 # it keeps the database, the .env file and the photos already on the site.
@@ -15,9 +18,15 @@ set -euo pipefail
 
 DOMAIN="${1:-}"
 if [ -z "$DOMAIN" ]; then
-  echo "Usage: bash deploy/regru.sh <domain>    for example: bash deploy/regru.sh pushkahotel.com" >&2
+  echo "Usage: bash deploy/regru.sh <domain> [alias ...]    for example: bash deploy/regru.sh pushka-hotel.ru" >&2
   exit 1
 fi
+HOSTS=""
+ORIGINS=""
+for d in "$@"; do
+  HOSTS="$HOSTS${HOSTS:+,}$d,www.$d"
+  ORIGINS="$ORIGINS${ORIGINS:+,}https://$d,https://www.$d"
+done
 
 APP="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VENV="$HOME/pushka-venv"
@@ -59,8 +68,8 @@ if [ ! -f "$APP/.env" ]; then
   cat > "$APP/.env" <<ENV
 DJANGO_SECRET_KEY=$SECRET
 DJANGO_DEBUG=False
-DJANGO_ALLOWED_HOSTS=$DOMAIN,www.$DOMAIN
-DJANGO_CSRF_TRUSTED_ORIGINS=https://$DOMAIN,https://www.$DOMAIN
+DJANGO_ALLOWED_HOSTS=$HOSTS
+DJANGO_CSRF_TRUSTED_ORIGINS=$ORIGINS
 POSTGRES_DB=
 DJANGO_SQLITE_PATH=$APP/db.sqlite3
 DJANGO_STATIC_ROOT=$SITE/static
@@ -68,6 +77,9 @@ DJANGO_MEDIA_ROOT=$SITE/media
 ENV
   chmod 600 "$APP/.env"
   echo "== Wrote $APP/.env"
+else
+  # Keep the list of domains up to date when aliases are added later.
+  sed -i "s|^DJANGO_ALLOWED_HOSTS=.*|DJANGO_ALLOWED_HOSTS=$HOSTS|; s|^DJANGO_CSRF_TRUSTED_ORIGINS=.*|DJANGO_CSRF_TRUSTED_ORIGINS=$ORIGINS|" "$APP/.env"
 fi
 
 # 4. Database, styles and photos
