@@ -141,3 +141,17 @@ if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+
+
+# Warnings and errors (for example a rejected domain name, which shows as a
+# "400 Bad Request" page) go to the web server's error log, even with
+# DEBUG off. On Reg.ru that log is in ~/logs.
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"stderr": {"class": "logging.StreamHandler"}},
+    "loggers": {
+        "django.request": {"handlers": ["stderr"], "level": "WARNING"},
+        "django.security": {"handlers": ["stderr"], "level": "WARNING"},
+    },
+}
