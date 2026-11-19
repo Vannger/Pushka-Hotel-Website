@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from hotel.models import HotelInfo, Suite
@@ -152,3 +152,18 @@ class OnePageTests(TestCase):
     def test_new_logo(self):
         ru = self.client.get("/ru/")
         self.assertContains(ru, "logo-light.svg")
+
+
+@override_settings(
+    ALLOWED_HOSTS=["pushka-hotel.ru", "www.pushka-hotel.ru", "pushka-hotel.online"],
+    PRIMARY_HOST="pushka-hotel.ru",
+)
+class PrimaryHostTests(TestCase):
+    def test_extra_domain_redirects_to_main_one(self):
+        response = self.client.get("/en/?x=1", HTTP_HOST="pushka-hotel.online")
+        self.assertEqual(response.status_code, 301)
+        self.assertEqual(response["Location"], "http://pushka-hotel.ru/en/?x=1")
+
+    def test_main_domain_and_www_are_served(self):
+        self.assertEqual(self.client.get("/ru/", HTTP_HOST="pushka-hotel.ru").status_code, 200)
+        self.assertEqual(self.client.get("/ru/", HTTP_HOST="www.pushka-hotel.ru").status_code, 200)
