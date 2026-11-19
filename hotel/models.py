@@ -274,6 +274,11 @@ class SuitePhoto(Photo):
     suite = models.ForeignKey(
         Suite, on_delete=models.CASCADE, related_name="photos", verbose_name=_("suite")
     )
+    featured = models.BooleanField(
+        _("shown first"),
+        default=False,
+        help_text=_("Shown before the “Show all photos” button. The others appear after it is pressed."),
+    )
 
     class Meta(Photo.Meta):
         verbose_name = _("photo")

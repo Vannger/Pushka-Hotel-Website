@@ -94,7 +94,7 @@ class OnePageTests(TestCase):
         en = self.client.get("/en/")
         self.assertContains(en, "Windows onto the courtyard")
         self.assertNotContains(ru, "Алкогол")
-        self.assertContains(ru, "Как получить бутылку шампанского Просекко в подарок?")
+        self.assertContains(ru, "Как получить бутылку игристого в подарок?")
         self.assertContains(ru, "по воскресеньям — бесплатно")
 
     def test_boss_feedback_texts(self):

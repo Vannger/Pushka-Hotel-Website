@@ -8,12 +8,16 @@
   if (!grid) return;
   var links = Array.prototype.slice.call(grid.querySelectorAll("a[data-photo]"));
 
+  // If some photos are marked "shown first", only those are visible until
+  // the button is pressed. Otherwise the first few are.
+  var featured = grid.querySelectorAll("li.is-featured").length;
+  var collapsedClass = featured ? "is-featured-only" : "is-collapsed";
   var more = document.querySelector("[data-gallery-more]");
-  if (more && links.length > COLLAPSE_ABOVE) {
-    grid.classList.add("is-collapsed");
+  if (more && links.length > (featured || COLLAPSE_ABOVE)) {
+    grid.classList.add(collapsedClass);
     more.hidden = false;
     more.addEventListener("click", function () {
-      grid.classList.remove("is-collapsed");
+      grid.classList.remove(collapsedClass);
       more.hidden = true;
     });
   }

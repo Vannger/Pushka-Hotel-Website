@@ -19,7 +19,7 @@ def preview(obj):
 class SuitePhotoInline(admin.TabularInline):
     model = SuitePhoto
     extra = 1
-    fields = (preview, "image", "alt_ru", "alt_en", "order")
+    fields = (preview, "image", "alt_ru", "alt_en", "order", "featured")
     readonly_fields = (preview,)
 
 

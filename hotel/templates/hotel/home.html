@@ -116,7 +116,7 @@
           {% translate "Room photo" as room_photo %}
           <ul class="photo-grid" data-gallery>
             {% for photo in photos %}
-              <li><a href="{{ photo.image.url }}" data-photo><img src="{{ photo.thumb_url }}" alt="{{ photo.caption|default:room_photo }}" loading="lazy"></a></li>
+              <li{% if photo.featured %} class="is-featured"{% endif %}><a href="{{ photo.image.url }}" data-photo><img src="{% if photo.featured %}{{ photo.image.url }}{% else %}{{ photo.thumb_url }}{% endif %}" alt="{{ photo.caption|default:room_photo }}" loading="lazy"></a></li>
             {% endfor %}
           </ul>
           <p class="photo-more"><button type="button" class="btn btn-ghost" data-gallery-more hidden>{% translate "Show all photos" %} ({{ photos|length }})</button></p>
@@ -137,7 +137,6 @@
       <div class="container">
         <div class="section-head">
           <h2>{% translate "Clear rates for your dates" %}</h2>
-          <p>{% translate "Fresh towels, slippers and personal toiletry kits are already included in the price." %}</p>
         </div>
         <div class="tariffs">
           <article class="tariff">

@@ -148,6 +148,16 @@ class RoomPhotosOnPageTests(TempMediaMixin, TestCase):
         page = self.client.get("/ru/")
         self.assertEqual(len(page.context["photos"]), 1)
 
+    def test_featured_photos_come_first(self):
+        a1 = self.add_photo(2, 1)
+        b1 = self.add_photo(5, 1)
+        b2 = self.add_photo(5, 2, featured=True)
+        page = self.client.get("/ru/")
+        self.assertEqual(page.context["photos"], [b2, a1, b1])
+        self.assertContains(page, 'class="is-featured"', count=1)
+        # A featured photo uses the full-size image, not the thumbnail.
+        self.assertContains(page, f'src="{b2.image.url}"')
+
     def test_page_works_without_photos(self):
         page = self.client.get("/ru/")
         self.assertContains(page, "Фотографии скоро появятся")
